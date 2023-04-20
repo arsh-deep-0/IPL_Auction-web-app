@@ -1,0 +1,435 @@
+* {
+    margin: 0px;
+}
+
+body {
+    /*background:url(images/bgimg.jpg) no-repeat center fixed;
+    background-size: cover ;*/
+    background-color: rgb(0, 0, 0);
+    width:100wh;
+
+}
+
+p {
+    /*color:white;*/
+    /* text-align: center;*/
+    font-size: 17.5px;
+    font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    height: 100vh;
+    /* width: 100%; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
+}
+
+.statsHolder {
+    text-align: center;
+    color: white;
+    background-color: white;
+    border-radius: 2%;
+    margin-right: 60px;
+    height: 64.8vh;
+    width: 425px;
+
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: .5; */
+
+}
+
+#batAvg {
+    font-size: 22px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 1000;
+    /* background-color: rgb(246, 120, 131); */
+    /* border: 2px black solid; */
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#bowlPts {
+    font-size: 22px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 1000;
+    /* background-color: rgb(144, 227, 144); */
+    /* border: 2px black solid; */
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#wkPts {
+    font-size: 22px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 1000;
+    /* background-color: aliceblue; */
+    /* border: 2px black solid; */
+    border-radius: 5px;
+    margin-bottom: 2px;
+    padding: 2px;
+}
+
+#basePrice {
+    font-size: 22px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 1000;
+    /* background-color: rgb(236, 255, 128); */
+    /* border: 2px black solid; */
+    border-radius: 5px;
+    padding: 2px;
+
+}
+
+.bids {
+    text-align: center;
+    color: #000;
+
+    /* background-color: #dae2eb; */
+    border-radius: 2%;
+    height: 86vh;
+    margin-right: 20px;
+
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.wallet {
+    border: 3px white solid;
+    margin: 0px;
+    background-color: #dae2eb;
+
+    border-radius: 2%;
+    height: 91vh;
+    margin-left: 20px;
+    width: 400px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#search{
+    transform: translate(1300px);
+}
+
+.data {
+
+    background: linear-gradient(143.7deg, rgb(0, 0, 0, 0.2), rgb(0, 0, 0, 0.9));
+    border-radius: 0.8em;
+
+    /* border: 2px black solid; */
+    padding-top: 5px;
+    width: 250px;
+    padding-bottom: 5px;
+    box-shadow: 0px 8px 32px 0 rgb(0, 0, 0, 0.37);
+    border-radius: 9px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: scale(1) translate(-20px) translateY(-345px);
+
+}
+.data:hover{
+    transform:  scale(1.02) translate(-20px) translateY(-345px);
+}
+
+
+
+#currPlayerImg {
+
+    /* border:2px black solid;*/
+    z-index: 1;
+
+    height: 610px;
+    transform: translateY(-187.25px) translateX(-37.5px);
+
+
+
+}
+
+
+#name {
+    transform: translateY(0px) translate(-115px) scale(1.4);
+    color: #000;
+}
+
+
+#playerno {
+    color: #000;
+    transform: translateX(-124px);
+}
+
+
+
+
+
+
+
+
+.bids-1 {
+
+    height: 25%;
+    width: 94%;
+    margin-top: 5px;
+    background-color: white;
+
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+
+}
+
+.bids-2 {
+    margin-top: 20px;
+    background-color: white;
+    height: 50%;
+    width: 154%;
+
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+
+label {
+    color: white;
+    text-align: center;
+
+    height: 55px;
+    margin: 6px;
+    padding: 9px;
+    font-size: 100%;
+    width: 18%;
+    border-radius: 10px;
+    border: 2px white solid;
+    transition: transform .3s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(logos/milogo.png);
+}
+
+label:hover {
+    transform: scale(1.1);
+    background-color: black;
+}
+
+label:active {
+
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+label:nth-of-type(1) {
+    background-color: blue;
+}
+
+label:nth-of-type(2) {
+    background-color: yellow;
+}
+
+label:nth-of-type(3) {
+    background-color: #ff657f;
+}
+
+label:nth-of-type(4) {
+    background-color: orange;
+}
+
+label:nth-of-type(5) {
+    background-color: darkred;
+}
+
+label:nth-of-type(6) {
+    background-color: red;
+}
+
+label:nth-of-type(7) {
+    background-color: purple;
+}
+
+label:nth-of-type(8) {
+    background-color: rgb(162, 162, 229);
+}
+
+
+
+
+.button {
+    background-color: black;
+    color: white;
+    font-size: 14.5px;
+    font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 4px;
+    margin: 10px;
+    border-radius: 6px;
+    border: 2px black solid;
+    background-color: green;
+    transition: all .1s ease-in;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+button:active {
+    background-color: black;
+    color: white;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+}
+
+.upsold {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#UP {
+    font-size: 14.5px;
+    font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 4px;
+    margin: 20px;
+    width: 80px;
+    border-radius: 6px;
+    color: white;
+    border: 2px white solid;
+    background-color: green;
+
+}
+
+#Sold {
+    font-size: 14.5px;
+    font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 4px;
+    width: 80px;
+    margin: 20px;
+    border-radius: 6px;
+    color: white;
+    border: 2px white solid;
+    background-color: red;
+}
+
+#hidden {
+    display: none;
+}
+
+.logo {
+    height: 50px;
+    display: inline;
+}
+
+.team {
+    color: white;
+    background-color: black;
+    border: 2px white solid;
+    border-radius: 5px;
+    padding: 7px;
+    margin-top: 5px;
+
+    width: 93%;
+    display: flex;
+    flex-wrap: wrap;
+    transition: all .2s ease-in;
+
+
+
+}
+
+#CSK {
+    background: linear-gradient(143.7deg, #fcca06 0, #f25c19 100%);
+    border-radius: 0.8em;
+}
+
+#MI {
+    background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
+    border-radius: 0.8em;
+}
+
+#RR {
+    background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
+    border-radius: 0.8em;
+}
+
+#DC {
+    background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
+    border-radius: 0.8em;
+}
+
+#KKR {
+    background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
+    border-radius: 0.8em;
+}
+
+#PBKS {
+    background: linear-gradient(143.7deg, #d71920 0, #84171b 100%);
+    border-radius: 0.8em;
+}
+
+#SRH {
+    background: linear-gradient(180deg, #f26522 0, #ed1a37 100%);
+    border-radius: 0.8em;
+}
+
+
+
+
+
+#RCB {
+    background: linear-gradient(143.7deg, #6a6a6a 0, #1c1c1c 100%);
+    border-radius: 0.8em;
+}
+
+.text {
+
+    font-size: 15px;
+    margin-left: 0px;
+
+}
+
+.purse {
+    color: green;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px green solid;
+    font-size: 18px;
+}
+
+.numOfPlayers {
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px black solid;
+    font-size: 18px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.team:hover {
+    transform: scale(1.1);
+    background-color: black;
+}

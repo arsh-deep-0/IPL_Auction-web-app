@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= player.name %></title>
+</head>
+<body>
+   
+    <h1><%= player.name %></h1>
+
+    <ul>
+            <li> <img src="<%= player.imgSrc %>" alt="rohit"> </li>
+           
+            <li> Name <%= player.name %></li>
+            <li> basePrice <%= player.basePrice %></li>
+            <li> batPts <%= player.batPts %></li>
+         
+     </ul>
+
+     <form action="/players/edit/<%= player.order %>">
+        <button >Edit</button>
+     </form>
+    
+     
+
+</body>
+</html>

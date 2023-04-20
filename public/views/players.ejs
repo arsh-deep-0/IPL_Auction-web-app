@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Players</title>
+</head>
+<body>
+     <h1>All Playeres</h1>
+     <ul>
+        <% for(let player of players){ %>
+            <li><a href="/players/<%= player.order %>"><%= player.name %> </a></li>
+         <%} %>
+     </ul>
+</body>
+</html>

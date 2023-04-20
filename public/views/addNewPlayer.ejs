@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Player</title>
+</head>
+
+<body>
+    <h1>Add a product</h1>
+
+    <form action="/players" method="POST">
+        <label for="name">Player Name</label>
+        <input id="name" type="text" name="name" placeholder="eg. Virat Kohli">
+
+        <label for="BattingPoints">Batting Points</label>
+        <input id="BattingPoints" type="text" name="batPts" placeholder="1-100">
+
+        <label for="BowlingPoints">Bowling Points</label>
+        <input id="BowlingPoints" type="text" name="bowlPts" placeholder="0-100">
+
+        <label for="WKPoints">Wicketkeeping Points</label>
+        <input id="WKPoints" type="text" name="wkPts" placeholder="0-100"> 
+
+        
+        <label for="Order">Order</label>
+        <input id="Order" type="text" name="order" placeholder="0-100"> 
+
+        <button>submit</button>
+    </form>
+</body>
+
+</html>

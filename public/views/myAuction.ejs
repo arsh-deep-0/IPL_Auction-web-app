@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Auction</title>
+    <!-- <link rel="stylesheet" href="app.css"> -->
+
+    <style>
+        * {
+            margin: 0px;
+            
+        }
+        
+        body {
+            /*background:url(images/bgimg.jpg) no-repeat center fixed;
+            background-size: cover ;*/
+            background-color: rgb(0, 0, 0);
+            width:100wh;
+        
+        }
+        
+        p {
+            /*color:white;*/
+            /* text-align: center;*/
+            font-size: 17.5px;
+            font-weight: 800;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .container {
+            height: 100vh;
+            /* width: 100%; */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
+        }
+        
+        .statsHolder {
+            text-align: center;
+            color: white;
+            background-color: white;
+            border-radius: 2%;
+            margin-right: 60px;
+            height: 64.8vh;
+            width: 30%;
+        
+            /* display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: .5; */
+        
+        }
+        
+        #batAvg {
+            font-size: 22px;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-weight: 1000;
+            /* background-color: rgb(246, 120, 131); */
+            /* border: 2px black solid; */
+            border-radius: 5px;
+            padding: 2px;
+        }
+        
+        #bowlPts {
+            font-size: 22px;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-weight: 1000;
+            /* background-color: rgb(144, 227, 144); */
+            /* border: 2px black solid; */
+            border-radius: 5px;
+            padding: 2px;
+        }
+        
+        #wkPts {
+            font-size: 22px;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-weight: 1000;
+            /* background-color: aliceblue; */
+            /* border: 2px black solid; */
+            border-radius: 5px;
+            margin-bottom: 2px;
+            padding: 2px;
+        }
+        
+        #basePrice {
+            font-size: 22px;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-weight: 1000;
+            /* background-color: rgb(236, 255, 128); */
+            /* border: 2px black solid; */
+            border-radius: 5px;
+            padding: 2px;
+        
+        }
+        
+        .bids {
+            text-align: center;
+            color: #000;
+        
+            /* background-color: #dae2eb; */
+            border-radius: 2%;
+            height: 86vh;
+            margin-right: 20px;
+        
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+        
+            align-items: center;
+        }
+        
+        .wallet {
+            border: 3px white solid;
+            margin: 0px;
+            background-color: #dae2eb;
+        
+            border-radius: 2%;
+            height: 91vh;
+            margin-left: 20px;
+            width: 30%;
+        
+            display: flex;
+        
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        
+        }
+        
+        
+        #search{
+            transform: translate(1500px);
+              }
+        
+        .data {
+        
+            background: linear-gradient(143.7deg, rgb(0, 0, 0, 0.2), rgb(0, 0, 0, 0.9));
+            border-radius: 0.8em;
+        
+            /* border: 2px black solid; */
+            padding-top: 5px;
+            width: 250px;
+            padding-bottom: 5px;
+            box-shadow: 0px 8px 32px 0 rgb(0, 0, 0, 0.37);
+            border-radius: 9px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: scale(1) translate(-20px) translateY(-345px);
+        
+        }
+        .data:hover{
+            transform:  scale(1.02) translate(-20px) translateY(-345px);
+        }
+        
+        
+        
+        #currPlayerImg {
+        
+            /* border:2px black solid;*/
+            z-index: 1;
+        width: 135%;
+          
+            transform: translateY(-207.25px) translateX(-37.5px);
+        
+        
+        
+        }
+        
+        
+        #name {
+            transform: translateY(0px) translate(-115px) scale(1.4);
+            color: #000;
+        }
+        
+        
+        #playerno {
+            color: #000;
+            transform: translateX(-124px);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        .bids-1 {
+        
+            height: 13%;
+            width: 94%;
+            margin-top: 5px;
+            background-color: white;
+        
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: space-evenly;
+        
+        }
+        
+        .bids-2 {
+            margin-top: 20px;
+            background-color: white;
+            height: 27%;
+            width: 154%;
+        
+            border-radius: 10px;
+            padding: 10px;
+        
+        }
+        
+        
+        label {
+            color: white;
+            text-align: center;
+        
+            height: 55px;
+            margin: 6px;
+            padding: 9px;
+            font-size: 100%;
+            width: 18%;
+            border-radius: 10px;
+            border: 2px white solid;
+            transition: transform .3s ease-in;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(logos/milogo.png);
+        }
+        
+        label:hover {
+            transform: scale(1.1);
+            background-color: black;
+        }
+        
+        label:active {
+        
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        
+        
+        
+        
+        
+        .button {
+            background-color: black;
+            color: white;
+            font-size: 14.5px;
+            font-weight: 800;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 4px;
+            margin: 10px;
+            border-radius: 6px;
+            border: 2px black solid;
+            background-color: green;
+            transition: all .1s ease-in;
+        }
+        
+        button:hover {
+            transform: scale(1.1);
+        }
+        
+        button:active {
+            background-color: black;
+            color: white;
+            box-shadow: 0 5px #666;
+            transform: translateY(2px);
+        }
+        
+        .upsold {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        
+        }
+        
+        
+        #UP {
+            font-size: 14.5px;
+            font-weight: 800;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 4px;
+            margin: 20px;
+            width: 80px;
+            border-radius: 6px;
+            color: white;
+            border: 2px white solid;
+            background-color: green;
+        
+        }
+        
+        #Sold {
+            font-size: 14.5px;
+            font-weight: 800;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 4px;
+            width: 80px;
+            margin: 20px;
+            border-radius: 6px;
+            color: white;
+            border: 2px white solid;
+            background-color: red;
+        }
+        
+        #hidden {
+            display: none;
+        }
+        
+        .logo {
+            height: 70px;
+            display: inline;
+        }
+        
+        .team {
+            color: white;
+            background-color: black;
+            border: 2px white solid;
+            border-radius: 5px;
+            padding: 7px;
+            margin-top: 5px;
+        
+            width: 93%;
+            display: flex;
+            flex-wrap: wrap;
+            transition: all .2s ease-in;
+        
+        
+        
+        }
+        
+      
+        
+        
+        
+        
+#CSK {
+    background: linear-gradient(143.7deg, #fcca06 0, #f25c19 100%);
+    border-radius: 0.8em;
+}
+#csk {
+    background: linear-gradient(143.7deg, #fcca06 0, #f25c19 100%);
+    border-radius: 0.8em;
+}
+#MI {
+    background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
+    border-radius: 0.8em;
+}
+#mi {
+    background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
+    border-radius: 0.8em;
+}
+
+#RR {
+    background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
+    border-radius: 0.8em;
+}
+#rr {
+    background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
+    border-radius: 0.8em;
+}
+
+#DC {
+    background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
+    border-radius: 0.8em;
+}
+#dc{
+    background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
+    border-radius: 0.8em;
+}
+#KKR {
+    background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
+    border-radius: 0.8em;
+}
+
+#PBKS {
+    background: linear-gradient(143.7deg, #d71920 0, #84171b 100%);
+    border-radius: 0.8em;
+}
+
+#SRH {
+    background: linear-gradient(180deg, #f26522 0, #ed1a37 100%);
+    border-radius: 0.8em;
+}
+
+
+
+
+
+#RCB {
+    background: linear-gradient(143.7deg, #6a6a6a 0, #1c1c1c 100%);
+    border-radius: 0.8em;
+}
+
+#kkr {
+    background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
+    border-radius: 0.8em;
+}
+
+#pbks{
+    background: linear-gradient(143.7deg, #d71920 0, #84171b 100%);
+    border-radius: 0.8em;
+}
+
+#srh {
+    background: linear-gradient(180deg, #f26522 0, #ed1a37 100%);
+    border-radius: 0.8em;
+}
+
+
+
+
+
+#rcb {
+    background: linear-gradient(143.7deg, #6a6a6a 0, #1c1c1c 100%);
+    border-radius: 0.8em;
+}
+        
+        .text {
+        
+            font-size: 15px;
+            margin-left: 0px;
+        
+        }
+        
+        .purse {
+            color: green;
+            background-color: white;
+            border-radius: 5px;
+            border: 2px green solid;
+            font-size: 18px;
+        }
+        
+        .numOfPlayers {
+            color: black;
+            background-color: white;
+            border-radius: 5px;
+            border: 2px black solid;
+            font-size: 18px;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        
+        .team:hover {
+            transform: scale(1.1);
+            background-color: black;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <div id="search">
+
+        <input style="border-radius:5px;border:2px rgb(39,50,50) solid;height:28px;" id="Medication" name="order" size="6"
+            type="text" value="">
+        <button style="padding:10px;" class="button" id="change">Search</button>
+
+    </div>
+
+
+
+
+    <section class="container">
+
+
+      <div class="wallet">
+            <section class="team" id="MI">
+                <div>
+                    <img class="logo" id="lMI" src="/resources/logos/milogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text">Mumbai Indians </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="MIpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="MInum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="CSK">
+                <div>
+                    <img class="logo" id="lCSK" src="/resources/logos/csklogo.png" alt="">
+                </div>
+
+                <div>
+                    <p class="text">Chennai Super Kings </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="CSKpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="CSKnum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="RR">
+                <div>
+                    <img class="logo" src="/resources/logos/rrlogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text">Rajasthan Royals </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="RRpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="RRnum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="RCB">
+                <div>
+                    <img class="logo" src="/resources/logos/rcblogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text">Royal challengers Bangalore </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="RCBpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="RCBnum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="PBKS">
+                <div>
+                    <img class="logo" src="/resources/logos/pbkslogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text"> Punjab Kings </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="PBKSpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="PBKSnum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="KKR">
+                <div>
+                    <img class="logo" src="/resources/logos/kkrlogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text">Kolkata Knight Riders </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="KKRpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="KKRnum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="SRH">
+                <div>
+                    <img class="logo" src="/resources/logos/srhlogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text">Sunrisers Hyderabaad </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="SRHpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="SRHnum">0</span></p>
+                </div>
+            </section>
+
+            <section class="team" id="DC">
+                <div>
+                    <img class="logo" src="/resources/logos/dclogo.png" alt="">
+                </div>
+                <div>
+                    <p class="text">Delhi Capitals </p>
+                    <p class="text">Remainng Purse : &#8377<span class="purse" id="DCpurse">50</span> crores</p>
+                    <p class="text">Players Bought: <span class="numOfPlayers" id="DCnum">0</span></p>
+                </div>
+            </section>
+
+
+        </div> 
+
+        <div class="bids">
+
+            <section class="bids-1">
+                <p class="Bid">Current Bid:</p>
+                <p id="rupee"> &#8377<span class="Bid" id="Amount">0</span>Lakhs</p>
+                <div class="upsold">
+                    <button id="UP">Bid Up</button>
+                    <button id="Sold">Sold</button>
+                </div>
+                <p class="Bids" id="hidden">0</p>
+            </section>
+
+            <section class="bids-2" id="teamSelector">
+                <p>Select Team</p>
+                <hr>
+                <form>
+                    <div class="upsold">
+                        <label id="mi" ><input name="profession" type="radio" value="MI"><img class="logo" src="/resources/logos/milogo.png" alt=""></label>
+                        <label id="csk"><input name="profession" type="radio" value="CSK"> <img class="logo"  src="/resources/logos/csklogo.png" alt=""></label>
+                        <label id="rr"><input name="profession" type="radio" value="RR"> <img class="logo"  src="/resources/logos/rrlogo.png" alt=""></label>
+                        <label id="srh"><input name="profession" type="radio" value="SRH"> <img class="logo"  src="/resources/logos/srhlogo.png" alt=""></label>
+            
+                        <label id="rcb"><input name="profession" type="radio" value="RCB"> <img class="logo"  src="/resources/logos/rcblogo.png" alt=""></label>
+                        <label id="pbks"><input name="profession" type="radio" value="PBKS"> <img class="logo" src="/resources/logos/pbkslogo.png" alt=""></label>
+                        <label id="kkr"><input name="profession" type="radio" value="KKR"> <img class="logo" src="/resources/logos/kkrlogo.png" alt=""></label>
+                        <label id="dc"><input name="profession" type="radio" value="DC"> <img class="logo"  src="/resources/logos/dclogo.png" alt=""></label>
+                      </div>
+                </form>
+
+                
+
+            </section>
+            <div class="upsold">
+                <button class="button" id="confirm">ADD</button>
+            </div>
+
+        </div>
+
+        <div class="statsHolder">
+
+
+            <p id="playerno">Player:<span id="playerNum">1</span></p>
+            <p class="stats" id="name">VIRAT KOHLI</p>
+
+
+            <img class="stas" id="currPlayerImg" src="/resources/Players/virat kohli.png" alt="">
+
+            <div class="data" id="databox">
+                <p>Bat Pts :<span id="batAvg">95</span></p>
+                &nbsp;
+                <p>Bowl Pts:<span id="bowlPts">14</span></p>
+                &nbsp;
+                <p>Wk Pts :<span id="wkPts">Nil</span></p>
+                <hr>
+                <p><br>Base : <span id="basePrice">5</span> Cr</p>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <script >
+        
+        let playerNumber = 0;
+        let player = [
+            {
+                "order": "1",
+                "name": "MS honi",
+                "imgSrc": "/Players/MS dhoni.png",
+                "batavg": "78",
+                "bowlavg": "Nil",
+                "openingbid": "2",
+                "wkPts": "22"
+            },
+            {
+                "order": "2",
+                "name": "Jasprit Bumrah",
+                "imgSrc": "/Players/jasprit bumrah.webp",
+                "batavg": "8",
+                "bowlavg": "97",
+                "openingbid": "2",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "3",
+                "name": "ROHIT SHARMA",
+                "imgSrc": "/Players/rohit sharma.png",
+                "batavg": 88,
+                "bowlavg": "18",
+                "openingbid": "2",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "4",
+                "name": "Ben Stokes",
+                "imgSrc": "/Players/ben stokes.png",
+                "batavg": "70",
+                "bowlavg": "62",
+                "openingbid": "2",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "5",
+                "name": "Hardik Pandya",
+                "imgSrc": "/Players/hardik pandya.png",
+                "batavg": "68",
+                "bowlavg": "69",
+                "openingbid": "2",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "6",
+                "name": "Bhuvneshvar Kumar",
+                "imgSrc": "/Players/bkumar.png",
+                "batavg": "14",
+                "bowlavg": "85",
+                "openingbid": "2",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "7",
+                "name": "Virat Kohli",
+                "imgSrc": "/Players/virat kohli.png",
+                "batavg": "95",
+                "bowlavg": "8",
+                "openingbid": "5",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "8",
+                "name": "Shikhar Dhawan",
+                "imgSrc": "/Players/Shikhar Dhawan.png",
+                "batavg": "80",
+                "bowlavg": "1",
+                "openingbid": "2",
+                "wkPts": "Nil"
+            },
+            {
+                "order": "9",
+                "name": "Jos Buttler",
+                "imgSrc": "/Players/Buttler.png",
+                "batavg": "89",
+                "bowlavg": "1",
+                "openingbid": "2",
+                "wkPts": "16"
+            }
+        
+        ];
+        
+        const click = document.getElementById("change");
+        
+        click.addEventListener("click", myFunction);
+        function myFunction() {
+            let elementValue = document.getElementById("Medication").value;
+            playerNumber++;
+        
+            player.forEach(function (myElement) {
+                if (myElement.order === elementValue) {
+                    document.getElementById("name").innerHTML = myElement.name;
+                    document.getElementById("playerNum").innerHTML = elementValue;
+        
+                    document.getElementById("currPlayerImg").style.animationName = "change";
+        
+                    setTimeout(function () {
+                        document.getElementById("currPlayerImg").src = "/resources" + myElement.imgSrc;
+        
+                    }, 470);
+        
+                    setTimeout(function () {
+                        document.getElementById("currPlayerImg").style.animationName = "changes";
+                        document.getElementById("currPlayerImg").style.animationIterationCount = "1";
+        
+                    }, 500);
+        
+        
+                   
+        
+        
+                    document.getElementById("currPlayerImg").style.opacity = 1;
+                    document.getElementById("batAvg").innerHTML = myElement.batavg;
+                    document.getElementById("bowlPts").innerHTML = myElement.bowlavg;
+                    document.getElementById("basePrice").innerHTML = myElement.openingbid;
+                    document.getElementById("wkPts").innerHTML = myElement.wkPts;
+                }
+        
+            })
+        }
+        
+        
+        
+        
+        let curr_bid = document.getElementById("Amount").innerHTML;
+        let substracting_value=0;
+        
+        const bidup = document.getElementById("UP");
+        const sold = document.getElementById("Sold");
+        bidup.addEventListener("click", increaseBid);
+        let bids = 0;
+        
+        function increaseBid() {
+            if (bids == 0) {
+                curr_bid = document.getElementById("basePrice").innerHTML * 100;
+                bids++;
+            }
+            else {
+                if ((curr_bid / 10) % 10 == 2 || (curr_bid / 10) % 10 == 5) {
+                    curr_bid += 30;
+                }
+                else {
+                    curr_bid += 20;
+                }
+            }
+        
+            document.getElementById("Amount").innerHTML = curr_bid;
+        
+        }
+        
+        sold.addEventListener("click", sell);
+        
+        function sell() {
+            document.getElementById("hidden").innerHTML = "Sold at : " + "\u20B9" + curr_bid + " lakhs";
+            document.getElementById("hidden").style.backgroundColor = "green";
+            document.getElementById("hidden").style.border = "2px white solid";
+            document.getElementById("hidden").style.borderRadius = "5px";
+            document.getElementById("Amount").innerHTML = "0";
+        
+            substracting_value = curr_bid / 100;
+            curr_bid = 0;
+            bids = 0;
+            document.getElementById("hidden").style.display = "block";
+            document.getElementById("teamSelector").style.display = "block";
+        
+        }
+        
+        const confirm = document.getElementById("confirm");
+        confirm.addEventListener("click", find);
+        function find() {
+            let team = "MIn";
+            let teams = document.forms[0];
+            for (let i = 0; i < teams.length; i++) {
+                if (teams[i].checked) {
+                    team = teams[i].value + "";
+                }
+            }
+            let purseId = team + "purse";
+            let numId = team + "num";
+        
+        
+            let curr_purse = document.getElementById(purseId).innerHTML - substracting_value;
+            console.log(curr_purse);
+            document.getElementById("" + purseId).innerHTML = "" + curr_purse.toFixed(2);
+            document.getElementById(numId).innerHTML++;
+            console.log(team);
+            console.log(purseId);
+        }
+        
+        document.addEventListener('click', (e) => {
+            // Retrieve id from clicked element
+            let elementId = e.target.id;
+            // If element has id
+            if (elementId !== '') {
+                console.log(elementId);
+        
+        
+                if (elementId[0] == "l") {
+        
+                    document.getElementsByClassName("modal")[0].style.display = "flex";
+                    document.getElementsByClassName("wallet")[0].style.display = "none";
+                    document.getElementsByClassName("statsHolder")[0].style.display = "none";
+                    document.getElementsByClassName("bids")[0].style.display = "none";
+                    document.body.style.backgroundColor = "#eabcbc";
+        
+                }
+        
+            }
+            // If element has no id
+            else {
+                console.log("An element without an id was clicked.");
+            }
+        
+        }
+        );
+        
+        const close = document.getElementById("close");
+        close.addEventListener("click", closeDetails);
+        function closeDetails() {
+            document.getElementsByClassName("modal")[0].style.display = "none";
+            document.getElementsByClassName("wallet")[0].style.display = "flex";
+            document.getElementsByClassName("statsHolder")[0].style.display = "flex";
+            document.getElementsByClassName("bids")[0].style.display = "flex";
+        }
+        
+        
+        
+        
+    </script>
+</body>
+
+</html>

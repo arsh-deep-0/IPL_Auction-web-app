@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit <%= editablePlayer.name %></title>
+</head>
+
+<body>
+    <h1>Edit the attributes</h1>
+
+    <form action="/players/<%=  editablePlayer.order %>?_method=PUT" method="POST">
+        <label for="name">Player Name</label>
+        <input id="name" type="text" name="name" placeholder="eg. Virat Kohli" value="<%=editablePlayer.name%>">
+
+        <label for="BattingPoints">Batting Points</label>
+        <input id="BattingPoints" type="text" name="batPts" placeholder="1-100" value="<%=editablePlayer.batPts%>">
+
+        <label for="BowlingPoints">Bowling Points</label>
+        <input id="BowlingPoints" type="text" name="bowlPts" placeholder="0-100" value="<%=editablePlayer.bowlPts%>">
+
+        <label for="WKPoints">Wicketkeeping Points</label>
+        <input id="WKPoints" type="text" name="wkPts" placeholder="0-100" value="<%=editablePlayer.wkPts%>"> 
+
+        <button>submit</button>
+    </form>
+</body>
+
+</html>
