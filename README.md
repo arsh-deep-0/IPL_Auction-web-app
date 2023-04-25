@@ -14,10 +14,15 @@ This web app allows users to organize an IPL auction with their friends or other
 The IPL Auction Web App includes the following features:
 
 1.User authentication and account creation
+
 2.Ability to create and join auction rooms with other users
+
 3.Real-time bidding on players during the auction process
+
 4.Tools to manage and track the auction process, including setting up bidding rules and time limits
+
 5.Ability to create and manage fantasy teams based on the players bought in the auction
+
 6.Tools to track the performance of the teams and players during the IPL season
 
 
