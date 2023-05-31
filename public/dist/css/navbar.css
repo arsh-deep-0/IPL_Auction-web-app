@@ -1,0 +1,250 @@
+li{
+    
+    list-style:none;
+    border:0px white solid;
+    border-radius:6px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 1rem;
+    color:rgb(13, 0, 255);
+  
+}
+a:hover{
+    color:red;
+   
+}
+
+
+
+header{
+    position: relative;
+    
+}
+
+.navbar{
+    position: fixed;
+    background-color: #fff;
+    
+    width: 91%;
+    height:3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0.5px 0.5px 2px 1px rgb(178, 177, 177);
+    border: 0px white solid;
+    border-radius: 4px;
+    padding: 2px;
+    padding-left: 5%;
+    padding-right:5%;
+    z-index: 2;
+}
+.logo{
+    height: 2.5rem;
+}
+
+ .logo a{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .links{
+    display: flex;
+
+    gap: 2rem;
+}
+
+ .toggle_btn img{
+    height: 2.5rem;
+    
+    cursor: pointer;
+    display: none;
+}
+.toggle_btn {
+    height: 2.5rem;
+    
+    cursor: pointer;
+    display: none;
+    display: flex;
+}
+.toggle_btn:hover img{
+    transform: scale(1.1);    
+}
+
+.login{
+    font-size: 1.2rem;
+    border:0.125rem black solid;
+    border-radius:4px;
+    padding:.25rem;
+}
+
+#dropdown-menu1 {
+    display: none;
+    position: fixed;
+    left: 0rem;
+    background-color: #fff;
+    box-shadow: 0.5px 0.5px 2px 1px rgb(178, 177, 177);
+    border:0px white solid;
+    height: 100vh;
+    width: 60%;
+    margin-top: 0%;
+    flex-direction: column;
+    padding-top: 8%;
+    align-items: start;
+  
+    transition: transform 1s 1s ease-in;
+    animation-name: appear-from-left;
+    animation-name: disappear-to-left;
+    animation-duration: 0.5s;
+    gap:15px;
+}
+@keyframes appear-from-left{
+    0%{left:-60%}
+    100%{left:0%}
+}
+@keyframes disappear-to-left{
+    0%{left:0%}
+    100%{left:-60%}
+}
+#list-ele-1:hover #list-ele-1-submenu,#list-ele-2:hover #list-ele-2-submenu,
+#list-ele-3:hover #list-ele-3-submenu,#list-ele-4:hover #list-ele-4-submenu,
+#list-ele-5:hover #list-ele-5-submenu {
+    display: flex;
+}
+
+
+#dropdown-menu1 li{
+       width: 100%; 
+}
+.menu-link{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+hr{
+    color: black;
+    width:100%;
+}
+#menu-links1{
+    width: 100%;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    justify-content: center;
+}
+
+
+/*responsive design*/
+
+@media (max-width:743px) {
+    .navbar .links {
+        display: none;
+    }    
+    .navbar .login{
+        margin-right: 1px;
+    }
+    .toggle_btn img{
+        display: block;
+     
+    }
+    
+    
+}
+
+
+@media (max-width:300px) {
+   
+    .navbar .login{
+        display: none;
+
+    }
+      
+    
+}
+
+.submenu{
+    transform: translate(-50%) translateY(2%);
+    box-shadow: 0.5px 0.5px 2px 1px rgb(178, 177, 177);
+    position: absolute;
+    display: none;
+    border-radius:6px ;   
+    background-color: #fff; 
+    padding: 1%;
+}
+.submenu .column{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+   
+}
+.submenu-vertical .column{
+    width: 100%;
+}
+.submenu .column .cell {
+    background-color: #fff;
+    position: relative;
+    height: 50px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    border-radius: 6px;
+}
+.submenu-vertical .column .cell{
+    background-color: #fff;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    border-radius: 6px;
+}
+.submenu .column .cell .text , .submenu-vertical .column .cell .text{
+    position: absolute;
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+}
+.cell-bold{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.cell-small{
+    font-size: .7rem;
+    font-weight: 400;
+}
+
+.submenu-vertical .cell-bold{
+    font-size: .8rem;
+    font-weight: 500;
+}
+.submenu-vertical .cell-small{
+    font-size: .5rem;
+    font-weight: 400;
+}
+
+.submenu-vertical{
+    box-shadow: 0.5px 0.5px 2px 1px rgb(178, 177, 177);
+    position: relative;
+    display: none;
+    border-radius:6px ;   
+    background-color: #fff; 
+    padding: 1%;
+    width: 94%;
+}
+
+.icons{
+    height: 90%;
+    transform: translateY(-10%);
+    padding: 2%;
+}
