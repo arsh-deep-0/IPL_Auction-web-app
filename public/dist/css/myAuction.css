@@ -44,7 +44,7 @@ p {
     padding-top: 10vh;
     overflow: hidden;
     position: relative;
-    height: 90vh;
+   
     width: 100%;
 
     display: flex;
@@ -769,6 +769,7 @@ button:active {
     height: 15rem;
 }  
 .statsHolder{
+   
     height: 30rem;
     width: 30rem;
     margin-bottom: 3rem;    
