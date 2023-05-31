@@ -3,23 +3,36 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override'); 
+require('dotenv').config();
 
 const IplPlayer = require('./models/batsmen');
 const Cricketer = require('./models/batsmen');
 
 const IplAuction =require('./models/auction');
 
-mongoose.connect("mongodb+srv://Arshdeep:A1r2s3d4e5@cluster0.441ajgx.mongodb.net/Auctions?retryWrites=true&w=majority",
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(() => {
-        console.log("connection open!!");
-    })
-    .catch(err => {
-        console.log(err);
-    })
+const PORT = process.env.PORT || 3000;
+
+//mongoose.set('strictQuery',false);
+/*const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect("mongodb+srv://Arshdeep:A1r2s3d4e5@cluster0.441ajgx.mongodb.net/Auctions",);
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }*/
+
+  
+const conn=mongoose.connect(process.env.MONGO_URI
+)
+.then(()=>{
+    console.log("connection open!!");
+    //console.log(`MongoDB Connected: ${conn.connection.host}`);
+})
+.catch(err=>{
+    console.log(err);
+})
 
  
 
@@ -30,8 +43,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 
-app.listen(3000, () => {
-    console.log(`app is listening to port 3000!`);
+app.listen(PORT, () => {
+    console.log(`app is listening to port ${PORT}!`);
 })
 
 
