@@ -5,7 +5,7 @@ let count=0;
             count++;
             const myText =document.getElementById("bp").value;
             console.log(myText);
-            socket.emit('message', myText); /* our instance of io emited a message to our server, 
+            socket2.emit('message', myText); /* our instance of io emited a message to our server, 
                                     now we have to handle it on server ,
                                     go to index.js*/
         }
@@ -27,7 +27,7 @@ let count=0;
             
             const myText =document.getElementById("bp").value;
             console.log(myText);
-            socket.emit('message', myText);  /* our instance of io emited a message to our server, 
+            socket2.emit('message', myText);  /* our instance of io emited a message to our server, 
                                     now we have to handle it on server ,
                                     go to index.js*/
         }
