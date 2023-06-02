@@ -1,5 +1,5 @@
 
-const socket = io('https://auction.cyclic.app/addNewPlayer');  //we are able to get an instance of io because of this line in ejs
+const socket = io('http://localhost:3001');  //we are able to get an instance of io because of this line in ejs
                                             //<script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
 
 document.getElementById("submit").onclick=()=>{
