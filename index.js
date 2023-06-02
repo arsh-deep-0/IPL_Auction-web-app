@@ -39,7 +39,7 @@ const io = require('socket.io')(http, {
 io.on('connection', (mySocket) => {
     console.log('a user connected');
     io.emit("user connected");
-
+    mySocket.on('disconnect', () => console.log('Client disconnected'));
     mySocket.on('message', (message) =>     {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
         io.emit('message', `${mySocket.id.substr(0,2)} said ${message}` );  /*the message emitted by client side 
@@ -61,8 +61,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 
+const hostname ='localhost';
 http.listen(PORT,console.log(`app is listening to port ${PORT}!`));//never use app.listen(port)
-
+/*http.listen(PORT, hostname, function (err) {
+    if (err) {
+      throw err;
+    }
+    console.log('server listening on: ', hostname, ':', PORT);
+  });*/
 
 app.get('/', (req, res) => {
     res.render('home');
