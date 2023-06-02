@@ -11,18 +11,6 @@ const Cricketer = require('./models/batsmen');
 const IplAuction =require('./models/auction');
 
 const PORT = process.env.PORT || 3000;
-
-//mongoose.set('strictQuery',false);
-/*const connectDB = async () => {
-    try {
-      const conn = await mongoose.connect("mongodb+srv://Arshdeep:A1r2s3d4e5@cluster0.441ajgx.mongodb.net/Auctions",);
-      console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  }*/
-
   
 const conn=mongoose.connect(process.env.MONGO_URI
 )
@@ -34,18 +22,46 @@ const conn=mongoose.connect(process.env.MONGO_URI
     console.log(err);
 })
 
- 
+
+//creating an http server and passing express app to it 
+/* we can also do this instead :- 
+const http = app.listen(port, () => {
+    console.log("Listening on port: " + port);
+});
+*/
+const http = require('http').createServer(app);
+
+const io = require('socket.io')(http, {
+    cors: { origin: "*" }
+});
+
+
+io.on('connection', (mySocket) => {
+    console.log('a user connected');
+    io.emit("user connected");
+
+    mySocket.on('message', (message) =>     {/*the message emitted by client side socket instance is handled here  */
+        console.log(message);
+        io.emit('message', `${mySocket.id.substr(0,2)} said ${message}` );  /*the message emitted by client side 
+                                                                              socket instance is now emitted to all servers 
+                                                                              with little modification */ 
+    });
+});
+
+
 
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'ejs');
+// view engine setup
+
+/*app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');*/
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 
-app.listen(PORT, () => {
-    console.log(`app is listening to port ${PORT}!`);
-})
+http.listen(PORT,console.log(`app is listening to port ${PORT}!`));//never use app.listen(port)
 
 
 app.get('/', (req, res) => {
@@ -88,6 +104,8 @@ app.get('/addNewPlayer', async (req, res) => {
     const players = await IplPlayer.find({});
     res.render('addNewPlayer', { players })
 })
+
+
 
 
 app.post("/players", async (req, res) => {

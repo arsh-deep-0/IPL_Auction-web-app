@@ -7,11 +7,21 @@
     <title>All Players</title>
 </head>
 <body>
+
+    
+    <input id="input" type="text">
+    <button id ="go">GO</button>
+
+    <p id="jj">woow</p>
      <h1>All Playeres</h1>
      <ul>
         <% for(let player of players){ %>
             <li><a href="/players/<%= player.order %>"><%= player.name %> </a></li>
          <%} %>
      </ul>
+
+     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+     <script type="text/javascript" src="views/js/player-io.js"></script>
+     
 </body>
 </html>

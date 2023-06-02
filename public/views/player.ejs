@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE ejs>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,9 @@
     <title><%= player.name %></title>
 </head>
 <body>
+
+    
+
    
     <h1><%= player.name %></h1>
 
@@ -15,14 +19,18 @@
            
             <li> Name <%= player.name %></li>
             <li> basePrice <%= player.basePrice %></li>
-            <li> batPts <%= player.batPts %></li>
+            <li id="batpts"> batPts <%= player.batPts %></li>
          
      </ul>
 
      <form action="/players/edit/<%= player.order %>">
         <button >Edit</button>
      </form>
-    
+
+     <p id="jj"></p>
+
+     
+     
      
 
 </body>

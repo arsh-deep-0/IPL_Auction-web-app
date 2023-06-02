@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE ejs>
 <html lang="en">
 
 <head>
@@ -6,10 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Player</title>
+
+
 </head>
 
 <body>
     <h1>Add a product</h1>
+
+    <ul>
+
+    </ul>
+
+    <input placeholder="message">
+    <button>Send</button>
+
+    <p id="ss">Hi</p>
+    <input id="bp" type="text">
+    <button id="submit">submit</button>
 
     <form action="/players" method="POST">
         <label for="name">Player Name</label>
@@ -22,14 +35,26 @@
         <input id="BowlingPoints" type="text" name="bowlPts" placeholder="0-100">
 
         <label for="WKPoints">Wicketkeeping Points</label>
-        <input id="WKPoints" type="text" name="wkPts" placeholder="0-100"> 
+        <input id="WKPoints" type="text" name="wkPts" placeholder="0-100">
 
-        
+
         <label for="Order">Order</label>
-        <input id="Order" type="text" name="order" placeholder="0-100"> 
+        <input id="Order" type="text" name="order" placeholder="0-100">
 
         <button>submit</button>
+
     </form>
+
+    
+    
+
+    <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+    <script type="text/javascript" src="views/js/app.js"></script>
+    
+
+
+
+
 </body>
 
 </html>

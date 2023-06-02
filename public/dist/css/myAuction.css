@@ -744,6 +744,7 @@ button:active {
         align-items: flex-end;
         gap: 2.5rem;
         flex-wrap: wrap-reverse;
+        flex-direction: row-reverse;
         padding-top: 5rem;
     }
 
