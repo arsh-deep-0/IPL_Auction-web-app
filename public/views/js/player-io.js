@@ -1,6 +1,5 @@
-import socket from ("socket.io-client")("https://auction-arsh.onrender.com/players");
+const socket2 =io('https://auction-arsh.onrender.com/players');
 
-const socket = socket;
 document.getElementById("go").onclick=()=>{
    
     const myText =document.getElementById("input").value;
