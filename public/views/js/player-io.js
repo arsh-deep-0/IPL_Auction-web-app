@@ -1,4 +1,4 @@
-const socket2 =io('http://localhost:3001');
+const socket = require("socket.io-client")("https://auction-arsh.onrender.com/players");
 
 document.getElementById("go").onclick=()=>{
    
