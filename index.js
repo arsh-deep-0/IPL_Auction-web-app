@@ -42,7 +42,7 @@ io.on('connection', (mySocket) => {
     mySocket.on('disconnect', () => console.log('Client disconnected'));
     mySocket.on('message', (message) =>     {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
-        io.emit('message', `${mySocket.id.substr(0,2)} said ${message}` );  /*the message emitted by client side 
+        io.emit('message', `${mySocket.id.substr(0,2)} said ${message} bro` );  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
                                                                               with little modification */ 
     });
