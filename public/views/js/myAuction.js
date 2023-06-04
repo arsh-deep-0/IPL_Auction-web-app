@@ -1,4 +1,5 @@
-let playerNumber = 0;
+let playerNumber = document.getElementById("playerNum").innerHTML;
+console.log(playerNumber);
 let player = [
     {
         "order": "1",
@@ -7,7 +8,9 @@ let player = [
         "batavg": "78",
         "bowlavg": "Nil",
         "openingbid": "2",
-        "wkPts": "22"
+        "wkPts": "22",
+        "nationality":"india",
+        "role":"wk"
     },
     {
         "order": "2",
@@ -16,7 +19,9 @@ let player = [
         "batavg": "8",
         "bowlavg": "97",
         "openingbid": "2",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"india",
+        "role":"Bowler"
     },
     {
         "order": "3",
@@ -25,7 +30,9 @@ let player = [
         "batavg": 88,
         "bowlavg": "18",
         "openingbid": "2",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"india",
+        "role":"Batsman"
     },
     {
         "order": "4",
@@ -34,7 +41,9 @@ let player = [
         "batavg": "70",
         "bowlavg": "62",
         "openingbid": "2",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"england",
+        "role":"All-Rounder"
     },
     {
         "order": "5",
@@ -43,7 +52,9 @@ let player = [
         "batavg": "68",
         "bowlavg": "69",
         "openingbid": "2",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"India",
+        "role":"All-Rounder"
     },
     {
         "order": "6",
@@ -52,7 +63,9 @@ let player = [
         "batavg": "14",
         "bowlavg": "85",
         "openingbid": "2",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"India",
+        "role":"Bowler"
     },
     {
         "order": "7",
@@ -61,7 +74,9 @@ let player = [
         "batavg": "95",
         "bowlavg": "8",
         "openingbid": "5",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"india",
+        "role":"batsman"
     },
     {
         "order": "8",
@@ -70,7 +85,9 @@ let player = [
         "batavg": "80",
         "bowlavg": "1",
         "openingbid": "2",
-        "wkPts": "Nil"
+        "wkPts": "Nil",
+        "nationality":"India",
+        "role":"batsman"
     },
     {
         "order": "9",
@@ -79,27 +96,54 @@ let player = [
         "batavg": "89",
         "bowlavg": "1",
         "openingbid": "2",
-        "wkPts": "16"
+        "wkPts": "16",
+        "nationality":"England",
+        "role":"wk"
     }
 
 ];
 
 const click = document.getElementById("change");
+const next = document.getElementById("NEXT");
+const prev = document.getElementById("PREV");
 
-click.addEventListener("click", myFunction);
-function myFunction() {
-    let elementValue = document.getElementById("Medication").value;
+
+click.addEventListener("click", decideOrder);
+next.addEventListener("click", increaseOrder);
+prev.addEventListener("click", decreaseOrder);
+
+function decideOrder(){
+    let order= document.getElementById("searchOrder").value;   
+    changePlayer(order)
+}
+
+function increaseOrder(){
+    playerNumber = document.getElementById("playerNum").innerText;
     playerNumber++;
-
+    console.log(playerNumber);
+    changePlayer(playerNumber+"");
+}
+function decreaseOrder(){
+    playerNumber =  document.getElementById("playerNum").innerHTML;
+    playerNumber--;
+    console.log(playerNumber);
+    changePlayer(playerNumber+"");
+}
+function changePlayer(elementValue) {
+console.log(elementValue);
     player.forEach(function (myElement) {
         if (myElement.order === elementValue) {
             document.getElementById("name").innerHTML = myElement.name;
             document.getElementById("playerNum").innerHTML = elementValue;
             document.getElementById("currPlayerImg").src = "/resources" + myElement.imgSrc;
+            document.getElementById("roleImg").src = "/resources/icons/" + myElement.role+".png";
+            document.getElementById("flagImg").src = "/resources/icons/" + myElement.nationality+".png";
             document.getElementById("batAvg").innerHTML = myElement.batavg;
             document.getElementById("bowlPts").innerHTML = myElement.bowlavg;
             document.getElementById("basePrice").innerHTML = myElement.openingbid;
             document.getElementById("wkPts").innerHTML = myElement.wkPts;
+            document.getElementById("nationality").innerHTML = myElement.nationality;
+            document.getElementById("role").innerHTML = myElement.role;
         }
 
     })

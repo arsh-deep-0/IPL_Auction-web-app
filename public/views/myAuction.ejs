@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPL Auction</title>
+    <title>IPL Auction </title>
     <!-- <link rel="stylesheet" href="app.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="stylesheet" href="dist/css/myAuction.css">
@@ -547,7 +547,7 @@
 
             <div id="search">
 
-                <input style="border-radius:5px;border:2px rgb(39,50,50) solid;height:1.5rem;" id="Medication"
+                <input style="border-radius:5px;border:2px rgb(39,50,50) solid;height:1.5rem;" id="searchOrder"
                     name="order" size="3" type="text" value="">
                 <button style="padding:8px;" class="button" id="change">Search</button>
 
@@ -559,8 +559,10 @@
                     <p id="rupee"> &#8377<span class="Bid" id="Amount">0</span>Lakhs</p>
                 </div>
                 <div class="upsold">
+                    <button id="PREV"> prev </button>
                     <button id="UP">Bid Up</button>
                     <button id="Sold">Sold</button>
+                    <button id="NEXT"> next </button>
                 </div>
                 <div>
                     <p class="Bids" id="hidden"></p>
@@ -619,8 +621,27 @@
 
                     <p>Wk Pts :<span id="wkPts">Nil</span></p>
 
-                    <p>Base : <span id="basePrice">5</span> Cr</p>
+                   
                     
+                </div>
+            </div>
+
+            <div class="otherstatsbg">
+                <div class="team-role">
+                    <img id="roleImg"src="resources/icons/batsman.png" alt="">
+                    <img class="eclipse" src="resources/icons/eclipse.png" alt="">
+                    <p id="role">Batsman</p>
+                </div>
+
+                <div class="nationality">
+                    <img class="flag" id="flagImg"src="resources/icons/india.png" alt="">
+                    <img class="eclipse" src="resources/icons/eclipse.png" alt="">
+                    <p id="nationality">India</p>
+                </div>
+                <div class="basePrice">
+                    <img class="coin" src="resources/icons/basePrice.png" alt="">
+                    <img class="eclipse" src="resources/icons/eclipse.png" alt="">
+                    <p>Base- <span id="basePrice">5</span> Cr</p>
                 </div>
             </div>
 

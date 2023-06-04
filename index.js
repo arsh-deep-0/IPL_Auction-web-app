@@ -42,7 +42,11 @@ io.on('connection', (mySocket) => {
     mySocket.on('disconnect', () => console.log('Client disconnected'));
     mySocket.on('message', (message) =>     {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
-        io.emit('message', `${mySocket.id.substr(0,2)} said ${message}` );  /*the message emitted by client side 
+        async () => {
+            const { order } = message;
+            const player = await IplPlayer.findOne({ order: order });
+        }
+        io.emit('message', `${mySocket.id.substr(0,2)} said ${message} and player name is ${player.name}` );  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
                                                                               with little modification */ 
     });
@@ -82,7 +86,6 @@ app.get('/auction', async (req, res) => {
 })
 
 app.post('/myAuction',async (req, res) =>{
-    
     const newAuction =  new IplAuction(req.body);
     await newAuction.save();
     res.render('myAuction',{newAuction});

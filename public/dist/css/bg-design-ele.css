@@ -3,18 +3,22 @@
     width: 400px;
     height: 2000px;
     background-color: rgb(105, 77, 229);
+    
    
     z-index: -1;
     transform: rotate(-60deg) translate(1020px) ;
-    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);    
+    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);  
+    box-shadow: 0rem 0.5rem 2rem 0 rgba(171, 169, 169, 0.37);  
 }
 .background-design-ele-2{
     position: absolute;
     width: 400px;
     height: 3400px;
     background: rgb(91, 58, 241);
+    
    
     z-index: -1;
     transform: rotate(55deg) translate(-700px) translateY(-200px);
-    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);   
+    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);  
+    box-shadow: 0rem 0.5rem 2rem 0 rgba(171, 169, 169, 0.37); 
 }
