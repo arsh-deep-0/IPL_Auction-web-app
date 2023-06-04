@@ -32,7 +32,7 @@ const http = app.listen(port, () => {
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
-    cors: { origin: "*" }
+    cors: { origin: "https://auction.cyclic.app" }
 });
 
 
@@ -43,7 +43,7 @@ io.on('connection', (mySocket) => {
     mySocket.on('message', (message) =>     {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
         
-        io.emit('message', `${mySocket.id.substr(0,2)} said ${message} and player name is` );  /*the message emitted by client side 
+        io.emit('message', `${mySocket.id.substr(0,2)} said ${message}` );  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
                                                                               with little modification */ 
     });
