@@ -32,7 +32,7 @@ const http = app.listen(port, () => {
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
-    cors: { origin: "https://auction.cyclic.app" }
+    cors: { origin: "*" }
 });
 
 

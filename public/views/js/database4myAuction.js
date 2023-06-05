@@ -1,5 +1,5 @@
 let count = 0;
-const socket = io('https://auction.cyclic.app');
+const socket = io('https://auction-arsh.onrender.com');
 
 const search = document.getElementById("change");
 const next = document.getElementById('NEXT');
