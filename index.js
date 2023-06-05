@@ -44,7 +44,7 @@ io.on('connection', (mySocket) => {
         console.log('Client disconnected')
     );
 
-    io.on('change-Player',(order)=>{
+    mySocket.on('change-Player',(order)=>{
         Cricketer.find({ order: order })
         .then(result =>{
             console.log(result);
@@ -53,12 +53,6 @@ io.on('connection', (mySocket) => {
         );
     })
 
-    Cricketer.find({ order: 3 })
-        .then(result =>{
-            console.log(result);
-            mySocket.emit('change-Player', result)
-        }
-        );
 
     mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
