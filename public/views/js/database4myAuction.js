@@ -18,16 +18,16 @@ function decideOrder() {
 }
 
 function increaseOrder() {
-    let order = current_player_order.innerText;
+    let order = Number(current_player_order.innerHTML);
     order++;
-    console.log(playerNumber);
-    changePlayer(playerNumber + "");
+    console.log(order);
+    changePlayer(order + "");
 }
 function decreaseOrder() {
-    let order = current_player_order.innerHTML;
+    let order = Number (current_player_order.innerHTML);
     order--;
-    console.log(playerNumber);
-    changePlayer(playerNumber + "");
+    console.log(order);
+    changePlayer(order + "");
 }
 
 function changePlayer(playerOrder) {
@@ -72,44 +72,4 @@ socket.on('change-Player', (result) => {
 
 
 
-
-const socket2 = io('https://auction-arsh.onrender.com');
-
-document.getElementById("go").onclick = () => {
-    count++;
-    const myText = document.getElementById("input").value;
-    console.log(myText);
-    socket2.emit('message', myText); /* our instance of io emited a message to our server, 
-                            now we have to handle it on server ,
-                            go to index.js*/
-}
-
-socket2.on('message', text => {     /* now this socket instance should handle the messsage emitted 
-                            from server side socket instance to all servers and from their to client side sockets*/
-
-    document.getElementById("jj").innerHTML = text;
-    console.log(text + "2");
-
-});
-
-
-if( document.getElementById("jj").innerHTML = "woww"&&count>0){
-    // const socket2 = io('http://localhost:3001');
-
-    document.getElementById("go").onclick = () => {
-
-        const myText = document.getElementById("input").value;
-        console.log(myText + "2");
-        socket2.emit('message', myText); /* our instance of io emited a message to our server, 
-                            now we have to handle it on server ,
-                            go to index.js*/
-    }
-
-    socket2.on('message', text => {     /* now this socket instance should handle the messsage emitted 
-                            from server side socket instance to all servers and from their to client side sockets*/
-
-        document.getElementById("jj").innerHTML = text;
-        console.log(text + "2");
-
-    });
-}
+ 
