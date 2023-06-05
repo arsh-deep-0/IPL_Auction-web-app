@@ -79,6 +79,7 @@ if (document.getElementById("searchOrder").innerHTML = "woww" && count > 0) {
     prev.addEventListener("click", decreaseOrder);
 
     function decideOrder() {
+        console.log("if");
         let order = input.value;
         changePlayer(order)
     }
@@ -110,7 +111,7 @@ if (document.getElementById("searchOrder").innerHTML = "woww" && count > 0) {
 
 
     socket.on('change-Player', (result) => {
-        console.log(result);
+        console.log(result,"wow");
         result.forEach(myElement => {
             document.getElementById("name").innerHTML = myElement.name;
             document.getElementById("playerNum").innerHTML = myElement.order;
