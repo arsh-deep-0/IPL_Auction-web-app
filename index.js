@@ -54,7 +54,7 @@ io.on('connection', (mySocket) => {
     })
 
 
-    mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */
+    mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  /*remember io is global and mySocket is local ,so when u wanr to emit on all devices use io*/ 
         console.log(message);
         io.emit('message', `${mySocket.id.substr(0, 2)} said ${message} bro `);  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
