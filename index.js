@@ -48,7 +48,7 @@ io.on('connection', (mySocket) => {
         Cricketer.find({ order: order })
         .then(result =>{
             console.log(result);
-            mySocket.emit('change-Player', result)
+            io.emit('change-Player', result)
         }
         );
     })
