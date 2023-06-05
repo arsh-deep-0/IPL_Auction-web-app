@@ -7,50 +7,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Player</title>
 
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            align-items: center;
+        }
+    </style>
 
 </head>
 
 <body>
     <h1>Add a product</h1>
 
-    <ul>
-
-    </ul>
-
-    <input placeholder="message">
-    <button>Send</button>
-
-    <p id="ss">Hi</p>
-    <input id="bp" type="text">
-    <button id="submit">submit</button>
-
     <form action="/players" method="POST">
         <label for="name">Player Name</label>
         <input id="name" type="text" name="name" placeholder="eg. Virat Kohli">
 
         <label for="BattingPoints">Batting Points</label>
-        <input id="BattingPoints" type="text" name="batPts" placeholder="1-100">
+        <input id="BattingPoints" type="number" name="batPts" placeholder="1-100">
 
         <label for="BowlingPoints">Bowling Points</label>
-        <input id="BowlingPoints" type="text" name="bowlPts" placeholder="0-100">
+        <input id="BowlingPoints" type="number" name="bowlPts" placeholder="0-100">
 
         <label for="WKPoints">Wicketkeeping Points</label>
-        <input id="WKPoints" type="text" name="wkPts" placeholder="0-100">
+        <input id="WKPoints" type="number" name="wkPts" placeholder="0-100" value="Nil">
 
 
         <label for="Order">Order</label>
-        <input id="Order" type="text" name="order" placeholder="0-100">
+        <input id="Order" type="number" name="order" placeholder="0-100">
+
+        <label for="SellingStatus">Selling Status</label>
+        <!-- 0 means yet to come  1 means sold 2 means unsold -->
+        <input id="sellingStatus" type="number" name="sellingStatus" placeholder="0-2" value="0">
+
+        <label for="Nationality">Nationality</label>
+        <input id="Nationality" type="text" name="Nationality" placeholder="eg.India">
+
+        <label for="BasePrice">Base Price</label>
+        <input id="BasePrice" type="text" name="BasePrice" placeholder="in crores" >
+
+        <label for="SellingPrice">Selling Price</label>
+        <input id="SellingPrice" type="number" name="SellingPrice" placeholder="in crores" value="0">
+
+        <label for="Team">Team Name</label>
+        <input id="Team" type="text" name="Team" placeholder="eg.MI" value="Nil">
+
+        <label for="Role">Role</label>
+        <input id="Role" type="text" name="Role" placeholder="eg.Batsman" value="Batsman">
 
         <button>submit</button>
 
     </form>
 
-    
-    
 
-    <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+
+
+    <!-- <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
     <script type="text/javascript" src="views/js/app.js"></script>
-    
+     -->
 
 
 

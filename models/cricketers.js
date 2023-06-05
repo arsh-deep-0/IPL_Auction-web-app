@@ -17,9 +17,15 @@ const playerSchema = new mongoose.Schema({
         type:Number,
         min:0
     },
-    basePrice:{
+    BasePrice:{
         type:Number,
         min:0
+    },
+    SellingPrice:{
+        type:Number
+    },
+    Nationality:{
+        type:String
     },
     order:{
         type:Number,
@@ -27,11 +33,20 @@ const playerSchema = new mongoose.Schema({
     },
     imgSrc:{
         type:String
+    },
+    Role:{
+        type:String
+    },
+    Team:{
+        type:String
+    },
+    sellingStatus:{
+        type:Number
     }
 })
 
 
 
-const Cricketer= mongoose.model('IplPlayer',playerSchema);
-
+const Cricketer= mongoose.model('cricketers',playerSchema);
+console.log("done bro")
 module.exports=Cricketer;

@@ -70,7 +70,7 @@ let player = [
     {
         "order": "7",
         "name": "Virat Kohli",
-        "imgSrc": "/Players/virat kohli.png",
+        "imgSrc": "/Players/virat_kohli.png",
         "batavg": "95",
         "bowlavg": "8",
         "openingbid": "5",
@@ -104,13 +104,13 @@ let player = [
 ];
 
 const click = document.getElementById("change");
-const next = document.getElementById("NEXT");
+/*const next = document.getElementById("NEXT");
 const prev = document.getElementById("PREV");
 
 
-click.addEventListener("click", decideOrder);
+/*click.addEventListener("click", decideOrder);
 next.addEventListener("click", increaseOrder);
-prev.addEventListener("click", decreaseOrder);
+prev.addEventListener("click", decreaseOrder);*/
 
 function decideOrder(){
     let order= document.getElementById("searchOrder").value;   
@@ -144,6 +144,13 @@ console.log(elementValue);
             document.getElementById("wkPts").innerHTML = myElement.wkPts;
             document.getElementById("nationality").innerHTML = myElement.nationality;
             document.getElementById("role").innerHTML = myElement.role;
+
+            //set bids section to default
+            document.getElementById("hidden").style.display = "none";
+            document.getElementById("bids-3").style.display = "block";
+            document.getElementById("UP").style.display = "block";
+            document.getElementById("Sold").style.display = "block";
+            document.getElementById("teamSelector").style.display = "none";
         }
 
     })
@@ -189,6 +196,9 @@ function sell() {
     curr_bid = 0;
     bids = 0;
     document.getElementById("hidden").style.display = "block";
+    document.getElementById("bids-3").style.display = "none";
+    document.getElementById("UP").style.display = "none";
+    document.getElementById("Sold").style.display = "none";
     document.getElementById("teamSelector").style.display = "block";
 
 }

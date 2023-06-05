@@ -2,25 +2,25 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const methodOverride = require('method-override'); 
+const methodOverride = require('method-override');
 require('dotenv').config();
 
-const IplPlayer = require('./models/batsmen');
-const Cricketer = require('./models/batsmen');
+//const IplPlayer = require('./models/player');
+const Cricketer = require('./models/cricketers');
 
-const IplAuction =require('./models/auction');
+const IplAuction = require('./models/auction');
 
 const PORT = process.env.PORT || 3000;
-  
-const conn=mongoose.connect(process.env.MONGO_URI
+
+const conn = mongoose.connect(process.env.MONGO_URI
 )
-.then(()=>{
-    console.log("connection open!!");
-    //console.log(`MongoDB Connected: ${conn.connection.host}`);
-})
-.catch(err=>{
-    console.log(err);
-})
+    .then(() => {
+        console.log("connection open!!");
+        //console.log(`MongoDB Connected: ${conn.connection.host}`);
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
 
 //creating an http server and passing express app to it 
@@ -39,13 +39,25 @@ const io = require('socket.io')(http, {
 io.on('connection', (mySocket) => {
     console.log('a user connected');
     io.emit("user connected");
-    mySocket.on('disconnect', () => console.log('Client disconnected'));
-    mySocket.on('message', (message) =>     {/*the message emitted by client side socket instance is handled here  */
+
+    mySocket.on('disconnect', () =>
+        console.log('Client disconnected')
+    );
+
+    mySocket.on('change-Player',(order)=>{
+        Cricketer.find({ order: order })
+        .then(result =>{
+            console.log(result);
+            mySocket.emit('change-Player', result)
+        }
+        );
+    })
+
+    mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
-        
-        io.emit('message', `${mySocket.id.substr(0,2)} said ${message}` );  /*the message emitted by client side 
+        io.emit('message', `${mySocket.id.substr(0, 2)} said ${message} bro `);  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
-                                                                              with little modification */ 
+                                                                              with little modification */
     });
 });
 
@@ -62,8 +74,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 
-const hostname ='localhost';
-http.listen(PORT,console.log(`app is listening to port ${PORT}!`));//never use app.listen(port)
+const hostname = 'localhost';
+http.listen(PORT, console.log(`app is listening to port ${PORT}!`));//never use app.listen(port)
 /*http.listen(PORT, hostname, function (err) {
     if (err) {
       throw err;
@@ -76,38 +88,38 @@ app.get('/', (req, res) => {
 })
 
 app.get('/auction', async (req, res) => {
-    const auction = await IplAuction.find({order:1});
-    const order=1;
+    const auction = await IplAuction.find({ order: 1 });
+    const order = 1;
 
     res.render('newAuction', { auction })
 })
 
-app.post('/myAuction',async (req, res) =>{
-    const newAuction =  new IplAuction(req.body);
+app.post('/myAuction', async (req, res) => {
+    const newAuction = new IplAuction(req.body);
     await newAuction.save();
-    res.render('myAuction',{newAuction});
+    res.render('myAuction', { newAuction });
 })
 
-app.get('/myAuction',(req,res)=>{
+app.get('/myAuction', (req, res) => {
     res.render('myAuction')
 })
 
 app.get('/players', async (req, res) => {
-    const players = await IplPlayer.find({});
+    const players = await Cricketer.find({});
     res.render('players', { players })
 })
 
 
 app.get('/players/:order', async (req, res) => {
     const { order } = req.params;
-    const player = await IplPlayer.findOne({ order: order });
+    const player = await Cricketer.findOne({ order: order });
     // res.send(`Details of ${player.name}`); never do send and render simultaneously
     res.render('player', { player })
 })
 
 app.get('/addNewPlayer', async (req, res) => {
 
-    const players = await IplPlayer.find({});
+    const players = await Cricketer.find({});
     res.render('addNewPlayer', { players })
 })
 
@@ -116,24 +128,25 @@ app.get('/addNewPlayer', async (req, res) => {
 
 app.post("/players", async (req, res) => {
     console.log(req.body);
-    const newPlayer =  new IplPlayer(req.body);
+    const newPlayer = new Cricketer(req.body);
+    console.log(newPlayer);
     await newPlayer.save();
     res.redirect("players");
 })
 
 
 app.get('/players/edit/:order', async (req, res) => {
-    const {order}= req.params;
-    const editablePlayer = await IplPlayer.findOne({order:order})
+    const { order } = req.params;
+    const editablePlayer = await Cricketer.findOne({ order: order })
     res.render('editPlayer', { editablePlayer })
 })
 
 app.put('/players/:order', async (req, res) => {
-    const {order}= req.params;
+    const { order } = req.params;
     console.log(order);
-    const editedPlayer = await IplPlayer.findOneAndUpdate({order:order},req.body,{runValidators:true , new: true} );
+    const editedPlayer = await Cricketer.findOneAndUpdate({ order: order }, req.body, { runValidators: true, new: true });
     console.log(req.body);
-    const player=editedPlayer;
+    const player = editedPlayer;
     res.render('player', { player })
 })
 
