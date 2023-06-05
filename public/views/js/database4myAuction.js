@@ -73,7 +73,7 @@ socket.on('change-Player', (result) => {
 
 
 
-if (document.getElementById("searchOrder").innerHTML = "woww" && count > 0) {
+/*if (document.getElementById("searchOrder").innerHTML = "woww" && count > 0) {
     search.addEventListener("click", decideOrder);
     next.addEventListener("click", increaseOrder);
     prev.addEventListener("click", decreaseOrder);
@@ -147,12 +147,12 @@ if (document.getElementById("searchOrder").innerHTML = "woww" && count > 0) {
             socket2.emit('message', myText); /* our instance of io emited a message to our server, 
                                     now we have to handle it on server ,
                                     go to index.js*/
-        }
+      /*  }
 
         socket2.on('message', text => {     /* now this socket instance should handle the messsage emitted 
                                     from server side socket instance to all servers and from their to client side sockets*/
 
-            document.getElementById("jj").innerHTML = text;
+          /*  document.getElementById("jj").innerHTML = text;
             console.log(text + "2");
 
         });
@@ -168,13 +168,13 @@ if (document.getElementById("searchOrder").innerHTML = "woww" && count > 0) {
                 socket2.emit('message', myText); /* our instance of io emited a message to our server, 
                                     now we have to handle it on server ,
                                     go to index.js*/
-            }
+         /*   }
 
             socket2.on('message', text => {     /* now this socket instance should handle the messsage emitted 
                                     from server side socket instance to all servers and from their to client side sockets*/
 
-                document.getElementById("jj").innerHTML = text;
+          /*      document.getElementById("jj").innerHTML = text;
                 console.log(text + "2");
 
             });
-        }
+        }*/
