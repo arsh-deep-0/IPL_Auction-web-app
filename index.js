@@ -44,7 +44,7 @@ io.on('connection', (mySocket) => {
         console.log('Client disconnected')
     );
 
-    mySocket.on('change-Player',(order)=>{
+    io.on('change-Player',(order)=>{
         Cricketer.find({ order: order })
         .then(result =>{
             console.log(result);
