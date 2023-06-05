@@ -104,57 +104,7 @@ let player = [
 ];
 
 const click = document.getElementById("change");
-/*const next = document.getElementById("NEXT");
-const prev = document.getElementById("PREV");
 
-
-/*click.addEventListener("click", decideOrder);
-next.addEventListener("click", increaseOrder);
-prev.addEventListener("click", decreaseOrder);*/
-
-function decideOrder(){
-    let order= document.getElementById("searchOrder").value;   
-    changePlayer(order)
-}
-
-function increaseOrder(){
-    playerNumber = document.getElementById("playerNum").innerText;
-    playerNumber++;
-    console.log(playerNumber);
-    changePlayer(playerNumber+"");
-}
-function decreaseOrder(){
-    playerNumber =  document.getElementById("playerNum").innerHTML;
-    playerNumber--;
-    console.log(playerNumber);
-    changePlayer(playerNumber+"");
-}
-function changePlayer(elementValue) {
-console.log(elementValue);
-    player.forEach(function (myElement) {
-        if (myElement.order === elementValue) {
-            document.getElementById("name").innerHTML = myElement.name;
-            document.getElementById("playerNum").innerHTML = elementValue;
-            document.getElementById("currPlayerImg").src = "/resources" + myElement.imgSrc;
-            document.getElementById("roleImg").src = "/resources/icons/" + myElement.role+".png";
-            document.getElementById("flagImg").src = "/resources/icons/" + myElement.nationality+".png";
-            document.getElementById("batAvg").innerHTML = myElement.batavg;
-            document.getElementById("bowlPts").innerHTML = myElement.bowlavg;
-            document.getElementById("basePrice").innerHTML = myElement.openingbid;
-            document.getElementById("wkPts").innerHTML = myElement.wkPts;
-            document.getElementById("nationality").innerHTML = myElement.nationality;
-            document.getElementById("role").innerHTML = myElement.role;
-
-            //set bids section to default
-            document.getElementById("hidden").style.display = "none";
-            document.getElementById("bids-3").style.display = "block";
-            document.getElementById("UP").style.display = "block";
-            document.getElementById("Sold").style.display = "block";
-            document.getElementById("teamSelector").style.display = "none";
-        }
-
-    })
-}
 
 
 
