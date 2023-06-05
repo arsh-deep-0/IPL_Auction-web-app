@@ -53,6 +53,13 @@ io.on('connection', (mySocket) => {
         );
     })
 
+    Cricketer.find({ order: 3 })
+        .then(result =>{
+            console.log(result);
+            mySocket.emit('change-Player', result)
+        }
+        );
+
     mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */
         console.log(message);
         io.emit('message', `${mySocket.id.substr(0, 2)} said ${message} bro `);  /*the message emitted by client side 
