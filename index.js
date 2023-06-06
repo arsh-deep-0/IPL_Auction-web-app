@@ -32,7 +32,7 @@ const http = app.listen(port, () => {
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
-    cors: { origin: "*" }
+    cors: { origin: "https://auction-arsh.onrender.com/myAuction" }
 });
 
 
