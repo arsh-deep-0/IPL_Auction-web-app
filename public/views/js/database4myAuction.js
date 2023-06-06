@@ -25,7 +25,8 @@ prev.addEventListener("click", decreaseOrder);
 
 function decideOrder() {
     let order = input.value;
-    changePlayer(order)
+    changePlayer(order);
+    socket.emit('increase-Bid',0);
 }
 
 function increaseOrder() {
@@ -33,12 +34,14 @@ function increaseOrder() {
     order++;
     console.log(order);
     changePlayer(order + "");
+    socket.emit('increase-Bid',0);
 }
 function decreaseOrder() {
     let order = Number (current_player_order.innerHTML);
     order--;
     console.log(order);
     changePlayer(order + "");
+    socket.emit('increase-Bid',0);
 }
 
 function changePlayer(playerOrder) {
@@ -71,7 +74,7 @@ socket.on('change-Player', (result) => {
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
         document.getElementById("teamSelector").style.display = "none";
-        socket.emit('increase-Bid',0);
+        
 
         //checking if player is sold or not 
         if(myElement.sellingStaus>0){
