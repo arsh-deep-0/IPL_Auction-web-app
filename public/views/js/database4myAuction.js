@@ -2,9 +2,11 @@ const socket = io('https://auction-arsh.onrender.com');
 
 //on page reload , going back to database details
 
-socket.on("user connected",()=>{
+socket.on("user connected",(data)=>{
     console.log('connection established');
-   // changePlayer()
+    let current_player_order=data.order;
+    changePlayer(current_player_order);
+    document.getElementById("Amount").innerHTML=data.bidValue;
 
  });
 
@@ -42,7 +44,7 @@ function decreaseOrder() {
 function changePlayer(playerOrder) {
 
     socket.emit('change-Player', playerOrder);
-    console.log("emiited");
+    console.log("emiited",playerOrder);
    
 }
 
@@ -61,6 +63,7 @@ socket.on('change-Player', (result) => {
         document.getElementById("wkPts").innerHTML = myElement.wkPts;
         document.getElementById("nationality").innerHTML = myElement.Nationality;
         document.getElementById("role").innerHTML = myElement.Role;
+       
 
         //set bids section to default
         document.getElementById("hidden").style.display = "none";
@@ -68,6 +71,13 @@ socket.on('change-Player', (result) => {
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
         document.getElementById("teamSelector").style.display = "none";
+
+
+        //checking if player is sold or not 
+        if(myElement.sellingStaus>0){
+            document.getElementById("hidden").innerHTML=myElement.sellingPrice;
+            document.getElementById("hidden").style.display="block";
+        }
     });
 })
 

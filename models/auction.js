@@ -27,7 +27,15 @@ const auctionSchema = new mongoose.Schema({
    maxBidding:{
     type:Number
    },
-   
+   currentPlayerOrder:{
+    type:Number
+   },
+   currentBidValue:{
+    type:Number
+   },
+   order:{
+    type:Number
+   }
 })
 
 

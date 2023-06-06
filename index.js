@@ -38,14 +38,19 @@ const io = require('socket.io')(http, {
 
 io.on('connection', (mySocket) => {
     console.log('a user connected');
-
-    io.emit("user connected");
+    let current_player_order=IplAuction.find({order:1}).currentPlayerOrder;
+    console.log(current_player_order);
+    let currentBidValue=IplAuction.find({order:1}).currentBidValue;
+    console.log(currentBidValue);
+    let auctiondetails={order:current_player_order,bidValue:currentBidValue};
+    io.emit("user connected",auctiondetails);
 
     mySocket.on('disconnect', () =>
         console.log('Client disconnected')
     );
 
     mySocket.on('change-Player',(order)=>{
+        IplAuction.findOneAndUpdate({order:1},{currentPlayerOrder:order},{ runValidators: true, new: true });
         Cricketer.find({ order: order })
         .then(result =>{
             console.log(result);
@@ -64,6 +69,8 @@ io.on('connection', (mySocket) => {
 
     mySocket.on('increase-Bid',bidValue=>{
         console.log(bidValue);
+        IplAuction.findOneAndUpdate({order:1},{currentBidValue:bidValue},{ runValidators: true, new: true });
+       
         io.emit('increase-Bid',bidValue);
     })
 });
