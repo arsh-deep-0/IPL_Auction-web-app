@@ -71,7 +71,7 @@ socket.on('change-Player', (result) => {
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
         document.getElementById("teamSelector").style.display = "none";
-
+        socket.emit('increase-Bid',0);
 
         //checking if player is sold or not 
         if(myElement.sellingStaus>0){
