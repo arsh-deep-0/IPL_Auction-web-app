@@ -60,6 +60,11 @@ io.on('connection', (mySocket) => {
                                                                               socket instance is now emitted to all servers 
                                                                               with little modification */
     });
+
+    mySocket.on('increase-Bid',bidValue=>{
+        console.log(bidValue);
+        io.emit('increase-Bid',bidValue);
+    })
 });
 
 

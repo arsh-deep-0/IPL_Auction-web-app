@@ -489,9 +489,10 @@ button:active {
 }
 
 #PREV{
-    height: 2rem;
-    margin-bottom: 1rem;
-    padding: .2rem;
+    
+   margin-bottom:1.2rem ;
+    padding: .25rem;
+    font-size: .9rem;
     font-weight: 800;
     font-family: 'Courier New', Courier, monospace;
     color: white;
@@ -501,16 +502,17 @@ button:active {
     border-radius: .4rem;
 }
 #NEXT{
-    height: 2rem;
-    margin-bottom: 1rem;
-    padding: .2rem;
+   
+    margin-bottom:1.2rem;
+    padding: .25rem;
+    font-size: .9rem;
     font-weight: 800;
     font-family: 'Courier New', Courier, monospace;
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
-    border-radius: .4rem;
+    border-radius: .35rem;
     
 }
 

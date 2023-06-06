@@ -112,28 +112,9 @@ const click = document.getElementById("change");
 let curr_bid = document.getElementById("Amount").innerHTML;
 let substracting_value = 0;
 
-const bidup = document.getElementById("UP");
+
 const sold = document.getElementById("Sold");
-bidup.addEventListener("click", increaseBid);
-let bids = 0;
 
-function increaseBid() {
-    if (bids == 0) {
-        curr_bid = document.getElementById("basePrice").innerHTML * 100;
-        bids++;
-    }
-    else {
-        if ((curr_bid / 10) % 10 == 2 || (curr_bid / 10) % 10 == 5) {
-            curr_bid += 30;
-        }
-        else {
-            curr_bid += 20;
-        }
-    }
-
-    document.getElementById("Amount").innerHTML = curr_bid;
-
-}
 
 sold.addEventListener("click", sell);
 

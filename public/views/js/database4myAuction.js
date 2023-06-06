@@ -34,12 +34,7 @@ function changePlayer(playerOrder) {
 
     socket.emit('change-Player', playerOrder);
     console.log("emiited");
-    //set bids section to default
-    document.getElementById("hidden").style.display = "none";
-    document.getElementById("bids-3").style.display = "block";
-    document.getElementById("UP").style.display = "block";
-    document.getElementById("Sold").style.display = "block";
-    document.getElementById("teamSelector").style.display = "none";
+   
 }
 
 
@@ -69,7 +64,43 @@ socket.on('change-Player', (result) => {
 
 
 
+//Increasing Bid
+let currentBid = document.getElementById("Amount");
+const basePrice=document.getElementById("basePrice");
+//let substracting_value = 0;
+
+const bidupButton = document.getElementById("UP");
+const soldButton = document.getElementById("Sold");
+
+bidupButton.addEventListener("click", increaseBid);
+
+function increaseBid(){
+    let currentBidValue=Number(currentBid.innerHTML);
+    console.log(currentBidValue);
+    if(currentBidValue==0){
+        currentBid.innerHTML=basePrice.innerHTML*100;
+    }
+
+    else if(currentBidValue<1000){
+        if(currentBidValue%100==20||currentBidValue%100==50){
+            currentBid.innerHTML=currentBidValue+30;
+        }
+        else{
+            currentBid.innerHTML=currentBidValue+20;
+        }
+    }
+    else{
+        currentBid.innerHTML=currentBidValue+50;
+    }
+    currentBidValue=currentBid.innerHTML;
+    console.log(currentBidValue);
+    socket.emit('increase-Bid',currentBidValue)
+}
 
 
+ //Handling increase bid message emitted to all servers
 
- 
+ socket.on('increase-Bid',value=>{
+    console.log(value);
+    currentBid.value=value;
+ })
