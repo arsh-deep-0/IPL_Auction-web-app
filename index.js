@@ -38,11 +38,13 @@ const io = require('socket.io')(http, {
 
 io.on('connection', (mySocket) => {
     console.log('a user connected');
-    let current_player_order=IplAuction.find({order:1}).currentPlayerOrder;
+    let currentAuction=IplAuction.find({order:1});
+    let current_player_order= currentAuction.currentPlayerOrder;
     console.log(current_player_order);
-    let currentBidValue=IplAuction.find({order:1}).currentBidValue;
+    let currentBidValue=currentAuction.currentBidValue;
     console.log(currentBidValue);
     let auctiondetails={order:current_player_order,bidValue:currentBidValue};
+    let ad=
     io.emit("user connected",auctiondetails);
 
     mySocket.on('disconnect', () =>

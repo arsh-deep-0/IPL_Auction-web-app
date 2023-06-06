@@ -3,6 +3,7 @@ const socket = io('https://auction-arsh.onrender.com');
 //on page reload , going back to database details
 
 socket.on("user connected",(data)=>{
+    console.log(data+"hi");
     console.log('connection established');
     let current_player_order=data.order;
     changePlayer(current_player_order);
