@@ -32,21 +32,28 @@ const http = app.listen(port, () => {
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
-    cors: { origin: "https://auction-arsh.onrender.com/myAuction" }
+    cors: { origin: "https://auction-arsh.onrender.com" }
 });
 
 
 io.on('connection', (mySocket) => {
     console.log('a user connected');
 
-    let currentAuction=IplAuction.find({order:1});
-    let current_player_order= currentAuction.currentPlayerOrder;
-    console.log(currentAuction);
-    let currentBidValue=currentAuction.currentBidValue;
-    //console.log(currentBidValue);
-    let auctiondetails={order:current_player_order,bidValue:currentBidValue};
-    
-    io.emit("user connected",auctiondetails);
+    IplAuction.find({order:1})
+    .then((result)=>{
+        result.forEach(element => {
+            let current_player_order=element.currentPlayerOrder;
+        let currentBidValue=element.currentBidValue;
+        //console.log(currentBidValue);
+        let auctiondetails={order:current_player_order,bidValue:currentBidValue};
+        
+        io.emit("user connected",auctiondetails);
+        });
+        
+    })
+     
+   
+   
 
     mySocket.on('disconnect', () =>
         console.log('Client disconnected')
