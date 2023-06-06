@@ -32,56 +32,56 @@ const http = app.listen(port, () => {
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
-    cors: { origin: "https://auction-arsh.onrender.com" }
+    cors: { origin: "http://localhost:3001" }
 });
 
 
 io.on('connection', (mySocket) => {
-    console.log('a user connected');
+    console.log(` ${mySocket.id} connected`);
 
-    IplAuction.find({order:1})
-    .then((result)=>{
-        result.forEach(element => {
-            let current_player_order=element.currentPlayerOrder;
-        let currentBidValue=element.currentBidValue;
-        //console.log(currentBidValue);
-        let auctiondetails={order:current_player_order,bidValue:currentBidValue};
-        
-        io.emit("user connected",auctiondetails);
-        });
-        
-    })
-     
-   
-   
+    IplAuction.find({ order: 1 })
+        .then((result) => {
+            result.forEach(element => {
+                let current_player_order = element.currentPlayerOrder;
+                let currentBidValue = element.currentBidValue;
+
+                let auctiondetails = { order: current_player_order, bidValue: currentBidValue };
+
+                io.emit("user connected", auctiondetails);
+            });
+
+        })
+
+
+
 
     mySocket.on('disconnect', () =>
-        console.log('Client disconnected')
+        console.log(`Client ${mySocket.id} disconnected`)
     );
 
-    mySocket.on('change-Player',(order)=>{
-        IplAuction.findOneAndUpdate({order:1},{currentPlayerOrder:order},{ runValidators: true, new: true });
-        Cricketer.find({ order: order })
-        .then(result =>{
-            console.log(result);
-            io.emit('change-Player', result)
-        }
-        );
+    mySocket.on('change-Player', (order) => {
+        IplAuction.findOneAndUpdate({ order: 1 }, { currentPlayerOrder: order }, { runValidators: true, new: true })
+            .then((result => {
+                Cricketer.find({ order: order })
+                    .then(result => {
+                        io.emit('change-Player', result)
+                    }
+                    );
+            }))
     })
 
 
-    mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  /*remember io is global and mySocket is local ,so when u wanr to emit on all devices use io*/ 
-        console.log(message);
+    mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  /*remember io is global and mySocket is local ,so when u wanr to emit on all devices use io*/
         io.emit('message', `${mySocket.id.substr(0, 2)} said ${message} bro `);  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
                                                                               with little modification */
     });
 
-    mySocket.on('increase-Bid',bidValue=>{
-        console.log(bidValue);
-        IplAuction.findOneAndUpdate({order:1},{currentBidValue:bidValue},{ runValidators: true, new: true });
-       
-        io.emit('increase-Bid',bidValue);
+    mySocket.on('increase-Bid', bidValue => {
+        IplAuction.findOneAndUpdate({ order: 1 }, { currentBidValue: bidValue }, { runValidators: true, new: true })
+            .then((result => {
+                io.emit('increase-Bid', bidValue);
+            }))
     })
 });
 

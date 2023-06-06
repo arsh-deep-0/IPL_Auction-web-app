@@ -1,16 +1,15 @@
-const socket = io('https://auction-arsh.onrender.com');
+const socket = io('http://localhost:3001');
 
 //on page reload , going back to database details
 
 socket.on("user connected",(data)=>{
-    console.log(data+"hi");
     console.log('connection established');
-    let current_player_order=data.order;
-    changePlayer(current_player_order);
+    changePlayer(data.order);
     document.getElementById("Amount").innerHTML=data.bidValue;
-
  });
 
+
+ 
 //changing player order and details
 
 const search = document.getElementById("change");
