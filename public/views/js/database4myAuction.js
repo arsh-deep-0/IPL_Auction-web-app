@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3001');
+const socket = io('https://auction-arsh.onrender.com');
 
 //on page reload , going back to database details
 
@@ -9,7 +9,7 @@ socket.on("user connected",(data)=>{
  });
 
 
- 
+
 //changing player order and details
 
 const search = document.getElementById("change");
