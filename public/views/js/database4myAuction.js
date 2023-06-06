@@ -102,5 +102,5 @@ function increaseBid(){
 
  socket.on('increase-Bid',value=>{
     console.log(value);
-    currentBid.value=value;
+    currentBid.innerHTML=value;
  })
