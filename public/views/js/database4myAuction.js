@@ -1,5 +1,14 @@
-let count = 0;
 const socket = io('https://auction-arsh.onrender.com');
+
+//on page reload , going back to database details
+
+socket.on("user connected",()=>{
+    console.log('connection established');
+   // changePlayer()
+
+ });
+
+//changing player order and details
 
 const search = document.getElementById("change");
 const next = document.getElementById('NEXT');
@@ -43,9 +52,9 @@ socket.on('change-Player', (result) => {
     result.forEach(myElement => {
         document.getElementById("name").innerHTML = myElement.name;
         document.getElementById("playerNum").innerHTML = myElement.order;
-        document.getElementById("currPlayerImg").src = "/resources/Players/" + myElement.name + ".png";
-        document.getElementById("roleImg").src = "/resources/icons/" + myElement.Role + ".png";
-        document.getElementById("flagImg").src = "/resources/icons/" + myElement.Nationality + ".png";
+        document.getElementById("currPlayerImg").src = "/resources/Players/" + myElement.name + ".webp";
+        document.getElementById("roleImg").src = "/resources/icons/" + myElement.Role + ".webp";
+        document.getElementById("flagImg").src = "/resources/icons/" + myElement.Nationality + ".webp";
         document.getElementById("batAvg").innerHTML = myElement.batPts;
         document.getElementById("bowlPts").innerHTML = myElement.bowlPts;
         document.getElementById("basePrice").innerHTML = myElement.BasePrice;
@@ -65,9 +74,9 @@ socket.on('change-Player', (result) => {
 
 
 //Increasing Bid
+
 let currentBid = document.getElementById("Amount");
 const basePrice=document.getElementById("basePrice");
-//let substracting_value = 0;
 
 const bidupButton = document.getElementById("UP");
 const soldButton = document.getElementById("Sold");
@@ -104,3 +113,8 @@ function increaseBid(){
     console.log(value);
     currentBid.innerHTML=value;
  })
+
+
+
+
+ //Selling a player 

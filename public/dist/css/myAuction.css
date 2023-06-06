@@ -260,8 +260,8 @@ p {
 
     
     /*done through javascript*/
-    border: 0.1rem solid rgb(120, 43, 235);
-    background-color: rgba(120, 43, 235, 0.388) ;
+    /*border: 0.1rem solid rgb(120, 43, 235);
+    background-color: rgba(120, 43, 235, 0.388) ;*/
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     position: absolute;
     margin-top: 16rem;
@@ -277,7 +277,7 @@ p {
 #currPlayerImg {
 
     /* border:2px black solid;*/
-   
+    filter: drop-shadow(0px 0px 10px #363636);
     position: absolute;
     width: 30rem;
     transform: translate(3rem) translateY(-5rem);
@@ -559,8 +559,17 @@ button:active {
     padding: 0.2rem;
 }
 
+label .logo{
+   
+    width: 2.2rem;
+}
+
+#srh .logo{
+    width: 2.8rem;
+}
+
 .logo {
-    height: 3rem;
+    width: 3rem;
     display: inline;
 }
 
@@ -589,6 +598,7 @@ button:active {
     flex-wrap: wrap;
     transition: all .2s ease-in;
     position: relative;
+    align-items: center;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
 
 }

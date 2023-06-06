@@ -43,11 +43,11 @@ header{
     padding-right:5%;
     z-index: 2;
 }
-.logo{
+ .main-logo{
     height: 2.5rem;
 }
 
- .logo a{
+ .main-logo a{
     font-size: 1.5rem;
     font-weight: bold;
 }

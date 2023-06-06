@@ -42,6 +42,9 @@ const playerSchema = new mongoose.Schema({
     },
     sellingStatus:{
         type:Number
+    },
+    imgSrc:{
+        type:String
     }
 })
 

@@ -38,6 +38,7 @@ const io = require('socket.io')(http, {
 
 io.on('connection', (mySocket) => {
     console.log('a user connected');
+
     io.emit("user connected");
 
     mySocket.on('disconnect', () =>
