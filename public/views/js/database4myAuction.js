@@ -1,12 +1,12 @@
-const socket = io('https://auction-arsh.onrender.com');
+const socket = io('https://auction-arsh.onrender.com/');
 
 //on page reload , going back to database details
 
-socket.on("user connected",(data)=>{
+socket.on("user connected", (data) => {
     console.log('connection established');
-    changePlayer(data.order);
-    document.getElementById("Amount").innerHTML=data.bidValue;
- });
+    changePlayer(data.order,'local');
+    document.getElementById("Amount").innerHTML = data.bidValue;
+});
 
 
 
@@ -17,7 +17,7 @@ const next = document.getElementById('NEXT');
 const prev = document.getElementById('PREV');
 
 const input = document.getElementById("searchOrder");
-const current_player_order = document.getElementById("playerNum")
+const currentPlayerOrder = document.getElementById("playerNum")
 
 search.addEventListener("click", decideOrder);
 next.addEventListener("click", increaseOrder);
@@ -25,30 +25,31 @@ prev.addEventListener("click", decreaseOrder);
 
 function decideOrder() {
     let order = input.value;
-    changePlayer(order);
-    socket.emit('increase-Bid',0);
+    changePlayer(order,'global');
+    socket.emit('increase-Bid', 0);
 }
 
 function increaseOrder() {
-    let order = Number(current_player_order.innerHTML);
+    let order = Number(currentPlayerOrder.innerHTML);
     order++;
     console.log(order);
-    changePlayer(order + "");
-    socket.emit('increase-Bid',0);
+    changePlayer(order + "",'global');
+    socket.emit('increase-Bid', 0);
 }
 function decreaseOrder() {
-    let order = Number (current_player_order.innerHTML);
+    let order = Number(currentPlayerOrder.innerHTML);
     order--;
     console.log(order);
-    changePlayer(order + "");
-    socket.emit('increase-Bid',0);
+    changePlayer(order + "",'global');
+    socket.emit('increase-Bid', 0);
 }
 
-function changePlayer(playerOrder) {
+function changePlayer(playerOrder,scope) {
+    
+    let changingDetails={playerOrder:playerOrder,scope:scope}
+    socket.emit('change-Player', changingDetails);
+    console.log("emiited", changingDetails);
 
-    socket.emit('change-Player', playerOrder);
-    console.log("emiited",playerOrder);
-   
 }
 
 
@@ -66,7 +67,7 @@ socket.on('change-Player', (result) => {
         document.getElementById("wkPts").innerHTML = myElement.wkPts;
         document.getElementById("nationality").innerHTML = myElement.Nationality;
         document.getElementById("role").innerHTML = myElement.Role;
-       
+
 
         //set bids section to default
         document.getElementById("hidden").style.display = "none";
@@ -74,12 +75,12 @@ socket.on('change-Player', (result) => {
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
         document.getElementById("teamSelector").style.display = "none";
-        
+
 
         //checking if player is sold or not 
-        if(myElement.sellingStaus>0){
-            document.getElementById("hidden").innerHTML=myElement.sellingPrice;
-            document.getElementById("hidden").style.display="block";
+        if (myElement.sellingStaus > 0) {
+            document.getElementById("hidden").innerHTML = myElement.sellingPrice;
+            document.getElementById("hidden").style.display = "block";
         }
     });
 })
@@ -89,45 +90,76 @@ socket.on('change-Player', (result) => {
 //Increasing Bid
 
 let currentBid = document.getElementById("Amount");
-const basePrice=document.getElementById("basePrice");
+const basePrice = document.getElementById("basePrice");
 
 const bidupButton = document.getElementById("UP");
-const soldButton = document.getElementById("Sold");
+
 
 bidupButton.addEventListener("click", increaseBid);
 
-function increaseBid(){
-    let currentBidValue=Number(currentBid.innerHTML);
+function increaseBid() {
+    let currentBidValue = Number(currentBid.innerHTML);
     console.log(currentBidValue);
-    if(currentBidValue==0){
-        currentBid.innerHTML=basePrice.innerHTML*100;
+    if (currentBidValue == 0) {
+        currentBid.innerHTML = basePrice.innerHTML * 100;
     }
 
-    else if(currentBidValue<1000){
-        if(currentBidValue%100==20||currentBidValue%100==50){
-            currentBid.innerHTML=currentBidValue+30;
+    else if (currentBidValue < 1000) {
+        if (currentBidValue % 100 == 20 || currentBidValue % 100 == 50) {
+            currentBid.innerHTML = currentBidValue + 30;
         }
-        else{
-            currentBid.innerHTML=currentBidValue+20;
+        else {
+            currentBid.innerHTML = currentBidValue + 20;
         }
     }
-    else{
-        currentBid.innerHTML=currentBidValue+50;
+    else {
+        currentBid.innerHTML = currentBidValue + 50;
     }
-    currentBidValue=currentBid.innerHTML;
+    currentBidValue = currentBid.innerHTML;
     console.log(currentBidValue);
-    socket.emit('increase-Bid',currentBidValue)
+    socket.emit('increase-Bid', currentBidValue)
 }
 
 
- //Handling increase bid message emitted to all servers
+//Handling increase bid message emitted to all servers
 
- socket.on('increase-Bid',value=>{
+socket.on('increase-Bid', value => {
     console.log(value);
-    currentBid.innerHTML=value;
- })
+    currentBid.innerHTML = value;
+})
 
 
 
 
- //Selling a player 
+//Selling a player 
+const soldButton = document.getElementById("Sold");
+soldButton.addEventListener('click', () => {
+    let sellingStatus = 1;
+    if (currentBid.innerHTML == 0) {
+        sellingStatus = 2;
+    }
+    let sellingDetails = {
+        amount: currentBid.innerHTML,
+        playerOrder: currentPlayerOrder.innerHTML,
+        sellingStatus: sellingStatus
+    }
+    socket.emit('player-Sold', sellingDetails);
+});
+
+const sellingPrice = document.getElementById('hidden');
+
+
+//handler of player-sold , which updates to UI
+socket.on('player-Sold',sellingDetails=>{
+    console.log(sellingDetails);
+    sellPlayer(sellingDetails);
+})
+
+function sellPlayer(sellingDetails) {
+    sellingPrice.innerHTML="Sold at : " + "\u20B9" + sellingDetails.amount + " lakhs";
+    sellingPrice.style.display="block";
+    document.getElementById("bids-3").style.display = "none";
+    document.getElementById("UP").style.display = "none";
+    document.getElementById("Sold").style.display = "none";
+    document.getElementById("teamSelector").style.display = "block";
+}
