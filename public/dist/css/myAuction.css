@@ -368,7 +368,7 @@ background-color: rgba(255, 255, 255, 0.518);
 }
 
 .undo {
-    margin-bottom: 1rem;
+    
     display: flex;
     flex-wrap: wrap;
     width: 14rem;
@@ -752,7 +752,7 @@ label .logo {
     color: green;
     background-color: white;
     border-radius: .3rem;
-    border: .125rem green solid;
+    border: 0.0rem green solid;
     font-size: 1.1rem;
     padding: 0.1rem;
 }
@@ -761,7 +761,7 @@ label .logo {
     color: black;
     background-color: white;
     border-radius: .3rem;
-    border: .125rem black solid;
+    border: 0rem black solid;
     font-size: 1.1rem;
     padding: .1rem;
 }
