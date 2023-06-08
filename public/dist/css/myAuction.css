@@ -233,18 +233,24 @@ p {
 
 
 #search {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
 
 }
 
 #search input {
     font-size: 1.2rem;
-    height: 1rem;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.5rem 0.06rem rgb(178, 177, 177);
     padding: 0;
+    border-radius:0.2rem;
+    border:0.1rem rgb(124, 122, 122) solid;
+    height:1.2rem;
 }
-
+input:focus {
+   outline: none;
+  }
 
 .data {
 
@@ -374,10 +380,12 @@ p {
 
 #undo {
     background: linear-gradient(180deg, #0fb122 0, #1a5f08 100%);
+    border: 0rem black solid;
 }
 
 #reset {
     background: linear-gradient(180deg, #f36161 0, #e20303 100%);
+    border: 0rem black solid;
 }
 
 #Amount {
@@ -476,12 +484,12 @@ label:nth-of-type(8) {
     padding: .25rem;
     margin: .625rem;
     border-radius: 0.35rem;
-    border: .125rem rgb(217, 217, 217) solid;
+    border: 0rem rgb(217, 217, 217) solid;
     background: linear-gradient(90deg, #5c4dff 10%, #6075ff 50%, #5848ff 90%);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     transition: all .1s ease-in;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
 }
 
 button:hover {
@@ -524,7 +532,7 @@ button:active {
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     border-radius: .4rem;
 }
@@ -539,7 +547,7 @@ button:active {
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     border-radius: .35rem;
 
@@ -556,7 +564,7 @@ button:active {
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #0fb122 0, #1a5f08 100%);
     display: block;
 }
@@ -573,7 +581,7 @@ button:active {
     color: white;
     border: 0rem rgb(218, 215, 215) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #f36161 0, #e20303 100%);
 
     display: block;
@@ -587,7 +595,7 @@ button:active {
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     border-radius: 0.3rem;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     padding: 0.2rem;
     display: none;
 }
@@ -615,11 +623,10 @@ label .logo {
     padding-right: 0.6rem;
     background-color: white;
     box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
-    border: 0.0rem solid black;
+    border: 0.01rem solid black;
     border-radius: 0.3rem;
     font-size: 1.3rem;
     margin-top: -0.5%;
-
 }
 
 #Wallet-Heading {
