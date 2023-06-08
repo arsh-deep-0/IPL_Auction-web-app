@@ -25,6 +25,7 @@ p {
     font-size: 1rem;
     font-weight: 300;
     font-family: 'Prata', serif, Courier, monospace;
+    
 }
 
 .bg {
@@ -95,6 +96,7 @@ p {
     /*background: linear-gradient(180deg, #5c4dff 10%, #6075ff 50%, #5848ff 90%);*/
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    background: linear-gradient(143.7deg, #ea1a85 -60%, #6265f8 100%);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -266,7 +268,9 @@ input:focus {
     backdrop-filter: blur(0.25rem);
     -webkit-backdrop-filter: blur(0.625rem);
 
-
+ background: linear-gradient(143.7deg, #ffffff -0%, #000000 50%, #ffffff 100%);
+ background: linear-gradient(143.7deg, #ea1a85 -30%, #6265f8 100%);
+ color: white;
     /*done through javascript*/
     /*border: 0.1rem solid rgb(120, 43, 235);
     background-color: rgba(120, 43, 235, 0.388) ;*/
@@ -356,7 +360,7 @@ input:focus {
     display: none;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
-
+    background: linear-gradient(143.7deg, #ea1a85 -60%, #6265f8 100%);
 }
 
 
@@ -616,6 +620,7 @@ label .logo {
 }
 
 .Heading {
+    font-family: 'Bruno Ace SC', cursive;
     position: absolute;
     padding: 0.2rem;
     padding-bottom: 0.4rem;
@@ -879,7 +884,6 @@ margin-left: 50%;
     .otherstatsbg {
         flex-direction: column;
         height: 23rem;
-        background-color: #6c61fb;
         border-radius: 0.8rem;
         border: 0.12rem rgb(214, 214, 214) solid;
         width: 3.3rem;
@@ -971,6 +975,7 @@ margin-left: 50%;
         position: relative;
         margin-top: 0;
         height: auto;
+        padding: 0.5rem;
 
     }
 
@@ -981,6 +986,7 @@ margin-left: 50%;
         overflow: scroll;
         background-color: white;
         justify-content: start;
+        border-radius: 0.25rem;
         
     }
     
@@ -995,10 +1001,6 @@ margin-left: 50%;
         height: 0.25rem;
     }
 
-    .teamSelector {
-        background-color: rgba(255, 255, 255, 0);
-        background-color: #6c61fb;
-    }
 
     .bids-1 {
         background-color: rgb(255, 255, 255);
