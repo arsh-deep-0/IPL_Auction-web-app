@@ -524,7 +524,7 @@ button:active {
 
 #PREV {
 
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.325rem;
     padding: .25rem;
     font-size: .9rem;
     font-weight: 800;
@@ -539,7 +539,7 @@ button:active {
 
 #NEXT {
 
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.325rem;
     padding: .25rem;
     font-size: .9rem;
     font-weight: 800;
@@ -881,7 +881,7 @@ margin-left: 50%;
         height: 23rem;
         background-color: #6c61fb;
         border-radius: 0.8rem;
-        border: 0.2rem white solid;
+        border: 0.12rem rgb(214, 214, 214) solid;
         width: 3.3rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -907,7 +907,7 @@ margin-left: 50%;
         height: 23rem;
         background-color: rgb(255, 255, 255);
         display: block;
-        border: 0.2rem white solid;
+        border: 0.1rem rgb(201, 200, 200) solid;
     }
 
     label {
