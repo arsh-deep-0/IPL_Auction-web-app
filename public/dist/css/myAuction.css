@@ -9,7 +9,7 @@
 body {
 
     background-color: rgb(255, 255, 255);
-    
+
 
 
 }
@@ -31,7 +31,7 @@ p {
 
     padding-top: 10vh;
     overflow: hidden;
-   
+
     position: fixed;
 
     height: 90vh;
@@ -45,7 +45,7 @@ p {
     padding-top: 10vh;
     overflow: hidden;
     position: relative;
-   
+
     width: 100%;
 
     display: flex;
@@ -58,7 +58,7 @@ p {
 .statsHolder {
 
     text-align: center;
-    
+
 
     border-radius: 2%;
     margin-left: 1rem;
@@ -73,26 +73,28 @@ p {
 
 .statsHolderBackground {
     background-color: rgb(255, 255, 255);
-   
+
     border-radius: 2%;
-    
+
     width: 25rem;
     height: 25rem;
     display: flex;
     flex-wrap: wrap;
-    
+
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     position: relative;
 }
 
-.otherstatsbg{
+.otherstatsbg {
     color: white;
     margin-top: 6rem;
     height: 3rem;
-   
+
     border-radius: .2rem;
     /*background: linear-gradient(180deg, #5c4dff 10%, #6075ff 50%, #5848ff 90%);*/
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -101,47 +103,44 @@ p {
     gap: 1rem;
 }
 
-.otherstatsbg img{
+.otherstatsbg img {
     width: 5rem;
 }
-.otherstatsbg p{
+
+.otherstatsbg p {
     font-size: 1.1rem;
 }
-.otherstatsbg .flag{
+
+.otherstatsbg #roleImg {
+    filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
+}
+
+.otherstatsbg .flag {
     width: 3rem;
     transform: translate(1rem)translateY(-0.4rem);
     border-radius: .3rem;
     border: .1rem solid white;
+    filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
 }
 
-.otherstatsbg .coin{
+.otherstatsbg .coin {
     width: 3rem;
-    transform: translateY(0.5rem) translate(1rem) ;
+    transform: translateY(0.5rem) translate(1rem);
+    filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
 }
-.eclipse{
+
+.eclipse {
     transform: rotate(180deg);
-    
-}
-.otherstatsbg div{
-    display: flex;
-    flex-direction: column;
-    transform: translateY(-4.5rem);
-    
+    filter: drop-shadow(0px 0px 0.4rem #00000000);
+
 }
 
-.otherstatsbg .nationality{
+.otherstatsbg div {
     display: flex;
-    flex-direction: column;
-    transform: translateY(-1.5rem) ;
-    
+    flex-direction: column-reverse;
 }
 
-.otherstatsbg .basePrice{
-    display: flex;
-    flex-direction: column;
-    transform: translateY(-2.6rem) ;
-    
-}
+
 
 
 #batAvg {
@@ -196,14 +195,15 @@ p {
     width: 25%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+
     align-items: center;
 
 }
 
 .wallet {
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    border: 0.2rem white solid;
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    border: 0rem white solid;
 
     background-color: #ffffff;
     border-radius: 2%;
@@ -241,6 +241,7 @@ p {
     font-size: 1.2rem;
     height: 1rem;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     padding: 0;
 }
 
@@ -254,19 +255,21 @@ p {
     width: 50%;
     padding-bottom: 0.3rem;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     border-radius: 0.5rem;
     backdrop-filter: blur(0.25rem);
     -webkit-backdrop-filter: blur(0.625rem);
 
-    
+
     /*done through javascript*/
     /*border: 0.1rem solid rgb(120, 43, 235);
     background-color: rgba(120, 43, 235, 0.388) ;*/
-    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    /*box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);*/
     position: absolute;
     margin-top: 16rem;
     transform: translate(-1rem)translateY(2rem);
     padding-bottom: 1rem;
+    filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
 }
 
 .data p {
@@ -277,7 +280,8 @@ p {
 #currPlayerImg {
 
     /* border:2px black solid;*/
-    filter: drop-shadow(0px 0px 10px #363636);
+
+    filter: drop-shadow(0px 0px 0.2rem #535252);
     position: absolute;
     width: 30rem;
     transform: translate(3rem) translateY(-5rem);
@@ -325,7 +329,7 @@ p {
 
     width: 50%;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     border-radius: 0.625rem;
     padding: 1.9rem;
     display: flex;
@@ -345,6 +349,7 @@ p {
     border-radius: 0.5rem;
     display: none;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
 
 }
 
@@ -355,6 +360,24 @@ p {
     padding: 0.3rem;
     border-radius: 0.3rem;
 
+}
+
+.undo {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 14rem;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+#undo {
+    background: linear-gradient(180deg, #0fb122 0, #1a5f08 100%);
+}
+
+#reset {
+    background: linear-gradient(180deg, #f36161 0, #e20303 100%);
 }
 
 #Amount {
@@ -377,6 +400,7 @@ label {
     color: white;
     text-align: center;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     height: 2.7rem;
 
     margin-top: 0.35rem;
@@ -404,6 +428,7 @@ label:hover {
 label:active {
 
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     transform: translateY(0.25rem);
 }
 
@@ -456,6 +481,7 @@ label:nth-of-type(8) {
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     transition: all .1s ease-in;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
 }
 
 button:hover {
@@ -488,9 +514,9 @@ button:active {
     align-items: center;
 }
 
-#PREV{
-    
-   margin-bottom:1.2rem ;
+#PREV {
+
+    margin-bottom: 1.2rem;
     padding: .25rem;
     font-size: .9rem;
     font-weight: 800;
@@ -498,12 +524,14 @@ button:active {
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     border-radius: .4rem;
 }
-#NEXT{
-   
-    margin-bottom:1.2rem;
+
+#NEXT {
+
+    margin-bottom: 1.2rem;
     padding: .25rem;
     font-size: .9rem;
     font-weight: 800;
@@ -511,9 +539,10 @@ button:active {
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     border-radius: .35rem;
-    
+
 }
 
 #UP {
@@ -527,6 +556,7 @@ button:active {
     color: white;
     border: 0rem rgb(225, 222, 222) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #0fb122 0, #1a5f08 100%);
     display: block;
 }
@@ -543,6 +573,7 @@ button:active {
     color: white;
     border: 0rem rgb(218, 215, 215) solid;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     background: linear-gradient(180deg, #f36161 0, #e20303 100%);
 
     display: block;
@@ -556,32 +587,49 @@ button:active {
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
     border-radius: 0.3rem;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
     padding: 0.2rem;
+    display: none;
 }
 
-label .logo{
-   
+label .logo {
+
     width: 2.2rem;
 }
 
-#srh .logo{
+#srh .logo {
     width: 2.8rem;
 }
 
 .logo {
     width: 3rem;
     display: inline;
+    filter: drop-shadow(0px 0px 0.15rem #bbb7b7);
 }
 
-.naming {
+.Heading {
     position: absolute;
     padding: 0.2rem;
+    padding-bottom: 0.4rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
     background-color: white;
-    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    border: 0.0rem solid black;
     border-radius: 0.3rem;
     font-size: 1.3rem;
-    margin-right: 68%;
+    margin-top: -0.5%;
+
+}
+
+#Wallet-Heading {
+    margin-right: 67%;
+}
+#Bids-Heading{
+margin-right: 9%;
+}
+#Stats-Heading{
+margin-left: 50%;
 }
 
 .team {
@@ -600,7 +648,7 @@ label .logo{
     position: relative;
     align-items: center;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
 }
 
 #CSK {
@@ -776,122 +824,173 @@ label .logo{
     }
 
     .wallet {
-        
-        width: 80%;
+
+        width: 25rem;
+        margin-right: 50%;
         margin-top: 0;
-        
+
     }
 
     .container {
         padding-top: 3rem;
         flex-wrap: wrap-reverse;
-        flex-direction: row;
-        gap: 5rem;
+        flex-direction: row-reverse;
+        gap: 0;
+        row-gap: 2rem;
+        justify-content: space-around;
     }
 
-    .bids{
-        flex-direction: row;
-        width: 40rem;
+    .bids {
+        margin-top: 10%;
+        width: 20rem;
         gap: 1rem;
-        height: 23rem;
+        height: auto;
     }
-    .bids-1{
-        background-color: white;
+
+    .bids-1 {
+        background-color: rgb(255, 255, 255);
         padding: 0.87rem;
         margin-bottom: 0;
+        width: 16rem;
     }
-    
-    .statsHolder{
-        height: 23rem;
-        width: 23rem;
+
+    .statsHolder {
+        flex-direction: row;
+        margin-top: 10%;
+        height: auto;
+        width: fit-content;
+        gap: 2rem;
         margin-right: 0;
-    }
-
-    .teamSelector{
-        width: 50rem;
-        height: 14rem;
-        background-color: white;
-        display: block;
-    }  
-}
-
-
-@media (max-width:613px) {
-    .container{
-        gap: 3rem;
-    }
-.bids{
-    margin-top: 0;
-    height: 38rem;
-    flex-direction: column;
-    width: 45%;
-    gap:0re,;
-}
-
-.wallet{
-    width: 20rem;
-}
-.teamSelector{
-    width: 20rem;
-    height: 14rem;
-    background-color: white;
-    display: block;
-}  
-}
-
-@media (max-width:433px) {
-    html {
-        font-size: 10px;
-    }
-
-    .container{
+        justify-content: space-around;
         align-items: flex-end;
-        gap: 2.5rem;
-        flex-wrap: wrap-reverse;
-        flex-direction: row-reverse;
-        padding-top: 5rem;
     }
 
-.bids{
-    margin-top: 0;
-    height: 30rem;
-    flex-direction: column;
-    width: 38%;
-    gap:1rem;
-}
-.bids-1{
-    width: 80%;
+    .statsHolderBackground {
+        z-index: 1;
+    }
+
+    .otherstatsbg {
+        flex-direction: column;
+        height: 23rem;
+        background-color: #6c61fb;
+        border-radius: 0.8rem;
+        width: 3.3rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .otherstatsbg div p {
+        color: #000;
+        transform: translate(1rem);
+    }
+
+    .team-role #role {
+        transform: translate(0);
+    }
+
+    .otherstatsbg div {
+        transform: translate(-0.9rem);
+    }
+
+    .teamSelector {
+        position: absolute;
+        margin-top: 25rem;
+        width: 16rem;
+        height: 23rem;
+        background-color: rgb(255, 255, 255);
+        display: block;
+    }
+
+    label {
+        width: 5rem;
+    }
 }
 
-.wallet{
-    width: 50%;
-    height: 36rem;   
-}
-.teamSelector{
-    width: 100%;
-    background-color: white;
-    display: none;
-    height: 15rem;
-}  
-.statsHolder{
-   
-    height: 20rem;
-    width: 20rem;
-    margin-bottom: 3rem;    
-}
-.statsHolderBackground{
-    height: 20rem;
-    width: 21.67rem;
-}
-#currPlayerImg{
-    width: 25rem;
-}
-.data{
-    margin-top: 21rem;
-}
-.naming{
-    margin-top: 38rem;
-    margin-right: 0;
-    margin-left: 50%;
-}
+
+@media (max-width:501px) {
+    .container {
+        height: 90vh;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        padding-top: 10vh;
+        position: relative;
+    }
+
+    #Stats-Heading {
+        margin-right: 50%;
+        margin-top: -3%;
+        margin-left: 0;
+    }
+
+    #Bids-Heading {
+        margin-right: 50%;
+        margin-top: 37vh;
+    }
+
+    .statsHolder {
+        position: absolute;
+        margin-top: 2vh;
+        height: 40vh;
+        height: 25rem;
+    }
+
+    #Wallet-Heading {
+        margin-right: -50%;
+        margin-top: 37vh;
+    }
+
+    .wallet {
+        margin-top: 40vh;
+        margin-right: 0;
+        margin-left: 0;
+        width: 20rem;
+        height: 40vh;
+    }
+
+    .bids {
+        margin-top: 40vh;
+        gap: 1rem;
+        height: 45vh;
+    }
+
+    .bids-1 {
+        height: 12vh;
+    }
+
+    .teamSelector {
+        position: relative;
+        margin-top: 0;
+        height: auto;
+
+    }
+
+    .buying-teams {
+        flex-wrap: nowrap;
+        flex-direction: row;
+        gap: 1rem;
+        overflow: scroll;
+        background-color: white;
+        justify-content: start;
+        height: 6rem;
+    }
+
+    .buying-teams::-webkit-scrollbar-thumb {
+        background: #000000cb;
+        border-radius: 20px;
+
+    }
+
+    .buying-teams::-webkit-scrollbar {
+        height: 0.25rem;
+    }
+
+    .teamSelector {
+        background-color: rgba(255, 255, 255, 0);
+        background-color: #6c61fb;
+    }
+
+    .bids-1 {
+        background-color: rgb(255, 255, 255);
+    }
+
 }

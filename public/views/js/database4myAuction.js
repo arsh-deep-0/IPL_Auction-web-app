@@ -1,10 +1,10 @@
-const socket = io('https://auction-arsh.onrender.com/');
+const socket = io('https://auction-arsh.onrender.com');
 
 //on page reload , going back to database details
 
 socket.on("user connected", (data) => {
     console.log('connection established');
-    changePlayer(data.order,'local');
+    changePlayer(data.order, 'local');
     document.getElementById("Amount").innerHTML = data.bidValue;
 });
 
@@ -25,7 +25,7 @@ prev.addEventListener("click", decreaseOrder);
 
 function decideOrder() {
     let order = input.value;
-    changePlayer(order,'global');
+    changePlayer(order, 'global');
     socket.emit('increase-Bid', 0);
 }
 
@@ -33,20 +33,20 @@ function increaseOrder() {
     let order = Number(currentPlayerOrder.innerHTML);
     order++;
     console.log(order);
-    changePlayer(order + "",'global');
+    changePlayer(order + "", 'global');
     socket.emit('increase-Bid', 0);
 }
 function decreaseOrder() {
     let order = Number(currentPlayerOrder.innerHTML);
     order--;
     console.log(order);
-    changePlayer(order + "",'global');
+    changePlayer(order + "", 'global');
     socket.emit('increase-Bid', 0);
 }
 
-function changePlayer(playerOrder,scope) {
-    
-    let changingDetails={playerOrder:playerOrder,scope:scope}
+function changePlayer(playerOrder, scope) {
+
+    let changingDetails = { playerOrder: playerOrder, scope: scope }
     socket.emit('change-Player', changingDetails);
     console.log("emiited", changingDetails);
 
@@ -78,9 +78,9 @@ socket.on('change-Player', (result) => {
 
 
         //checking if player is sold or not 
-        if (myElement.sellingStaus > 0) {
-            document.getElementById("hidden").innerHTML = myElement.sellingPrice;
-            document.getElementById("hidden").style.display = "block";
+        if (myElement.sellingStatus >= 1) {
+            let sellingDetails = { sellingStatus:myElement.sellingStatus,sellingAmount: myElement.SellingPrice };
+            sellPlayer(sellingDetails);
         }
     });
 })
@@ -139,7 +139,7 @@ soldButton.addEventListener('click', () => {
         sellingStatus = 2;
     }
     let sellingDetails = {
-        amount: currentBid.innerHTML,
+        sellingAmount: currentBid.innerHTML,
         playerOrder: currentPlayerOrder.innerHTML,
         sellingStatus: sellingStatus
     }
@@ -150,16 +150,47 @@ const sellingPrice = document.getElementById('hidden');
 
 
 //handler of player-sold , which updates to UI
-socket.on('player-Sold',sellingDetails=>{
-    console.log(sellingDetails);
+socket.on('player-Sold', sellingDetails => {
+    console.log('yeah',sellingDetails);
     sellPlayer(sellingDetails);
 })
 
 function sellPlayer(sellingDetails) {
-    sellingPrice.innerHTML="Sold at : " + "\u20B9" + sellingDetails.amount + " lakhs";
-    sellingPrice.style.display="block";
-    document.getElementById("bids-3").style.display = "none";
-    document.getElementById("UP").style.display = "none";
-    document.getElementById("Sold").style.display = "none";
-    document.getElementById("teamSelector").style.display = "block";
+    console.log("got",sellingDetails);
+    if (sellingDetails.sellingStatus == 0) {
+        sellingPrice.style.display = "none";
+        document.getElementById("bids-3").style.display = "block";
+        document.getElementById("UP").style.display = "block";
+        document.getElementById("Sold").style.display = "block";
+        document.getElementById("teamSelector").style.display = "none";
+    }
+    else {
+        sellingPrice.style.display ="block";
+        document.getElementById("bids-3").style.display = "none";
+        document.getElementById("UP").style.display = "none";
+        document.getElementById("Sold").style.display = "none";
+    }
+    if (sellingDetails.sellingStatus == 2) {
+        sellingPrice.innerHTML = "Unsold";
+        sellingPrice.style.display = "block";
+    }
+    else if(sellingDetails.sellingStatus == 1) {
+        sellingPrice.innerHTML = "Sold at : " + "\u20B9" + sellingDetails.sellingAmount + " lakhs";
+        document.getElementById("teamSelector").style.display = "block";
+        sellingPrice.style.display = "block";
+    }
 }
+
+
+//reseting a sold player 
+
+const reset = document.getElementById('reset');
+reset.addEventListener('click', () => {
+    let resetingDetails = {
+        sellingAmount: 0,
+        playerOrder: currentPlayerOrder.innerHTML,
+        sellingStatus: 0
+    }
+    socket.emit('player-Sold', resetingDetails);
+    socket.emit('increase-Bid', 0);
+})

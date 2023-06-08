@@ -32,7 +32,7 @@ const http = app.listen(port, () => {
 const http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
-    cors: { origin: "https://auction-arsh.onrender.com/" }
+    cors: { origin: "https://auction-arsh.onrender.com" }
 });
 
 
@@ -47,7 +47,7 @@ io.on('connection', (mySocket) => {
 
                 let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue };
 
-                mySocket.emit("user connected", auctiondetails);
+                mySocket.emit("user connected", auctiondetails);  
             });
 
         })
@@ -91,9 +91,9 @@ io.on('connection', (mySocket) => {
     mySocket.on('player-Sold', sellingDetails => {
         console.log(sellingDetails)
         let filter = sellingDetails.playerOrder;
-        let update = sellingDetails.amount;
+        let update = sellingDetails.sellingAmount;
         let sellingStatus = sellingDetails.sellingStatus;
-        Cricketer.findOneAndUpdate({ order: filter }, { sellingPrice: update, sellingStatus: sellingStatus }, { runValidators: true, new: true })
+        Cricketer.findOneAndUpdate({ order: filter }, { SellingPrice: update, sellingStatus: sellingStatus }, { runValidators: true, new: true })
             .then(result => {
                 io.emit('player-Sold', sellingDetails);
             })
