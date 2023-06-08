@@ -95,7 +95,7 @@ p {
     border-radius: .2rem;
     /*background: linear-gradient(180deg, #5c4dff 10%, #6075ff 50%, #5848ff 90%);*/
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(0, 0, 0,0.37);
     background: linear-gradient(143.7deg, #ea1a85 -60%, #6265f8 100%);
     display: flex;
     flex-direction: row;
@@ -262,9 +262,9 @@ input:focus {
     padding-top: 0.3rem;
     width: 50%;
     padding-bottom: 0.3rem;
-    box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
-    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
-    border-radius: 0.5rem;
+     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(0, 0, 0,0.37);
+    border-radius: 0.5rem; 
     backdrop-filter: blur(0.25rem);
     -webkit-backdrop-filter: blur(0.625rem);
 
@@ -279,7 +279,7 @@ input:focus {
     margin-top: 16rem;
     transform: translate(-1rem)translateY(2rem);
     padding-bottom: 1rem;
-    filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
+    
 }
 
 .data p {
@@ -360,6 +360,7 @@ input:focus {
     display: none;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
+    box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(0, 0, 0,0.37);
     background: linear-gradient(143.7deg, #ea1a85 -60%, #6265f8 100%);
 }
 
@@ -885,7 +886,7 @@ margin-left: 50%;
         flex-direction: column;
         height: 23rem;
         border-radius: 0.8rem;
-        border: 0.12rem rgb(214, 214, 214) solid;
+        border: 0rem rgb(214, 214, 214) solid;
         width: 3.3rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -911,7 +912,7 @@ margin-left: 50%;
         height: 23rem;
         background-color: rgb(255, 255, 255);
         display: block;
-        border: 0.1rem rgb(201, 200, 200) solid;
+        border: 0rem rgb(201, 200, 200) solid;
     }
 
     label {
@@ -983,7 +984,7 @@ margin-left: 50%;
         flex-wrap: nowrap;
         flex-direction: row;
         gap: 1rem;
-        overflow: scroll;
+        overflow-x: scroll;
         background-color: white;
         justify-content: start;
         border-radius: 0.25rem;
