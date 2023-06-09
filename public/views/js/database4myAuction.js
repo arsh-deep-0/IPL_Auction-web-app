@@ -5,7 +5,7 @@ const socket = io('https://auction-arsh.onrender.com');
 socket.on("user connected", (data) => {
     console.log('connection established');
     changePlayer(data.order, 'local');
-    document.getElementById("Amount").innerHTML = data.bidValue;
+    document.getElementById("Amount").innerHTML = data.bidValue;  
 });
 
 
@@ -194,3 +194,90 @@ reset.addEventListener('click', () => {
     socket.emit('player-Sold', resetingDetails);
     socket.emit('increase-Bid', 0);
 })
+
+
+//updating buyer's details
+
+socket.on('buyer-Details',details=>{
+    let parentDiv = document.getElementById('wallet');
+    parentDiv.innerHTML=''; //ensuring that there is not prior teams already in parent div
+    let buyingTeams= document.getElementById('buying-teams');
+    buyingTeams.innerHTML='';
+    details.forEach(Buyer=>{
+        makeNewBuyer(parentDiv,Buyer);
+        addTeamInSelector(buyingTeams,Buyer);
+    })
+})
+
+function makeNewBuyer(parentDiv,Buyer) {  
+    const team =document.createElement('div');
+    team.classList.add('team');
+    team.id=('team-'+Buyer.order);
+    parentDiv.appendChild(team);
+
+    const logoImgClass=document.createElement("div"); //making a new html element of type div
+    const logoImg=document.createElement("img");
+    logoImg.classList.add('logo');  //giving it a class name
+    logoImg.src="/resources/logos/"+Buyer.logo+".webp"
+    
+    team.appendChild(logoImg); //appending it into main parent div
+
+
+    const teamData =document.createElement('div');
+    teamData.classList.add('team-data');
+    const BuyerName=document.createElement("p");
+    const BuyerPurse=document.createElement("p");
+    const numOfPlayers=document.createElement("p");
+    const BuyerPurseValue=document.createElement('span');
+    const numOfPlayersValue=document.createElement('span');
+
+    BuyerName.classList.add('text');
+    BuyerPurse.classList.add('text');
+    numOfPlayers.classList.add('text');
+    BuyerPurseValue.classList.add('purse');
+    numOfPlayersValue.classList.add('numOfPlayers');
+
+    BuyerName.innerText=Buyer.name;
+    BuyerPurse.innerHTML="Remainng Purse : &#8377 <span class="+"purse>"+ Buyer.currentWallet+"</span> crores";
+    numOfPlayersValue.innerHTML=Buyer.playersBought; 
+    numOfPlayers.innerHTML="Players Bought: ";
+    teamData.appendChild(BuyerName);
+    teamData.appendChild(BuyerPurse);
+    
+    teamData.appendChild(numOfPlayers);
+    numOfPlayers.appendChild(numOfPlayersValue);
+
+    team.appendChild(teamData);
+    
+}
+
+function addTeamInSelector(buyingTeams,Buyer){
+
+    const label=document.createElement("label");
+    label.type="radio";
+    label.id="label-"+Buyer.order;
+
+    const logoImg=document.createElement('img');
+    logoImg.classList.add('logo');  //giving it a class name
+    logoImg.src="/resources/logos/"+Buyer.logo+".webp"
+    
+label.appendChild(logoImg);
+buyingTeams.appendChild(label);
+
+
+}
+
+const element = document.getElementById("body");
+
+element.addEventListener("click", function() {
+  // Enter fullscreen mode
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+});

@@ -6,6 +6,7 @@ li{
     padding: 4px;
     padding-left: 8px;
     padding-right: 8px;
+    
 }
 
 a{
@@ -114,8 +115,12 @@ header{
 #list-ele-1:hover #list-ele-1-submenu,#list-ele-2:hover #list-ele-2-submenu,
 #list-ele-3:hover #list-ele-3-submenu,#list-ele-4:hover #list-ele-4-submenu,
 #list-ele-5:hover #list-ele-5-submenu {
+   
     display: flex;
+    
 }
+
+
 
 
 #dropdown-menu1 li{

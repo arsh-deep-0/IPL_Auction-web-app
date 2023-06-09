@@ -1,7 +1,7 @@
 const confirm = document.getElementById("confirm");
 confirm.addEventListener("click", find);
 function find() {
-    let team = "MIn";
+    let team ;
     let teams = document.forms[0];
     for (let i = 0; i < teams.length; i++) {
         if (teams[i].checked) {
@@ -58,4 +58,18 @@ function moveBackground() {
     document.getElementById("bg-2").style.transform ="rotate(55deg) translate("+translateBg2+"px) translateY(-200px)";
     
 }
+
+
+const blurDivs= document.querySelectorAll('img');
+
+blurDivs.forEach(img=>{
+   function loaded(){
+    img.style.opacity="100%"
+   }
+   if(img.complete){
+    loaded()
+   }else{
+    img.addEventListener('load',loaded);
+   }
+})
 

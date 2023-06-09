@@ -6,8 +6,8 @@ const methodOverride = require('method-override');
 require('dotenv').config();
 
 //const IplPlayer = require('./models/player');
-const Cricketer = require('./models/cricketers');
-
+const Cricketer = require('./models/cricketer');
+const Buyer = require('./models/buyer');
 const IplAuction = require('./models/auction');
 
 const PORT = process.env.PORT || 3000;
@@ -47,10 +47,18 @@ io.on('connection', (mySocket) => {
 
                 let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue };
 
-                mySocket.emit("user connected", auctiondetails);  
+                mySocket.emit("user connected", auctiondetails);
+
+                Buyer.find({ order: { $lte: 8 } }) //Finding the details of all buyers  
+                    .then(result => {
+                        mySocket.emit('buyer-Details', result);
+                    })
             });
 
         })
+
+
+
 
     //Basic working of Socket io
     mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  //remember io is global and mySocket is its local instance ,so when u want to emit on all devices use io
@@ -89,6 +97,12 @@ io.on('connection', (mySocket) => {
     })
 
     mySocket.on('player-Sold', sellingDetails => {
+        //firstly we have to add teams in team selector
+        Buyer.find({ order: { $lte: 8 } }) //Finding the details of all buyers  
+        .then(result => {
+            mySocket.emit('buyer-Details', result);
+        })
+
         console.log(sellingDetails)
         let filter = sellingDetails.playerOrder;
         let update = sellingDetails.sellingAmount;

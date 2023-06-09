@@ -5,6 +5,9 @@
 * {
     margin: 0px;
 }
+.body{
+    background-color: white;
+}
 
 body {
 
@@ -429,7 +432,7 @@ label {
 
 label:hover {
     transform: scale(1.1);
-    background-color: black;
+   
 }
 
 label:active {
@@ -439,37 +442,6 @@ label:active {
     transform: translateY(0.25rem);
 }
 
-label:nth-of-type(1) {
-    background-color: blue;
-}
-
-label:nth-of-type(2) {
-    background-color: yellow;
-}
-
-label:nth-of-type(3) {
-    background-color: #ff657f;
-}
-
-label:nth-of-type(4) {
-    background-color: orange;
-}
-
-label:nth-of-type(5) {
-    background-color: darkred;
-}
-
-label:nth-of-type(6) {
-    background-color: red;
-}
-
-label:nth-of-type(7) {
-    background-color: purple;
-}
-
-label:nth-of-type(8) {
-    background-color: rgb(162, 162, 229);
-}
 
 
 
@@ -522,8 +494,7 @@ button:active {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border: 0.25rem solid rgb(255, 255, 255);
-    box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
+ 
 }
 
 #PREV {
@@ -588,7 +559,7 @@ button:active {
 
 label .logo {
 
-    width: 2.2rem;
+    width: 2.4rem;
 }
 
 #srh .logo {
@@ -632,7 +603,7 @@ label .logo {
     color: white;
     background-color: black;
 
-    border-radius: 5px;
+    border-radius: 0.77rem;
     padding: .7rem;
     margin-top: .3rem;
     min-height: 4.2rem;
@@ -647,92 +618,92 @@ label .logo {
     box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(178, 177, 177);
 }
 
-#CSK {
+#team-2 {
     background: linear-gradient(143.7deg, #fcca06 0, #f25c19 100%);
-    border-radius: 0.8em;
+    
 }
 
-#csk {
+#label-2 {
     background: linear-gradient(143.7deg, #fcca06 0, #f25c19 100%);
-    border-radius: 0.8em;
+    
 }
 
-#MI {
+#team-1 {
     background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
-    border-radius: 0.8em;
+    
 }
 
-#mi {
+#label-1 {
     background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
-    border-radius: 0.8em;
+    
 }
 
-#RR {
+#team-3 {
     background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
-    border-radius: 0.8em;
+    
 }
 
-#rr {
+#label-3 {
     background: linear-gradient(143.7deg, #ea1a85 0, #001d48 100%);
-    border-radius: 0.8em;
+    
 }
 
-#DC {
+#team-8 {
     background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
-    border-radius: 0.8em;
+    
 }
 
-#dc {
+#label-8 {
     background: linear-gradient(180deg, #0078bc 0, #17479e 100%);
-    border-radius: 0.8em;
+    
 }
 
-#KKR {
+#team-6 {
     background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
-    border-radius: 0.8em;
+    
 }
 
-#PBKS {
+#team-5 {
     background: linear-gradient(143.7deg, #d71920 0, #84171b 100%);
-    border-radius: 0.8em;
+    
 }
 
-#SRH {
+#team-7 {
     background: linear-gradient(180deg, #f26522 0, #ed1a37 100%);
-    border-radius: 0.8em;
+    
 }
 
 
 
 
 
-#RCB {
+#team-4 {
     background: linear-gradient(143.7deg, #6a6a6a 0, #1c1c1c 100%);
-    border-radius: 0.8em;
+    
 }
 
-#kkr {
+#label-6 {
     background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
-    border-radius: 0.8em;
+    
 }
 
-#pbks {
+#label-5 {
     background: linear-gradient(143.7deg, #d71920 0, #84171b 100%);
-    border-radius: 0.8em;
+    
 }
 
-#srh {
+#label-7 {
     background: linear-gradient(180deg, #f26522 0, #ed1a37 100%);
-    border-radius: 0.8em;
+    
 }
 
 
 
 
 
-#rcb {
+#label-4 {
     background: linear-gradient(143.7deg, #6a6a6a 0, #1c1c1c 100%);
-    border-radius: 0.8em;
+    
 }
 
 .team-data {
@@ -834,6 +805,7 @@ label .logo {
         gap: 0;
         row-gap: 2rem;
         justify-content: space-around;
+        
     }
 
     .bids {
@@ -985,7 +957,8 @@ label .logo {
         background-color: white;
         justify-content: start;
         border-radius: 0.25rem;
-
+        border: 0.25rem solid rgb(255, 255, 255);
+        box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     }
 
 
