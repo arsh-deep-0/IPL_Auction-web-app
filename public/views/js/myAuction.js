@@ -1,24 +1,4 @@
-const confirm = document.getElementById("confirm");
-confirm.addEventListener("click", find);
-function find() {
-    let team ;
-    let teams = document.forms[0];
-    for (let i = 0; i < teams.length; i++) {
-        if (teams[i].checked) {
-            team = teams[i].value + "";
-        }
-    }
-    let purseId = team + "purse";
-    let numId = team + "num";
 
-
-    let curr_purse = document.getElementById(purseId).innerHTML - substracting_value;
-    console.log(curr_purse);
-    document.getElementById("" + purseId).innerHTML = "" + curr_purse.toFixed(2);
-    document.getElementById(numId).innerHTML++;
-    console.log(team);
-    console.log(purseId);
-}
 
 document.addEventListener('click', (e) => {
     // Retrieve id from clicked element
@@ -60,16 +40,5 @@ function moveBackground() {
 }
 
 
-const blurDivs= document.querySelectorAll('img');
 
-blurDivs.forEach(img=>{
-   function loaded(){
-    img.style.opacity="100%"
-   }
-   if(img.complete){
-    loaded()
-   }else{
-    img.addEventListener('load',loaded);
-   }
-})
 

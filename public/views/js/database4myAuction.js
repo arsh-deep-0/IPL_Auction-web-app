@@ -1,11 +1,11 @@
-const socket = io('https://auction-arsh.onrender.com');
+const socket = io('http://localhost:3001');
 
 //on page reload , going back to database details
 
 socket.on("user connected", (data) => {
     console.log('connection established');
     changePlayer(data.order, 'local');
-    document.getElementById("Amount").innerHTML = data.bidValue;  
+    document.getElementById("Amount").innerHTML = data.bidValue;
 });
 
 
@@ -79,7 +79,7 @@ socket.on('change-Player', (result) => {
 
         //checking if player is sold or not 
         if (myElement.sellingStatus >= 1) {
-            let sellingDetails = { sellingStatus:myElement.sellingStatus,sellingAmount: myElement.SellingPrice };
+            let sellingDetails = { sellingStatus: myElement.sellingStatus, sellingAmount: myElement.SellingPrice };
             sellPlayer(sellingDetails);
         }
     });
@@ -151,12 +151,12 @@ const sellingPrice = document.getElementById('hidden');
 
 //handler of player-sold , which updates to UI
 socket.on('player-Sold', sellingDetails => {
-    console.log('yeah',sellingDetails);
+    console.log('yeah', sellingDetails);
     sellPlayer(sellingDetails);
 })
 
 function sellPlayer(sellingDetails) {
-    console.log("got",sellingDetails);
+    console.log("got", sellingDetails);
     if (sellingDetails.sellingStatus == 0) {
         sellingPrice.style.display = "none";
         document.getElementById("bids-3").style.display = "block";
@@ -165,7 +165,7 @@ function sellPlayer(sellingDetails) {
         document.getElementById("teamSelector").style.display = "none";
     }
     else {
-        sellingPrice.style.display ="block";
+        sellingPrice.style.display = "block";
         document.getElementById("bids-3").style.display = "none";
         document.getElementById("UP").style.display = "none";
         document.getElementById("Sold").style.display = "none";
@@ -174,7 +174,7 @@ function sellPlayer(sellingDetails) {
         sellingPrice.innerHTML = "Unsold";
         sellingPrice.style.display = "block";
     }
-    else if(sellingDetails.sellingStatus == 1) {
+    else if (sellingDetails.sellingStatus == 1) {
         sellingPrice.innerHTML = "Sold at : " + "\u20B9" + sellingDetails.sellingAmount + " lakhs";
         document.getElementById("teamSelector").style.display = "block";
         sellingPrice.style.display = "block";
@@ -198,38 +198,38 @@ reset.addEventListener('click', () => {
 
 //updating buyer's details
 
-socket.on('buyer-Details',details=>{
+socket.on('buyer-Details', details => {
     let parentDiv = document.getElementById('wallet');
-    parentDiv.innerHTML=''; //ensuring that there is not prior teams already in parent div
-    let buyingTeams= document.getElementById('buying-teams');
-    buyingTeams.innerHTML='';
-    details.forEach(Buyer=>{
-        makeNewBuyer(parentDiv,Buyer);
-        addTeamInSelector(buyingTeams,Buyer);
+    parentDiv.innerHTML = ''; //ensuring that there is not prior teams already in parent div
+    let buyingTeams = document.getElementById('buying-teams');
+    buyingTeams.innerHTML = '';
+    details.forEach(Buyer => {
+        makeNewBuyer(parentDiv, Buyer);
+        addTeamInSelector(buyingTeams, Buyer);
     })
 })
 
-function makeNewBuyer(parentDiv,Buyer) {  
-    const team =document.createElement('div');
+function makeNewBuyer(parentDiv, Buyer) {
+    const team = document.createElement('div');
     team.classList.add('team');
-    team.id=('team-'+Buyer.order);
+    team.id = ('team-' + Buyer.order);
     parentDiv.appendChild(team);
 
-    const logoImgClass=document.createElement("div"); //making a new html element of type div
-    const logoImg=document.createElement("img");
+    const logoImgClass = document.createElement("div"); //making a new html element of type div
+    const logoImg = document.createElement("img");
     logoImg.classList.add('logo');  //giving it a class name
-    logoImg.src="/resources/logos/"+Buyer.logo+".webp"
-    
+    logoImg.src = "/resources/logos/" + Buyer.logo + ".webp"
+
     team.appendChild(logoImg); //appending it into main parent div
 
 
-    const teamData =document.createElement('div');
+    const teamData = document.createElement('div');
     teamData.classList.add('team-data');
-    const BuyerName=document.createElement("p");
-    const BuyerPurse=document.createElement("p");
-    const numOfPlayers=document.createElement("p");
-    const BuyerPurseValue=document.createElement('span');
-    const numOfPlayersValue=document.createElement('span');
+    const BuyerName = document.createElement("p");
+    const BuyerPurse = document.createElement("p");
+    const numOfPlayers = document.createElement("p");
+    const BuyerPurseValue = document.createElement('span');
+    const numOfPlayersValue = document.createElement('span');
 
     BuyerName.classList.add('text');
     BuyerPurse.classList.add('text');
@@ -237,47 +237,71 @@ function makeNewBuyer(parentDiv,Buyer) {
     BuyerPurseValue.classList.add('purse');
     numOfPlayersValue.classList.add('numOfPlayers');
 
-    BuyerName.innerText=Buyer.name;
-    BuyerPurse.innerHTML="Remainng Purse : &#8377 <span class="+"purse>"+ Buyer.currentWallet+"</span> crores";
-    numOfPlayersValue.innerHTML=Buyer.playersBought; 
-    numOfPlayers.innerHTML="Players Bought: ";
+    BuyerName.innerText = Buyer.name;
+    BuyerPurse.innerHTML = "Remainng Purse : &#8377 <span class=" + "purse>" + Buyer.currentWallet + "</span> crores";
+    numOfPlayersValue.innerHTML = Buyer.playersBought;
+    numOfPlayers.innerHTML = "Players Bought: ";
     teamData.appendChild(BuyerName);
     teamData.appendChild(BuyerPurse);
-    
+
     teamData.appendChild(numOfPlayers);
     numOfPlayers.appendChild(numOfPlayersValue);
 
     team.appendChild(teamData);
-    
+
 }
 
-function addTeamInSelector(buyingTeams,Buyer){
+function addTeamInSelector(buyingTeams, Buyer) {
 
-    const label=document.createElement("label");
-    label.type="radio";
-    label.id="label-"+Buyer.order;
+    const label = document.createElement("label");
+    label.id = "label-" + Buyer.order;
 
-    const logoImg=document.createElement('img');
+    const input = document.createElement('input');
+    input.type = "radio";
+    input.name='buyer';
+    input.value=Buyer.order; 
+    label.appendChild(input);
+
+    const logoImg = document.createElement('img');
     logoImg.classList.add('logo');  //giving it a class name
-    logoImg.src="/resources/logos/"+Buyer.logo+".webp"
-    
-label.appendChild(logoImg);
-buyingTeams.appendChild(label);
+    logoImg.src = "/resources/logos/" + Buyer.logo + ".webp"
 
+    label.appendChild(logoImg);
+    buyingTeams.appendChild(label);
 
+    //adding players to teams
+    const confirm = document.getElementById("confirm");
+    confirm.addEventListener("click", find);
+    function find() {
+        let team;
+        let teams = document.forms[0];
+        for (let i = 0; i < teams.length; i++) {
+            if (teams[i].checked) {
+                team = teams[i].value + "";
+            }
+           
+        }
+        console.log(team);
+
+    }
 }
+    //Making web app full screen by clicking anywhere in body
 
-const element = document.getElementById("body");
+    const element = document.getElementById("body");
 
-element.addEventListener("click", function() {
-  // Enter fullscreen mode
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.mozRequestFullScreen) {
-    element.mozRequestFullScreen();
-  } else if (element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) {
-    element.msRequestFullscreen();
-  }
-});
+    element.addEventListener("click", function () {
+        // Enter fullscreen mode
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        }
+        else{
+            console.log('not');
+        }
+        
+    });
