@@ -43,6 +43,9 @@ io.on('connection', (mySocket) => {
         .then((result) => {
             result.forEach(element => {
                 let currentPlayerOrder = element.currentPlayerOrder;
+                // if(currentPlayerOrder==0){
+                //     currentPlayerOrder++;
+                // }
                 let currentBidValue = element.currentBidValue;
 
                 let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue };
@@ -56,9 +59,6 @@ io.on('connection', (mySocket) => {
             });
 
         })
-
-
-
 
     //Basic working of Socket io
     mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  //remember io is global and mySocket is its local instance ,so when u want to emit on all devices use io
@@ -99,11 +99,11 @@ io.on('connection', (mySocket) => {
     mySocket.on('player-Sold', sellingDetails => {
         //firstly we have to add teams in team selector
         Buyer.find({ order: { $lte: 8 } }) //Finding the details of all buyers  
-        .then(result => {
-            mySocket.emit('buyer-Details', result);
-        })
+            .then(result => {
+                io.emit('buyer-Details', result);
+            })
 
-        console.log(sellingDetails)
+        console.log(sellingDetails, "sold")
         let filter = sellingDetails.playerOrder;
         let update = sellingDetails.sellingAmount;
         let sellingStatus = sellingDetails.sellingStatus;
@@ -111,6 +111,56 @@ io.on('connection', (mySocket) => {
             .then(result => {
                 io.emit('player-Sold', sellingDetails);
             })
+    })
+
+    mySocket.on('add-Player', addingDetails => {
+
+        Cricketer.findOneAndUpdate({ order: addingDetails.playerOrder }, { Team: addingDetails.buyingTeamOrder, sellingStatus: 3 }, { runValidators: true, new: true })
+            .then(result => {
+                let role = result.Role + 'sBought';
+                console.log(role);
+                console.log(addingDetails, 'added')
+                let sellingAmount = (-1 * result.SellingPrice / 100).toFixed(1);
+
+                /*Buyer.updateMany({},{$rename:{BatsmanBought:'BatsmansBought',bowlersBought:'BowlersBought',wksBought:'WKsBought'}})
+                .then(result=>{
+                 console.log(result);
+                })*/
+
+                Buyer.findOneAndUpdate({ order: addingDetails.buyingTeamOrder },
+                    { $inc: { playersBought: 1, [role]: 1, currentWallet: sellingAmount } },
+                    { runValidators: true, new: true })
+                    .then(Buyer => {
+                        Cricketer.findOneAndUpdate({order:addingDetails.playerOrder},{teamlogo:Buyer.logo}).
+                        then(player=>{
+                            console.log(player);
+                        })
+                        io.emit('add-Player', Buyer)
+                    })
+            })
+
+
+    })
+    mySocket.on('remove-Player', removingDetails => {
+        Cricketer.findOneAndUpdate({ order: removingDetails.playerOrder }, { Team: '0', sellingStatus: 0 }, { runValidators: true }) // new :true is attentionaly not kept true
+            .then(result => {
+                let role = result.Role + 'sBought';
+                console.log(role);
+                console.log(removingDetails, 'removed');
+                let sellingAmount = (1 * result.SellingPrice / 100).toFixed(1);
+
+                Buyer.findOneAndUpdate({ order: result.Team },
+                    { $inc: { playersBought: -1, [role]: -1, currentWallet: sellingAmount } },
+                    { runValidators: true, new: true })
+                    .then(Buyer => {
+                        Cricketer.findOneAndUpdate({order:removingDetails.playerOrder},{teamlogo:'Nil'}).
+                        then(player=>{
+                            console.log(player);
+                        })
+                        io.emit('remove-Player', Buyer)
+                    })
+            })
+
     })
 });
 

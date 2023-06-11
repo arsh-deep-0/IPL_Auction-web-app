@@ -38,6 +38,9 @@ const playerSchema = new mongoose.Schema({
         type:String
     },
     Team:{
+        type:Number
+    },
+    teamlogo:{
         type:String
     },
     sellingStatus:{

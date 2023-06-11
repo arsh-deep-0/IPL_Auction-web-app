@@ -2,10 +2,11 @@ const socket = io('https://auction-arsh.onrender.com');
 
 //on page reload , going back to database details
 
-socket.on("user connected", (data) => {
+socket.on("user connected", (AuctionData) => {
     console.log('connection established');
-    changePlayer(data.order, 'local');
-    document.getElementById("Amount").innerHTML = data.bidValue;
+    changePlayer(AuctionData.order, 'local');
+    console.log(AuctionData.order)
+    document.getElementById("Amount").innerHTML = AuctionData.bidValue;
 });
 
 
@@ -45,6 +46,9 @@ function decreaseOrder() {
 }
 
 function changePlayer(playerOrder, scope) {
+    // if(playerOrder==0){
+    //     playerOrder++;
+    // }
 
     let changingDetails = { playerOrder: playerOrder, scope: scope }
     socket.emit('change-Player', changingDetails);
@@ -57,7 +61,7 @@ socket.on('change-Player', (result) => {
     console.log(result);
     result.forEach(myElement => {
         document.getElementById("name").innerHTML = myElement.name;
-        document.getElementById("playerNum").innerHTML = myElement.order;
+        currentPlayerOrder.innerHTML = myElement.order;
         document.getElementById("currPlayerImg").src = "/resources/Players/" + myElement.name + ".webp";
         document.getElementById("roleImg").src = "/resources/icons/" + myElement.Role + ".webp";
         document.getElementById("flagImg").src = "/resources/icons/" + myElement.Nationality + ".webp";
@@ -68,6 +72,14 @@ socket.on('change-Player', (result) => {
         document.getElementById("nationality").innerHTML = myElement.Nationality;
         document.getElementById("role").innerHTML = myElement.Role;
 
+        //putting team logo in sold section 
+        if(myElement.teamlogo=='Nil'){
+            document.getElementById('buyerTeam').style.display='none';
+
+        }else{
+        document.getElementById('buyerTeam').src="/resources/logos/"+myElement.teamlogo+".webp";
+        document.getElementById('buyerTeam').style.display='block';
+        }
 
         //set bids section to default
         document.getElementById("hidden").style.display = "none";
@@ -78,10 +90,12 @@ socket.on('change-Player', (result) => {
 
 
         //checking if player is sold or not 
-        if (myElement.sellingStatus >= 1) {
+        
+         if (myElement.sellingStatus >= 1) {
             let sellingDetails = { sellingStatus: myElement.sellingStatus, sellingAmount: myElement.SellingPrice };
-            sellPlayer(sellingDetails);
+            soldPlayerHandler(sellingDetails);
         }
+      
     });
 })
 
@@ -152,10 +166,10 @@ const sellingPrice = document.getElementById('hidden');
 //handler of player-sold , which updates to UI
 socket.on('player-Sold', sellingDetails => {
     console.log('yeah', sellingDetails);
-    sellPlayer(sellingDetails);
+    soldPlayerHandler(sellingDetails);
 })
 
-function sellPlayer(sellingDetails) {
+function soldPlayerHandler(sellingDetails) {
     console.log("got", sellingDetails);
     if (sellingDetails.sellingStatus == 0) {
         sellingPrice.style.display = "none";
@@ -172,12 +186,17 @@ function sellPlayer(sellingDetails) {
     }
     if (sellingDetails.sellingStatus == 2) {
         sellingPrice.innerHTML = "Unsold";
-        sellingPrice.style.display = "block";
+       
     }
     else if (sellingDetails.sellingStatus == 1) {
         sellingPrice.innerHTML = "Sold at : " + "\u20B9" + sellingDetails.sellingAmount + " lakhs";
         document.getElementById("teamSelector").style.display = "block";
-        sellingPrice.style.display = "block";
+        
+    }
+    else if(sellingDetails.sellingStatus == 3){
+        sellingPrice.innerHTML = "Sold at : " + "\u20B9" + sellingDetails.sellingAmount + " lakhs";
+        document.getElementById("teamSelector").style.display = "none";
+       
     }
 }
 
@@ -186,7 +205,18 @@ function sellPlayer(sellingDetails) {
 
 const reset = document.getElementById('reset');
 reset.addEventListener('click', () => {
-    let resetingDetails = {
+  
+    if ( sold=document.getElementById('buyerTeam').style.display=="block") {//it means player sold and added in a team 
+        let removingDetails = {
+            playerOrder: currentPlayerOrder.innerHTML,
+            sellingPrice: Number(currentBid.innerHTML),
+            sellingStatus:3
+        }
+        socket.emit('remove-Player', removingDetails)
+        console.log('sent');
+    }
+
+    let resetingDetails = { // this one helps to set player object in db back to default
         sellingAmount: 0,
         playerOrder: currentPlayerOrder.innerHTML,
         sellingStatus: 0
@@ -194,6 +224,9 @@ reset.addEventListener('click', () => {
     socket.emit('player-Sold', resetingDetails);
     socket.emit('increase-Bid', 0);
 })
+
+
+
 
 
 //updating buyer's details
@@ -228,17 +261,17 @@ function makeNewBuyer(parentDiv, Buyer) {
     const BuyerName = document.createElement("p");
     const BuyerPurse = document.createElement("p");
     const numOfPlayers = document.createElement("p");
-    const BuyerPurseValue = document.createElement('span');
     const numOfPlayersValue = document.createElement('span');
 
     BuyerName.classList.add('text');
     BuyerPurse.classList.add('text');
     numOfPlayers.classList.add('text');
-    BuyerPurseValue.classList.add('purse');
+
     numOfPlayersValue.classList.add('numOfPlayers');
+    numOfPlayersValue.id = 'numOfPlayers-' + Buyer.order;
 
     BuyerName.innerText = Buyer.name;
-    BuyerPurse.innerHTML = "Remainng Purse : &#8377 <span class=" + "purse>" + Buyer.currentWallet + "</span> crores";
+    BuyerPurse.innerHTML = 'Remainng Purse : &#8377 <span class="purse" id="purse-' + Buyer.order + '">' + Buyer.currentWallet.toFixed(2) + '</span> crores';
     numOfPlayersValue.innerHTML = Buyer.playersBought;
     numOfPlayers.innerHTML = "Players Bought: ";
     teamData.appendChild(BuyerName);
@@ -258,8 +291,8 @@ function addTeamInSelector(buyingTeams, Buyer) {
 
     const input = document.createElement('input');
     input.type = "radio";
-    input.name='buyer';
-    input.value=Buyer.order; 
+    input.name = 'buyer';
+    input.value = Buyer.order;
     label.appendChild(input);
 
     const logoImg = document.createElement('img');
@@ -269,39 +302,67 @@ function addTeamInSelector(buyingTeams, Buyer) {
     label.appendChild(logoImg);
     buyingTeams.appendChild(label);
 
-    //adding players to teams
-    const confirm = document.getElementById("confirm");
-    confirm.addEventListener("click", find);
-    function find() {
-        let team;
-        let teams = document.forms[0];
-        for (let i = 0; i < teams.length; i++) {
-            if (teams[i].checked) {
-                team = teams[i].value + "";
-            }
-           
-        }
-        console.log(team);
+}
 
+//adding player to team
+const confirm = document.getElementById("confirm");
+confirm.addEventListener("click", find);
+function find() {
+    let order;
+    let allOrders = document.forms[0];
+    for (let i = 0; i < allOrders.length; i++) {
+        if (allOrders[i].checked) {
+            order = allOrders[i].value + "";
+        }
+    }
+    console.log(order);
+    let addingDetails = {
+        playerOrder: currentPlayerOrder.innerHTML,
+        buyingTeamOrder: order,
+        sellingPrice: currentBid.innerHTML
+    }
+    socket.emit('add-Player', addingDetails)
+
+}
+
+//updating buyer stats
+
+socket.on('add-Player', Buyer => {
+    document.getElementById('teamSelector').style.display = "none";
+    document.getElementById('purse-' + Buyer.order).innerHTML = Buyer.currentWallet.toFixed(2);
+    document.getElementById('numOfPlayers-' + Buyer.order).innerHTML = Buyer.playersBought;
+    document.getElementById('buyerTeam').src="/resources/logos/"+Buyer.logo+".webp";
+    document.getElementById('buyerTeam').style.display="block";
+})
+
+socket.on('remove-Player', Buyer => {
+    document.getElementById('teamSelector').style.display = "none";
+    document.getElementById('purse-' + Buyer.order).innerHTML = Buyer.currentWallet.toFixed(2);
+    document.getElementById('numOfPlayers-' + Buyer.order).innerHTML = Buyer.playersBought;
+    document.getElementById('buyerTeam').src="";
+    document.getElementById('buyerTeam').style.display="none";
+})
+
+
+
+
+//Making web app full screen by clicking anywhere in body
+
+const element = document.getElementById("body");
+
+element.addEventListener("click", fullscreen);
+
+function fullscreen() {
+    // Enter fullscreen mode
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
     }
 }
-    //Making web app full screen by clicking anywhere in body
 
-    const element = document.getElementById("body");
 
-    element.addEventListener("click", function () {
-        // Enter fullscreen mode
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-        }
-        else{
-            console.log('not');
-        }
-        
-    });

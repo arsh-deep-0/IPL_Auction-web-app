@@ -398,6 +398,15 @@ background-color: rgba(255, 255, 255, 0.518);
     font-size: 1.8rem;
 }
 
+#buyerTeam{
+
+align-self: center;
+
+height: 6rem;
+width: auto;
+display: none;
+}
+
 .edgy-font {
     font-family: 'Bruno Ace SC', cursive;
     font-size: 1.5rem;
@@ -516,7 +525,7 @@ button:active {
 #PREV{
     height: 2rem;
     transform: rotate(180deg);
-    margin: 0.7rem;
+    margin: 1rem;
     margin-bottom: 2rem;
 
     filter: drop-shadow(0px 0px 0.2rem #a383ef);
@@ -532,7 +541,7 @@ button:active {
 
 #NEXT{
     height: 2rem;
-    margin: 0.7rem;
+    margin: 1rem;
     margin-bottom: 2rem;
  
     filter: drop-shadow(0px 0px 0.2rem #af71fc);
@@ -963,6 +972,11 @@ label .logo {
         margin: 0;
         margin-bottom: 1.5rem;
     }
+
+    #buyerTeam{
+        align-self: center;
+        
+    }
     
 #hidden {
     padding: 0.5rem;
@@ -1056,3 +1070,4 @@ label .logo {
         overflow: visible;
     }
 }
+

@@ -22,13 +22,18 @@ const buyerSchema = new mongoose.Schema({
    playersBought:{
     type:Number
    },
-   batsmenBought:{
+   BatsmanBought:{
     type:Number
    },
-   bowlersBought:{
+  
+   BatsmansBought:{
     type:Number
    },
-   wksBought:{
+  
+   BowlersBought:{
+    type:Number
+   },
+   WKsBought:{
     type:Number
    },
    overseasBought:{
