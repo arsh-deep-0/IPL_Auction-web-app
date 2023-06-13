@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 li{
     font-family: 'Bruno Ace SC', cursive;
     list-style:none;
@@ -28,6 +33,7 @@ header{
     
 }
 
+
 .navbar{
     position: fixed;
     background-color: #fff;
@@ -45,6 +51,20 @@ header{
     padding-right:5%;
     z-index: 2;
 }
+#navbar-2{
+    
+    margin-top: 3rem;
+    display: grid;
+    flex-direction: column;
+    height: 100%;
+    width: 7%;
+    padding: 0;
+    z-index: 1;
+ 
+    justify-self: center;
+}
+
+
  .main-logo{
     height: 2.5rem;
 }
@@ -58,6 +78,12 @@ header{
     display: flex;
 
     gap: 2rem;
+}
+#links-2{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
  .toggle_btn img{
@@ -253,4 +279,32 @@ hr{
     height: 90%;
     transform: translateY(-10%);
     padding: 2%;
+}
+
+@media (max-width:501px) {
+    #navbar-2{
+z-index: 2;
+        display: flex;
+       
+      margin-top: 96vh;
+        flex-direction: row;
+        height: 4vh;
+        width: 100%;
+        justify-content: center;
+    }
+
+    #links-2{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        gap: 0;
+        color: #6233fc;
+    }
+    #links-2 li{
+        font-weight: 600;
+        font-size: 1.3rem;
+    }
+
 }

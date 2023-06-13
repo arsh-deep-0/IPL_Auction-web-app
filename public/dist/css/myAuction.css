@@ -4,6 +4,7 @@
 
 * {
     margin: 0px;
+    padding:0;
 }
 .body{
     background-color: white;
@@ -46,12 +47,13 @@ p {
 }
 
 .container {
+    padding-left: 7%;
     padding-top: 10vh;
     overflow: hidden;
     position: relative;
 
-    width: 100%;
-
+    width: 93%;
+    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -91,7 +93,7 @@ transform: translate(1rem)translateY(-2rem);
 }
 
 .otherstatsbg {
-    color: white;
+    color: black;
     margin-top: 6rem;
     height: 3rem;
 
@@ -100,7 +102,8 @@ transform: translate(1rem)translateY(-2rem);
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     box-shadow: 0.03rem 0.03rem 0.35rem 0.06rem rgb(0, 0, 0, 0.37);
     box-shadow: 0.0rem 0.2rem 0.55rem 0.02rem #9743fe7e;
-    background: linear-gradient(143.7deg, #ea1a85 -60%, #6265f8 100%);
+    /*background: linear-gradient(143.7deg, #ea1a85 -60%, #6265f8 100%);*/
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -1068,6 +1071,8 @@ label .logo {
 @media (max-width:501px) {
     .container{
         overflow: visible;
+        padding-left: 0;
+        width: 100%;
     }
 }
 

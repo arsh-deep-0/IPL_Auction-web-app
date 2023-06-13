@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="dist/css/myAuction.css">
     <link rel="stylesheet" href="dist/css/navbar.css">
     <link rel="stylesheet" href="dist/css/bg-design-ele.css">
+    <link rel="stylesheet" href="dist/css/modal.css">
 
 
 </head>
@@ -434,6 +435,38 @@
             </div>
         </nav>
 
+        <nav class="navbar" id="navbar-2">
+
+            <ul class="links" id="links-2">
+                <li class="bottom-navbar-ele" id="openTeamsModal">Teams</li>
+                <li class="bottom-navbar-ele" id="play-Auction">Auction</li>
+                <li class="bottom-navbar-ele" id="list-ele-3">Players</li>
+
+            </ul>
+
+
+        </nav>
+
+        <div id="Teams-Modal" class="modal">
+            <section class="modal-content">
+
+                <div class="modal-teams" id="modal-teams">
+
+                </div>
+
+                <div class="players">
+                    <div class="player">
+                        <img src="/resources/players/Rohit Sharma.webp" alt="" class="buyed-player">
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <div class="modal" id="Players-Modal"></div>
+
+
+
         <div class="bg">
             <div class="background-design-ele-1" id="bg-1"></div>
             <div class="background-design-ele-2" id="bg-2"></div>
@@ -478,12 +511,12 @@
                         <img id="PREV" src="/resources/icons/next.png" alt="">
                         <button class="button" id="UP">Bid Up</button>
                         <button class="button" id="Sold">Sell</button>
-                        <img class="logo" id="buyerTeam" src="" alt="0">      
+                        <img class="logo" id="buyerTeam" src="" alt="0">
                         <img ID="NEXT" src="/resources/icons/next.png" alt="">
                     </div>
                     <div>
                         <p class="Bids" id="hidden"></p>
-                       
+
                     </div>
 
                 </section>
@@ -500,7 +533,7 @@
 
                     <form>
                         <div class="buying-teams" id="buying-teams">
-                           
+
                         </div>
                     </form>
                     <div class="add">
@@ -561,6 +594,8 @@
     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
     <script src="views/js/myAuction.js"></script>
     <script src="views/js/database4myAuction.js"></script>
+    <script src="views/js/navbar.js"></script>
+    <script src="views/js/teamModal.js"></script>
 
 
 </body>

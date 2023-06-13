@@ -5,7 +5,7 @@ const socket = io('https://auction-arsh.onrender.com');
 socket.on("user connected", (AuctionData) => {
     console.log('connection established');
     changePlayer(AuctionData.order, 'local');
-    console.log(AuctionData.order)
+    console.log(AuctionData);
     document.getElementById("Amount").innerHTML = AuctionData.bidValue;
 });
 
@@ -297,7 +297,7 @@ function addTeamInSelector(buyingTeams, Buyer) {
 
     const logoImg = document.createElement('img');
     logoImg.classList.add('logo');  //giving it a class name
-    logoImg.src = "/resources/logos/" + Buyer.logo + ".webp"
+    logoImg.src = "/resources/logos/" + Buyer.logo + ".webp"  
 
     label.appendChild(logoImg);
     buyingTeams.appendChild(label);
