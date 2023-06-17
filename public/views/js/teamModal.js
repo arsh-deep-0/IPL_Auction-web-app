@@ -1,3 +1,6 @@
+ 
+
+
 socket.on('buyer-Details',result=>{
     const modalTeams= document.getElementById('modal-teams');
     modalTeams.innerHTML='<p>Teams</p>';
@@ -15,6 +18,11 @@ socket.on('buyer-Details',result=>{
         logoDiv.appendChild(logoImg)
         
     })
+    let modalLogo1=document.getElementById('modal-logo-div-'+(1));
+modalLogo1.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
+
+socket.emit('view-team-players',1);  
+socket.emit('view-team-analytics',1); 
     
     const modalLogos = document.getElementsByClassName('modal-logo');
     //document.getElementById('modal-logo-div-0').back
@@ -26,12 +34,12 @@ socket.on('buyer-Details',result=>{
             // Reset background color of all children to white
             for (let j = 0; j < modalLogos.length; j++) {
                let otherLogo =document.getElementById('modal-logo-div-'+(j+1));
-                otherLogo.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
+                otherLogo.style.background = "white";
             }
     
             // Set background color of the clicked child to blue
             
-            this.style.background = "linear-gradient(-90deg, #25054a 0, #7423ed 100%)";
+            this.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
             console.log(i)
             socket.emit('view-team-players',i+1);  
             socket.emit('view-team-analytics',i+1);                      
