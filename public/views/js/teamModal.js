@@ -98,7 +98,7 @@ players.forEach(player => {
     let playerImg = document.createElement('img');
     playerImg.classList.add('modal-player');
     playerImg.id='modal-player-'+player.order;  //giving it a class name
-    playerImg.src = "/resources/players/" + player.name + ".webp";
+    playerImg.src = "/resources/Players/" + player.name + ".webp";
     playerData.appendChild(playerImg);
 
     let template=document.createElement('img');
