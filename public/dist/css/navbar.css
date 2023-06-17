@@ -18,11 +18,13 @@ a{
     text-decoration: none;
     font-size: 1rem;
     color:rgb(13, 0, 255);
+    color: white;
+    color: gold;
     font-family: 'Bruno Ace SC', cursive;
   
 }
 a:hover{
-    color:red;
+    color:white;
    
 }
 
@@ -36,14 +38,23 @@ header{
 
 .navbar{
     position: fixed;
+    background-color: #000000;
     background-color: #fff;
     
+    margin: 0;
+    background:linear-gradient(143.7deg, #3b215d 0,#b8b4c2 50%, #552792 100%) ;
+    
+    background:#3b215d ;
+    background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
+    background: rgb(105, 77, 229);
+    background: linear-gradient(-90deg, #25054a 0, #7423ed 100%);
     width: 91%;
     height:3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0.5px 0.5px 2px 1px rgb(178, 177, 177);
+    box-shadow: 0.0rem 0.2rem 0.25rem 0.02rem #9743fe7e; 
     border: 0px white solid;
     border-radius: 0px;
     padding: 2px;
@@ -51,17 +62,31 @@ header{
     padding-right:5%;
     z-index: 2;
 }
-#navbar-2{
-    
-    margin-top: 3rem;
-    display: grid;
-    flex-direction: column;
-    height: 100%;
-    width: 7%;
+#navbar-2{   
+    display: inline-flex;
     padding: 0;
-    z-index: 1;
- 
+    z-index: 2;
     justify-self: center;
+       
+      margin-top: 92vh;
+        flex-direction: row;
+        height: 4vh;
+      
+      width: fit-content;
+        justify-content: center;
+        background: #6233fc;
+        background: linear-gradient(
+            143.7deg,
+            #462523 -60%,
+                   #cb9b51 2%, 
+            #f6e27a 45%,
+            #f6f2c0 50%,
+            #f6e27a 55%,
+            #cb9b51 98%,
+            #462523 160%
+            );;
+        padding: .3rem;
+        border-radius: .3rem;
 }
 
 
@@ -76,15 +101,40 @@ header{
 
 .navbar .links{
     display: flex;
-
+color: white;
     gap: 2rem;
 }
 #links-2{
-    flex-direction: column;
+    padding: 0;
+  
+    display: inline-flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    width: 90%;
+    gap: 0;
+    color: #6233fc;
 }
+#links-2 li{
+    background-color: #6233fc;
+    margin: 1.5rem;
+    color: #000000;
+    background: linear-gradient(
+        143.7deg,
+        #462523 -60%,
+               #cb9b51 2%, 
+        #f6e27a 45%,
+        #f6f2c0 50%,
+        #f6e27a 55%,
+        #cb9b51 98%,
+        #462523 160%
+        );;
+        box-shadow: 0.0rem 0.0rem 0.55rem 0.02rem #2505057e;
+   
+}
+
+
+
 
  .toggle_btn img{
     height: 2.5rem;
@@ -116,6 +166,7 @@ header{
     left: 0rem;
     background-color: #fff;
     box-shadow: 0.5px 0.5px 2px 1px rgb(178, 177, 177);
+    box-shadow: 0.0rem 0.2rem 0.25rem 0.02rem #9743fe7e; 
     border:0px white solid;
     height: 100vh;
     width: 60%;
@@ -283,13 +334,14 @@ hr{
 
 @media (max-width:501px) {
     #navbar-2{
+        
 z-index: 2;
         display: flex;
-       
-      margin-top: 96vh;
+       padding: 0;
+      margin-top: 94vh;
         flex-direction: row;
         height: 4vh;
-        width: 100%;
+      border-radius: 0.6rem;
         justify-content: center;
     }
 
@@ -298,7 +350,7 @@ z-index: 2;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 90%;
+       
         gap: 0;
         color: #6233fc;
     }

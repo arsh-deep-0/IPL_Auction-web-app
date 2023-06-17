@@ -48,7 +48,7 @@ const playerSchema = new mongoose.Schema({
     },
     imgSrc:{
         type:String
-    }
+    } 
 })
 
 

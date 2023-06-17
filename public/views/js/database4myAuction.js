@@ -73,7 +73,7 @@ socket.on('change-Player', (result) => {
         document.getElementById("role").innerHTML = myElement.Role;
 
         //putting team logo in sold section 
-        if(myElement.teamlogo=='Nil'){
+        if(myElement.teamlogo=='0'){
             document.getElementById('buyerTeam').style.display='none';
 
         }else{
@@ -297,7 +297,7 @@ function addTeamInSelector(buyingTeams, Buyer) {
 
     const logoImg = document.createElement('img');
     logoImg.classList.add('logo');  //giving it a class name
-    logoImg.src = "/resources/logos/" + Buyer.logo + ".webp"  
+    logoImg.src = "/resources/logos/" + Buyer.logo + ".webp" ;
 
     label.appendChild(logoImg);
     buyingTeams.appendChild(label);

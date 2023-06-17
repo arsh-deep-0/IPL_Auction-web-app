@@ -12,14 +12,14 @@ document.addEventListener('click', (e) => {
         console.log("An element without an id was clicked.");
     }
 
-}
+} 
 );
 
 
 let windowWidth = window.innerWidth;
 
 
-
+ 
 window.addEventListener("resize", moveBackground);
 
 let translateBg1;

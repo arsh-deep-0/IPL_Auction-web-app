@@ -31,8 +31,8 @@ const socketIO = (http) => {
                             mySocket.emit('buyer-Details', result); 
                         })
                 });
-
-            })
+ 
+            }) 
 
         //Basic working of Socket io
         mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  //remember io is global and mySocket is its local instance ,so when u want to emit on all devices use io
@@ -127,7 +127,7 @@ const socketIO = (http) => {
                         { $inc: { playersBought: -1, [role]: -1, currentWallet: sellingAmount } },
                         { runValidators: true, new: true })
                         .then(Buyer => {
-                            Cricketer.findOneAndUpdate({ order: removingDetails.playerOrder }, { teamlogo: 'Nil' }).
+                            Cricketer.findOneAndUpdate({ order: removingDetails.playerOrder }, { teamlogo: '0' }).
                                 then(player => {
                                     console.log(player);
                                 })

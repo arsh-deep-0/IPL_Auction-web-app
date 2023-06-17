@@ -4,7 +4,7 @@
 const bottomNavbarLinks = document.getElementsByClassName('bottom-navbar-ele');
 
  let auctionLink = document.getElementById('play-Auction');
- auctionLink.style.backgroundColor = "#6233fc";
+ auctionLink.style.background = "linear-gradient(-90deg, #25054a 0, #7423ed 100%)";
  auctionLink.style.color = "#fff";
 
 
@@ -14,19 +14,21 @@ for (let i = 0; i < bottomNavbarLinks.length; i++) {
         for (var j = 0; j < bottomNavbarLinks.length; j++) {
             let modal = (bottomNavbarLinks[j].innerHTML) + '-Modal';
            
-            if (modal == 'Auction-Modal') { }
+            if (modal == 'Auction-Modal') {
+                
+             }
             else {
                 console.log(modal);
                 if(document.getElementById(modal).style.display=="block"){
                     document.getElementById(modal).style.animationName="disappear-to-left-modal";
                     setTimeout(()=>{
                         document.getElementById(modal).style.display = "none";
-                    },250)
+                    },250) 
                     
                 }
                 
             }
-            bottomNavbarLinks[j].style.backgroundColor = "white";
+            bottomNavbarLinks[j].style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
            
             bottomNavbarLinks[j].style.color = "#000"
         }
@@ -40,8 +42,8 @@ for (let i = 0; i < bottomNavbarLinks.length; i++) {
                 document.getElementById(modal).style.display = "block";
          
         }
-        this.style.backgroundColor = "#6233fc";
-        this.style.color = "#fff";
+        this.style.background = "linear-gradient(-90deg, #25054a 0, #7423ed 100%)";
+        this.style.color = "white";
         
     });
 }
