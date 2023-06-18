@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="dist/css/navbar.css">
     <link rel="stylesheet" href="dist/css/bg-design-ele.css">
     <link rel="stylesheet" href="dist/css/modal.css">
+    <link rel="stylesheet" href="dist/css/playerModal.css">
+
 
 
 </head>
@@ -58,48 +60,73 @@
 
         <div id="Teams-Modal" class="modal">
             <section class="modal-content">
-
                 <div class="modal-teams" id="modal-teams">
-
                 </div>
-
-
                 <div class="modal-players" id="modal-players">
                     <div class="modal-player-outerdiv">
-                        <p class="heading">Batsman</p>
+                        <p class="heading">Batsmen Bought - <span id="batsmen-Number"></span></p>
 
                         <div id="modal-batsman-div" class="modal-batsman-div"></div>
                     </div>
                     <div class="modal-player-outerdiv">
-                        <p class="heading">Bowler</p>
+                        <p class="heading">Bowlers Bought - <span id="bowlers-Number"></span></p>
                         <div id="modal-bowler-div" class="modal-bowler-div"></div>
                     </div>
                     <div class="modal-player-outerdiv">
-                        <p class="heading">All-Rounder</p>
+                        <p class="heading">All-Rounders Bought - <span id="All-Rounders-Number"></span></p>
                         <div id="modal-allrounder-div" class="modal-allrounder-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">WKs Bought - <span id="Wks-Number"></span></p>
+                        <div id="modal-WKs-div" class="modal-WKs-div"></div>
                     </div>
 
                 </div>
 
                 <div class="modal-team-data" id="modal-team-data">
-                    <div class="mlogo" >
+                    <div class="mlogo">
                         <div class="mlogo-inner">
-                            <img id="mlogo" src="/resources/logos/pbkslogo.webp" alt="">
+                            <img id="mlogo" src="" alt="">
                         </div>
-                     
+                        <div>
+                            <p id="modal-team-name"></p>
+                        </div>
+
+
                     </div>
+
+
                     <div class="mdashboard">
                         <div class="circle__box">
-                           
-                            <p>Wallet Spent</p>
-                            <p>75/80</p>
-                        <div class="circle__wrapper circle__wrapper--right">
-                            <div class="circle__whole circle__right" id="odometer">
-                               
+
+                            <p><span id="wallet-left"></span>/80Cr <br><br><br><br> Wallet left</p>
+                            <div class="circle__wrapper circle__wrapper--right">
+
+                                <div class="circle__whole circle__right" id="odometer">
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+
+                    <div class="modal-other-data">
+                        <div>
+                            <p>Total Players - <span id="total-players"></span></p>
+                        </div>
+
+                        <div>
+                            <p>Overseas - <span id='overseas'></span></p>
+                        </div>
+
+                        <div>
+                            <p>Avg.Bat Pts - <span id='avg-bat-pts'></span></p>
+                        </div>
+
+                        <div>
+                            <p>Avg.Bowl Pts - <span id='avg-bowl-pts'></span></p>
+                        </div>
+                    </div>
 
 
             </section>
@@ -107,6 +134,35 @@
 
         <div id="Players-Modal" class="modal">
 
+            <section class="modal-content">
+                         <div class="modal-selector">
+                            <p id="query-1">All</p>
+                            <p p id="query-3">Sold</p>
+                            <p p id="query-0">Yet to Come</p>
+                            <p p id="query-2">Unsold</p>
+                         </div>     
+                         
+                         <div class="query-modal-players" id="modal-players">
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">Batsmen - <span id="query-batsmen-Number"></span></p>
+        
+                                <div id="query-modal-batsman-div" class="modal-batsman-div"></div>
+                            </div>
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">Bowlers - <span id="query-bowlers-Number"></span></p>
+                                <div id="query-modal-bowler-div" class="modal-bowler-div"></div>
+                            </div>
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">All-Rounders - <span id="query-All-Rounders-Number"></span></p>
+                                <div id="query-modal-allrounder-div" class="modal-allrounder-div"></div>
+                            </div>
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">WKs - <span id="query-Wks-Number"></span></p>
+                                <div id="query-modal-WKs-div" class="modal-WKs-div"></div>
+                            </div>
+        
+                        </div>
+            </section>
         </div>
 
 
@@ -242,8 +298,8 @@
     <script src="views/js/database4myAuction.js"></script>
     <script src="views/js/navbar.js"></script>
     <script src="views/js/teamModal.js"></script>
-
+    <script src="views/js/playersModal.js"></script>
 
 </body>
 
-</html>
+</html> 

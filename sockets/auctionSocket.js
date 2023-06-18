@@ -96,15 +96,21 @@ const socketIO = (http) => {
                     console.log(addingDetails, 'added')
                     let sellingAmount = (-1 * result.SellingPrice / 100).toFixed(1);
 
-                    /*Buyer.updateMany({},{$rename:{BatsmanBought:'BatsmansBought',bowlersBought:'BowlersBought',wksBought:'WKsBought'}})
-                    .then(result=>{
-                     console.log(result);
-                    })*/
+                    let number =0;
+                    if(result.Nationality!='India'){
+                        number=1
+                    }
+
+                    // Buyer.updateMany({},{$set:{'AllRoundersBought':0}})
+                    // .then(result=>{
+                    //  console.log(result);
+                    // })
 
                     Buyer.findOneAndUpdate({ order: addingDetails.buyingTeamOrder },
-                        { $inc: { playersBought: 1, [role]: 1, currentWallet: sellingAmount } },
+                        { $inc: { playersBought: 1,overseasBought:number, [role]: 1, currentWallet: sellingAmount } },
                         { runValidators: true, new: true })
                         .then(Buyer => {
+                            console.log(Buyer);
                             Cricketer.findOneAndUpdate({ order: addingDetails.playerOrder }, { teamlogo: Buyer.logo }).
                                 then(player => {
                                     console.log(player);
@@ -123,8 +129,13 @@ const socketIO = (http) => {
                     console.log(removingDetails, 'removed');
                     let sellingAmount = (1 * result.SellingPrice / 100).toFixed(1);
 
+
+                    let number =0;
+                    if(result.Nationality!='India'){
+                        number=-1;
+                    }
                     Buyer.findOneAndUpdate({ order: result.Team },
-                        { $inc: { playersBought: -1, [role]: -1, currentWallet: sellingAmount } },
+                        { $inc: { playersBought: -1,overseasBought:number, [role]: -1, currentWallet: sellingAmount } },
                         { runValidators: true, new: true })
                         .then(Buyer => {
                             Cricketer.findOneAndUpdate({ order: removingDetails.playerOrder }, { teamlogo: '0' }).

@@ -1,0 +1,49 @@
+.modal-selector {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5rem;
+    justify-content: space-evenly;
+    width: 60%;
+    left: 20%;
+    background: linear-gradient(143.7deg, #f97794 -20%, #6200ff 40%, #7423ed 70%);
+    padding: 0.1rem;
+    border-radius: .3rem;
+}
+
+.modal-selector p {
+    display: inline;
+    font-family: 'Bruno Ace SC', cursive;
+    padding: 0.25rem;
+    border-radius: 0.2rem;
+    background-color: white;
+}
+.query-modal-players {
+    margin-left: 2.5%;
+    margin-top: 0;
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: white;
+    position: relative;
+    width: 90%;
+    max-width: 90%;
+    margin-left: 0;
+    left: 2%;
+    right: 5%;
+}
+
+.query-modal-players .heading {
+    margin: 1rem;
+    margin-left: 0;
+    color: white;
+    background: linear-gradient(-90deg, #340865 0, #340865 100%);
+    filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
+    align-self: center;
+    display: block;
+    width: 12rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    padding: 0.15rem;
+    font-size: 0.8rem;
+}

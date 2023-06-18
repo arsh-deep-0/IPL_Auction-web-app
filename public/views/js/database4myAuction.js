@@ -72,8 +72,9 @@ socket.on('change-Player', (result) => {
         document.getElementById("nationality").innerHTML = myElement.Nationality;
         document.getElementById("role").innerHTML = myElement.Role;
 
-        //putting team logo in sold section 
-        if(myElement.teamlogo=='0'){
+        //putting team logo in sold section \
+       
+        if(myElement.teamlogo=='0'||myElement.teamlogo==undefined){
             document.getElementById('buyerTeam').style.display='none';
 
         }else{
@@ -135,7 +136,7 @@ function increaseBid() {
 }
 
 
-//Handling increase bid message emitted to all servers
+//Handling increase bid message emitted to  servers
 
 socket.on('increase-Bid', value => {
     console.log(value);

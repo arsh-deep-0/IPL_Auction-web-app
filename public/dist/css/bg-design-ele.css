@@ -4,6 +4,7 @@
     height: 2000px;
     background-color: rgb(105, 77, 229);
     background: linear-gradient(-90deg, #25054a 0, #7423ed 100%);
+    background: linear-gradient( 13.7deg, #f97794 -20%,  #6200ff 40%,   #491696 70%);
     /* background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%); */
    
@@ -19,6 +20,7 @@
     height: 3400px;
     background-color: rgb(105, 77, 229);
     background: linear-gradient(-90deg, #25054a 0, #7423ed 100%);
+    background: linear-gradient( -83.7deg, #f97794 -20%,  #6200ff 40%,   #4a1797 70%);
     /* background: linear-gradient(143.7deg, #3b215d 0, #552792 100%);
     background: linear-gradient(180deg, #c137a6 0, #7423ed 100%);
      */

@@ -14,7 +14,7 @@ router.get('/auction', async (req, res) => {
   const auction = await IplAuction.find({ order: 1 });
   const order = 1;
 
-  res.render('newAuction', { auction }); 
+  res.render('newAuction', { auction });  
 });
 
 router.post('/myAuction', async (req, res) => {

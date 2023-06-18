@@ -20,7 +20,7 @@ let windowWidth = window.innerWidth;
 
 
  
-window.addEventListener("resize", moveBackground);
+window.addEventListener("resize", moveBackground); 
 
 let translateBg1;
 let translateBg2;

@@ -22,7 +22,7 @@ const buyerSchema = new mongoose.Schema({
    playersBought:{
     type:Number
    },
-   BatsmanBought:{
+   AllRoundersBought:{
     type:Number
    },
   

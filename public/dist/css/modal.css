@@ -37,6 +37,8 @@
     border-radius: .4rem;
     width: 100%;
     min-height: 100%;
+    height: fit-content;
+    min-height: 120%;
     max-height: fit-content;
     display: flex;
     flex-wrap: wrap;
@@ -60,7 +62,7 @@
 .modal-teams{
     align-items: center;
     margin-left: 1.5%;
-    margin-top: 6vh;
+    margin-top: 5rem;
     height: 6.5rem;
     transform: skew(20deg);
     display: flex;
@@ -95,6 +97,7 @@
     padding: 0.2rem;
     box-shadow: 0.0rem 0.0rem 0.25rem 0.02rem #f6f6f67e;
     background: white;
+   
 }
 
 .modal-logo{
@@ -122,7 +125,7 @@ max-width: 66%;
 }
 
 .modal-teams p{
-    font-family: 'Bruno Ace SC', cursive;
+     font-family: 'Bruno Ace SC', cursive; 
     transform: skew(-20deg);
     color: white;
   
@@ -133,24 +136,6 @@ max-width: 66%;
     height: 0.3rem;
     
 }
-
-
-
-
-.modal-players p{
-    align-self: center;
-    color: #000000;
-    background:  linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%);
-    background: white;  
-    font-family: 'Bruno Ace SC', cursive;
-    display: block;
-    width: 10rem;
-    text-align: center;
-    border-radius: 0.2rem;
-    padding: 0.15rem;
-    font-size: 0.8rem;
-}
-
 
 
 
@@ -166,7 +151,7 @@ color: white;
 
 
 .modal-player-template{
-    height: 15rem;
+    height: 18rem;
    
     filter: drop-shadow(0px 0px 0.4rem #3b215d );
 
@@ -174,7 +159,7 @@ color: white;
 
  .modal-player-data{
     position: absolute;
-    width: 8.3rem;
+    width: 10rem;
     display: flex;
     justify-content: center;
  }
@@ -182,7 +167,7 @@ color: white;
  
  .modal-player{
     
-    height: 11rem;
+    height: 13.5rem;
     
     margin-top: 1rem;
     
@@ -205,18 +190,26 @@ color: white;
   
  .modal-player-name{
    
-    font-family: 'Bruno Ace SC', cursive;
+     font-family: 'Bruno Ace SC', cursive; 
     align-self: flex-start;
     font-size: 0.8rem;
     position: absolute;
-    margin-top: 9.5rem;
+    margin-top: 14rem;
     color: #ffffff !important;
     background: rgba(16, 2, 35, 0) !important;
-     width: 7.2rem !important; 
+     /* width: 8.2rem !important;  */
     text-align: center;
     z-index: 2;
     position: absolute;
-}
+
+  
+    display: block;
+  
+    text-align: center;
+    border-radius: 0.2rem;
+    padding: 0.15rem;
+ }
+
 
 .modal-player-outerdiv{
     margin-top: 1vh;  
@@ -298,14 +291,42 @@ color: white;
     box-shadow: 0.03rem 0.03rem 0.5rem 0.06rem rgb(178, 177, 177);
 }
 
+
+.modal-WKs-div{
+   
+    padding-top: 0.25rem;
+    padding-left: 0.25rem;
+    transform: skew(12deg);
+  padding-left: 2.5rem;
+  padding-right: 10.5rem;
+    display: inline-flex;
+    overflow-x: scroll;
+    border-radius: .3rem;
+    width: 95%;
+    max-width: 95%;
+ 
+   background: linear-gradient(-90deg, #340865 0, #340865 100%);
+ 
+    
+    gap: 0rem;
+ 
+    display: flex;
+    flex-wrap: nowrap;
+    box-shadow: 0.0rem 0.2rem 0.55rem 0.02rem #9743fe7e;
+    box-shadow: 0.03rem 0.03rem 0.5rem 0.06rem rgb(178, 177, 177);
+  
+}
+
 .modal-team-data{
+  right: 5%;
     position: absolute;
-    margin-top: 6vh;
-    margin-left: 70%;
-    display: inline-grid;
+    margin-top: 12.25em;
+
+    display: inline-flex;
     justify-content: center;
-   flex-direction: column;
-    width: 25%;
+    align-items: center;
+    flex-direction: column;
+     width: 25%;
     height: fit-content;
     background-color: white;
 
@@ -321,13 +342,16 @@ color: white;
 
 /*designing team-data*/
 .mlogo{
-    display: grid;
-    justify-content: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
     width: 100%;
-    height: 10rem;
+  margin-bottom: 1rem;
+ 
 }
 .mlogo-inner{
-    width: 7rem;
+  order: 1;
+    width: 8rem;
     height: 8rem;
     background: white;
     display: grid;
@@ -346,17 +370,50 @@ color: white;
     transform: scale(1.05);
    
 }
+.mlogo p{
+  color: white;
+  text-align: center;
+  margin: 0.25rem;
+}
 
+.modal-other-data{
+  order: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
 
+}
+
+.modal-other-data p{
+  color: white;
+  background: #340865;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  min-width: 8.5rem;
+  text-align: center;
+}
 .modal-players .heading{
     margin: 1rem;
     margin-left: 0;
     color: white;
     background: linear-gradient(-90deg, #340865 0, #340865 100%);
     filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
+    align-self: center;
+    /* font-family: 'Bruno Ace SC', cursive; */
+    display: block;
+    width: 12rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    padding: 0.15rem;
+    font-size: 0.8rem;
 }
 
 .mdashboard{
+  order: 3;
     display: grid;
     justify-content: center;
     width: 100%;  
@@ -368,7 +425,7 @@ color: white;
 .circle__box {
     width: 20rem;
     height: 20rem;
-    margin: 5rem auto;
+ 
     position: relative;
     transform: rotate(-90deg);
     display: grid;
@@ -377,8 +434,8 @@ color: white;
   }
   
   .circle__wrapper {
-    width: 10rem;
-    height: 20rem;
+    width: 50%;
+    height: 100%;
     position: absolute;
     top: 0;
     overflow: hidden;
@@ -392,9 +449,9 @@ color: white;
   
   .circle__whole {
     background-color: #340865;
-    width: 19rem;
-    height: 19rem;
-    border: 0.5rem solid white;
+    width: 190%;
+    height: 95%;
+    border:0.4rem solid white;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -406,14 +463,20 @@ color: white;
   .circle__box p{
     position: absolute;
     color: white;
-    transform: rotate(90deg) translateY(-9rem);
-    font-family: 'Bruno Ace SC', cursive;
+    top: 30%;
+    right: 10%;
+    transform: rotate(90deg);
+     font-family: 'Bruno Ace SC', cursive; 
     z-index: 10;
+    text-align: center;
+  }
+  #wallet-left{
+    font-size: 1.5rem;
   }
   
   .circle__right {
-    border-top: 0.5rem solid gold;
-    border-right: 0.5rem solid gold;
+    border-top:0.4rem solid gold;
+    border-right:0.4rem solid gold;
     right: 0;
     animation: circleRight 4s linear infinite;
     filter: drop-shadow(0px 0px 0.4rem #bbb7b7);
@@ -430,28 +493,124 @@ color: white;
     }
   }
 
+  @media (max-width:710px) {
+    .modal-other-data{
+      flex-direction: column;
+      width: 70%;
+   gap: 0.5rem;
+    }
+  }
 @media (max-width:690px) {
     .modal-teams{
         overflow-x: scroll;
     }
-
-    
+    .circle__box {
+      width: 16rem;
+      height: 16rem;
+    }
     ::-webkit-scrollbar-thumb {
         background: gold;
         border-radius: 20px;
     }
-    
+ 
+}
+@media (max-width:586px) {
+  .circle__box {
+    width: 13rem;
+    height: 13rem;
+  }
+  #wallet-left{
+    font-size: 1rem;
+  }
 }
  @media (max-width:501px) {
+  .modal-content{
+    flex-direction: column;
+  }
     .modal-teams{
+      position: relative;
+      order: 1;
      overflow-x: scroll;
         gap:0.1rem;
-        max-width:90%;
-    }
-
-    .modal-players{
+        transform: skew(0deg);
+        width: 90%;
         max-width: 90%;
+        margin-left: 0;
+        left: 2%;
+        right: 5%;
+      
     }
+    .modal-logo-div{
+      transform: skew(20deg);
+    }
+    .mlogo{
+      margin-bottom: 0;
+    }
+    .mlogo-inner{
+      order: -1;
+    }
+    .circle__box {
+      width: 10rem;
+      height: 10rem;
+    }
+    .modal-players{
+      position: relative;
+      order: 3;
+        width: 90%;
+        max-width: 90%;
+        margin-left: 0;
+        left: 2%;
+        right: 5%;
+        
+    }
+.modal-team-data{
+
+  margin-top: 1rem;
+  position: relative;
+
+  order: 2;
+  width: 89%;
+  max-width: 89%;
+  right: 5%;
+  left: 2%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.mlogo{
+  width: 33%;
+}
+
+.mdashboard{
+  width: 33%;
+  align-self: center;
+}
+
+.modal-other-data{
+  order: 4;
+ width: 33%;
+  flex-direction: row;
+  margin-bottom: 0;
+}
+
+.circle__box p{
+ 
+  top: 20%;
+  right: 10%;
+  transform: rotate(90deg);
+  width: 100%;
+  
+}
+
+.modal-player-name{
+
+ font-size: 0.91rem;
+}
+
+
+.modal-players .heading{
+  font-size: 1rem;
+}
+   
 }
 
 

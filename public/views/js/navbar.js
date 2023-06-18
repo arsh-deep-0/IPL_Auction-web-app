@@ -60,5 +60,5 @@ for (let i = 0; i < bottomNavbarLinks.length; i++) {
 
 
 
-// Close the modal when the user clicks outside of it
+
 

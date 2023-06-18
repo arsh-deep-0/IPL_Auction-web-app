@@ -1049,6 +1049,7 @@ label .logo {
 
     #buyerTeam{
         align-self: center;
+        display: none;
         
     }
     
