@@ -1,4 +1,4 @@
-const socket = io('https://auction-arsh.onrender.com//myAuction');
+const socket = io('https://auction-arsh.onrender.com');
 
 //on page reload , going back to database details
 
