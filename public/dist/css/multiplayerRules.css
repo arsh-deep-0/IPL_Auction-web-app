@@ -1,0 +1,96 @@
+.numOfPlayersModal{
+    position: absolute;
+    background: #00000000;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+
+.modal-content{
+    width: 40%;
+    height: 50%;
+    background-color: white;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+   justify-content: space-evenly;
+   align-items: center;
+   gap: 2rem;
+}
+
+.modal-content p{
+    font-size: 1.5rem;
+    color: blue;
+}
+
+
+#next{
+    padding: 0.3rem;
+    background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 70%);
+    border: 0.1rem white solid;
+    color: aliceblue;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    transition: all 0.1s ease-in ;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    }
+    
+    #next:hover{
+        transform: scale(1.05);
+    }
+
+
+.roomID{
+    position: relative;
+    align-self: flex-start; 
+    margin-top: 4rem;
+    height: 2rem;
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;   
+    border-radius: 0.5rem;
+}
+
+
+#roomID{
+    color: black;
+}
+
+#greet{
+    position: relative;
+    align-self: flex-start; 
+    margin-top: 4rem;
+    height: 2rem;
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;   
+    border-radius: 0.5rem;
+}
+#username-cookie{
+    text-align: center;
+    color: #000;
+}
+body{
+    height: 100vh;
+  flex-direction: row;
+}
+
+p{
+    text-align: center;
+}
+
+#enterRoomIDModel{
+    display: none;
+}

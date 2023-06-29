@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/css/selectAuctionType.css">
+    <link rel="stylesheet" href="dist/css/multiplayerRules.css">
+    <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="background-box-1"></div>
+    <div class="background-box-2"></div>
+
+    <div class="greet" id="greet">
+        <p id="username-cookie"></p>
+    </div>
+
+    <div class="nameModal" id="nameModal">
+        <div class="modal-content">
+           
+                <p>What should we call you?</p>
+                <input type="text" name="" id="name">
+                <button id="submit">Submit</button>       
+        </div>
+    </div>
+
+    <div class="numOfPlayersModal" id="enterRoomIDModel">
+        <div class="modal-content" id="modal-1">
+            <p> Enter Room ID <br> and join your friends</p>
+            <input type="Number" id="numOfPlayers" min="100000" max="999999"  >
+            <button id="next">Next</button>
+            <p id="message"></p>  
+        </div>
+    </div>
+    <script type="module" src="views/js/enterRoomNumber.js"></script>
+</body>
+</html>

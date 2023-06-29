@@ -1,6 +1,12 @@
 const Cricketer = require('../models/cricketer');
 const Buyer = require('../models/buyer');
 const IplAuction = require('../models/auction');
+const User = require('../models/user');
+const Multiplayer = require('../models/multiplayer');
+
+const mongoose = require('mongoose');
+
+
 
 const socketIO = (mySocket) => {
     mySocket.on('view-team-players', teamOrder => {
@@ -25,14 +31,109 @@ const socketIO = (mySocket) => {
                     mySocket.emit('all-players', result);
                 })
         }
-        else{
-            
-            Cricketer.find({ sellingStatus:query}).
+        else {
+
+            Cricketer.find({ sellingStatus: query }).
                 then(result => {
                     mySocket.emit('all-players', result);
                 })
         }
     })
+
+    mySocket.on('cookie', data => {
+        console.log(data);
+        let user = new User(data);
+        user.save()
+            .then(Auction1 => {
+                console.log(Auction1);
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    })
+
+    mySocket.on('create-room', (userID) => {
+
+        function generateUniqueRoomId() {
+            const min = 100000;
+            const max = 999999;
+
+            const roomId = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            // Check if the generated roomId already exists in the collection
+            const existingRoom = Multiplayer.findOne({ roomID: roomId })
+                .then(result => {
+                    console.log(result);
+                    if (result == null) {
+                        return roomId;
+                    } else {
+                        return generateUniqueRoomId();
+                    }
+                })
+
+            return roomId;
+        }
+
+        const uniqueRoomID = generateUniqueRoomId();
+
+        let room = new Multiplayer({ roomID: uniqueRoomID });
+
+        room.save()
+            .then(Auction1 => {
+                console.log(Auction1);
+            })
+            .catch(e => {
+                console.log(e);
+            })
+
+        User.findOneAndUpdate({ userID: userID }, { latestMatchID: uniqueRoomID }, { runValidators: true, new: true })
+            .then(result => {
+                console.log(result);
+                mySocket.emit('roomID', result.latestMatchID);
+            })
+    })
+
+    mySocket.on('numOfPlayers', data => {
+
+        Multiplayer.findOneAndUpdate({ roomID: data.roomID }, {  $set:{playersReached:0,numberOfPlayers: data.number , hostID:data.userID}}, { runValidators: true, new: true })
+            .then(result => {
+                console.log(result);
+            })
+
+        let duplicateCollectionName = 'buyersRoom-' + data.roomID;
+        const db = mongoose.connection;
+        duplicateCollection(db,duplicateCollectionName);
+
+        Buyer.find({order:{$lte:data.number}})
+            .then((documents) => {
+                const duplicateDocuments = documents.map((document) => ({ ...document.toObject() }));
+                db.collection(duplicateCollectionName).insertMany(duplicateDocuments)
+                    .then(() => {
+                        console.log('Documents copied to the duplicate collection successfully.');
+                       
+                        
+                    })
+                    .catch((error) => {
+                        console.error('Error copying documents to the duplicate collection', error);
+                    });
+            })
+            .catch((error) => {
+                console.error('Error retrieving documents from the source collection', error);
+            });
+    })
 }
 
-module.exports = socketIO;
+
+
+function duplicateCollection(db, duplicateCollectionName) {
+    db.createCollection(duplicateCollectionName)
+        .then(() => {
+            console.log(`Duplicate collection '${duplicateCollectionName}' created successfully.`);
+        })
+        .catch((error) => {
+            console.error('Error creating duplicate collection', error);
+        });
+
+}
+
+module.exports = socketIO; 

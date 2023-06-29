@@ -1,4 +1,4 @@
-const socket = io('https://auction-arsh.onrender.com');
+const socket = io('https://auction-arsh.onrender.com//myAuction');
 
 //on page reload , going back to database details
 
@@ -12,8 +12,8 @@ socket.on("user connected", (AuctionData) => {
 
 
 //changing player order and details
-
-const search = document.getElementById("change");
+ 
+const search = document.getElementById("change"); 
 const next = document.getElementById('NEXT');
 const prev = document.getElementById('PREV');
 

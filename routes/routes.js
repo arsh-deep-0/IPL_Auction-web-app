@@ -10,14 +10,36 @@ router.get('/', (req, res) => {
   res.render('home');      
 });
 
-router.get('/auction', async (req, res) => {
+router.get('/selectAuction', async (req, res) => {
+  console.log(req.body);
   const auction = await IplAuction.find({ order: 1 });
   const order = 1;
 
-  res.render('newAuction', { auction });  
+  res.render('selectAuctionType', { auction });  
 });
 
-router.post('/myAuction', async (req, res) => {
+router.get('/multiplayerRules',(req,res)=>{
+  res.render('MultiplayerRules');
+})
+
+router.get('/setAuctionRules',(req,res)=>{
+  res.render('setAuctionRules');
+})
+
+router.get('/waitingRoom', (req,res)=>{
+  res.render('waitingRoom');
+ 
+})
+
+router.get('/selectCharacters',(req,res)=>{
+  res.render('selectCharacters');
+})
+
+router.get('/enterroomNumber',(req,res)=>{
+  res.render('enterroomNumber');
+})
+
+router.post('/myAuction', async (req, res) => {  
   const newAuction = new IplAuction(req.body);
   await newAuction.save();
   res.render('myAuction', { newAuction });

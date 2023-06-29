@@ -9,11 +9,11 @@ const routes= require('./routes/routes')
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URI
+const db= mongoose.connect(process.env.MONGO_URI
 )
     .then(() => {
         console.log("connection open!!");
-    })
+    }) 
     .catch(err => {
         console.log(err);
     })
