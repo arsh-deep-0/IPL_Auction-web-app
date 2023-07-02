@@ -1,4 +1,4 @@
-const Socket = io('https://auction-arsh.onrender.com');
+const Socket = io('https://auction-arsh.onrender.com/');
 
 const params = new URLSearchParams(window.location.search);
 

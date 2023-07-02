@@ -41,10 +41,12 @@ const socketIO = (mySocket) => {
     })
 
     mySocket.on('cookie', data => {
+        console.log('nnoo');
         console.log(data);
         let user = new User(data);
         user.save()
             .then(Auction1 => {
+
                 console.log(Auction1);
             })
             .catch(e => {
@@ -64,10 +66,12 @@ const socketIO = (mySocket) => {
             const existingRoom = Multiplayer.findOne({ roomID: roomId })
                 .then(result => {
                     console.log(result);
-                    if (result == null) {
-                        return roomId;
-                    } else {
+                    if (result) {
+                        console.log('ye');
                         return generateUniqueRoomId();
+                    } else {
+                        console.log('yen');
+                        return roomId;
                     }
                 })
 
@@ -78,40 +82,66 @@ const socketIO = (mySocket) => {
 
         let room = new Multiplayer({ roomID: uniqueRoomID });
 
+        console.log('xex')
+        console.log(uniqueRoomID);
+
         room.save()
             .then(Auction1 => {
+                console.log('xenx')
                 console.log(Auction1);
             })
             .catch(e => {
                 console.log(e);
             })
 
-        User.findOneAndUpdate({ userID: userID }, { latestMatchID: uniqueRoomID }, { runValidators: true, new: true })
-            .then(result => {
-                console.log(result);
-                mySocket.emit('roomID', result.latestMatchID);
+        User.findOne({ userID: userID }).
+            then(user => {
+
+                let collectionName = 'buyersRoom-' + user.latestMatchID;
+                console.log(collectionName);
+ 
+              if(user.latestMatchID>10)
+                mongoose.connection.db.dropCollection(collectionName, (error, result) => {
+                    if (error) {
+                        console.error('Error deleting collection:', error);
+                    } else {
+                        console.log('Collection deleted successfully:', result);
+                    }
+                })
+
+  
+
+
+                User.findOneAndUpdate({ userID: userID }, { latestMatchID: uniqueRoomID }, { runValidators: true, new: true })
+                    .then(result => {
+
+                        mySocket.emit('roomID', result.latestMatchID);
+                    })
+
             })
+
+
     })
 
     mySocket.on('numOfPlayers', data => {
 
-        Multiplayer.findOneAndUpdate({ roomID: data.roomID }, {  $set:{playersReached:0,numberOfPlayers: data.number , hostID:data.userID}}, { runValidators: true, new: true })
+        Multiplayer.findOneAndUpdate({ roomID: data.roomID }, { $set: { playersReached: 0, numberOfPlayers: data.number, hostID: data.userID } }, { runValidators: true, new: true })
             .then(result => {
                 console.log(result);
             })
 
         let duplicateCollectionName = 'buyersRoom-' + data.roomID;
         const db = mongoose.connection;
-        duplicateCollection(db,duplicateCollectionName);
+        duplicateCollection(db, duplicateCollectionName);
 
-        Buyer.find({order:{$lte:data.number}})
+        Buyer.find({ order: { $lte: data.number } })
             .then((documents) => {
                 const duplicateDocuments = documents.map((document) => ({ ...document.toObject() }));
                 db.collection(duplicateCollectionName).insertMany(duplicateDocuments)
                     .then(() => {
                         console.log('Documents copied to the duplicate collection successfully.');
-                       
-                        
+
+
                     })
                     .catch((error) => {
                         console.error('Error copying documents to the duplicate collection', error);
@@ -120,7 +150,10 @@ const socketIO = (mySocket) => {
             .catch((error) => {
                 console.error('Error retrieving documents from the source collection', error);
             });
+
     })
+
+
 }
 
 

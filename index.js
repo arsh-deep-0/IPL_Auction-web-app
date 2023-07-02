@@ -9,16 +9,19 @@ const routes= require('./routes/routes')
 
 const PORT = process.env.PORT || 3000;
 
+
 const db= mongoose.connect(process.env.MONGO_URI
 )
     .then(() => {
         console.log("connection open!!");
+
+
     }) 
     .catch(err => {
         console.log(err);
     })
 
-  
+    
 
 
 //creating an http server and passing express app to it 

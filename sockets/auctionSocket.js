@@ -25,7 +25,7 @@ const socketIO = (http) => {
 
         IplAuction.find({ order: 1 })    //finds the current order of player which is running from MongoDB and the current Bid Value 
             .then((result) => {
-                console.log(result);
+               
                 result.forEach(element => {
                     let currentPlayerOrder = element.currentPlayerOrder;
                     if (currentPlayerOrder == 0) {
@@ -35,12 +35,12 @@ const socketIO = (http) => {
 
                     let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue };
 
-                    console.log(auctiondetails);
+                  
                     mySocket.emit("user connected", auctiondetails);
 
                     Buyer.find({ order: { $lte: 8 } }) //Finding the details of all buyers  
                         .then(result => {
-                            console.log(result);
+
                             mySocket.emit('buyer-Details', result);
                         })
                 });
@@ -196,9 +196,6 @@ const socketIO = (http) => {
                                 for (let i = 1; i <= result.playersReached; i++) {
                                     db.collection(buyersRoom).findOne({ order: i }).
                                         then(user => {
-
-
-
                                             if (result.hostID == user.userID) {
                                                 let userdetails = {
                                                     role: 'Host',
@@ -367,8 +364,11 @@ const socketIO = (http) => {
 
         })
 
+       
 
-
+     
+ 
+        
 
 
     }

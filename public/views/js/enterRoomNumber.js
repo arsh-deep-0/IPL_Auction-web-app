@@ -1,6 +1,6 @@
 //const Socket= require('./database4myAuction')
-const Socket = io('https://auction-arsh.onrender.com');
-console.log(getCookie('userName'));
+const Socket = io('https://auction-arsh.onrender.com/');
+console.log(getCookie('userName')); 
 
 let input = document.getElementById("numOfPlayers");
 let maxValue = 999999; // Set your desired maximum value

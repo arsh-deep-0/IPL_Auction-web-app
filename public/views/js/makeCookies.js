@@ -51,16 +51,7 @@ if (userIDCookie) {
     document.getElementById('greet').style.display = 'block';
     document.getElementById('username-cookie').innerHTML = 'Hello ' + getCookie('userName');
 
-    const multiplayer = document.getElementById('multiplayer');
-    multiplayer.addEventListener('click', multiplayerPage);
-    function multiplayerPage() {
-        Socket.emit('create-room',userID);
-        Socket.on('roomID',roomID=>{
-            console.log('done');
-            window.location.href = "multiplayerRules?roomID="+roomID;
-        })     
-        
-    }
+  
 
 } else {
     // User does not have a user ID, generate a new one based on the IP address
@@ -112,3 +103,16 @@ if (userIDCookie) {
 
 
 }
+
+
+const multiplayer = document.getElementById('multiplayer');
+multiplayer.addEventListener('click', multiplayerPage);
+function multiplayerPage() {
+    console.log('hinjo');
+    Socket.emit('create-room',getCookie('userID'));
+    Socket.on('roomID',roomID=>{
+        console.log('done');
+        window.location.href = "multiplayerRules?roomID="+roomID;
+    })     
+    
+} 
