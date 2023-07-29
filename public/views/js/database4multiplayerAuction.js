@@ -127,6 +127,12 @@ socket.on('change-Player', (myElement) => {
             let sellingDetails = { sellingStatus: myElement.sellingStatus, sellingAmount: myElement.SellingPrice, roomID: params.get('roomID') };
             soldPlayerHandler(sellingDetails);
            
+        }else{
+            let bidDetails = {
+                bidValue: 0,
+                roomID: params.get('roomID')
+            }
+            socket.emit('increase-Bid', bidDetails);
         }
            
         
