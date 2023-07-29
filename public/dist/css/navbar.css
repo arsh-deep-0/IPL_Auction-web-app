@@ -67,6 +67,7 @@ header{
     padding: 0;
     z-index: 2;
     justify-self: center;
+    margin-right: 4%;
        
       margin-top: 92vh;
         flex-direction: row;

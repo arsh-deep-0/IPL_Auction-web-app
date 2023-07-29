@@ -1,10 +1,8 @@
-//const socket2 = io('http://localhost:3001'); 
-
 
 const bottomNavbarLinks = document.getElementsByClassName('bottom-navbar-ele');
 
  let auctionLink = document.getElementById('play-Auction');
- auctionLink.style.background = "linear-gradient(-90deg, #25054a 0, #7423ed 100%)";
+ auctionLink.style.background = "linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%)";
  auctionLink.style.color = "#fff";
 
 
@@ -42,7 +40,7 @@ for (let i = 0; i < bottomNavbarLinks.length; i++) {
                 document.getElementById(modal).style.display = "block";
          
         }
-        this.style.background = "linear-gradient(-90deg, #25054a 0, #7423ed 100%)";
+        this.style.background = "linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%)";
         this.style.color = "white";
         
     });

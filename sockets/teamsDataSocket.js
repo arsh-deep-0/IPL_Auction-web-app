@@ -9,35 +9,54 @@ const mongoose = require('mongoose');
 
 
 const socketIO = (mySocket) => {
-    mySocket.on('view-team-players', teamOrder => {
-        Cricketer.find({ Team: teamOrder }).
-            then(result => {
-                mySocket.emit('view-team-players', result);
-            })
+    mySocket.on('view-team-players', viewData => {
+        
+        console.log(viewData.teamOrder);
+
+        fetchPlayerDetails(viewData.roomID, viewData);
     })
 
-    mySocket.on('view-team-analytics', order => {
-        Buyer.findOne({ order: order }).
+    mySocket.on('view-team-analytics', viewData => {
+        let buyersRoom = 'buyersRoom-' + viewData.roomID;
+        mongoose.connection.collection(buyersRoom).findOne({ order: viewData.teamOrder }).
             then(result => {
                 mySocket.emit('view-team-analytics', result);
             })
     })
 
     mySocket.on('all-players', (query) => {
-        if (query == 1) {
-
-            Cricketer.find({}).
-                then(result => {
-                    mySocket.emit('all-players', result);
-                })
+        console.log(query);
+        let cricketersRoom = 'cricketersRoom-' + query.roomID;
+        const collection = mongoose.connection.db.collection(cricketersRoom);  
+       
+       
+        if (query.query == 1) {
+            find(collection,{})
         }
         else {
-
-            Cricketer.find({ sellingStatus: query }).
-                then(result => {
-                    mySocket.emit('all-players', result);
-                })
+            find(collection,{sellingStatus:query.query});
         }
+
+        async function find(collection,query){
+            try{
+            const cursor = collection.find(query);
+            const cricketers = await cursor.toArray();
+    
+            const cricketersDetails = cricketers.filter(cricketer => cricketer !== null);
+            console.log(cricketersDetails);
+            mySocket.emit('all-players', cricketersDetails);
+        }catch (error) {
+            console.error('An error occurred:', error);
+        }
+    }
+       
+    })
+
+    mySocket.on('findUser', userID => {
+        User.findOne({ userID: userID }).
+            then(result => {
+                mySocket.emit('findUser', result);
+            })
     })
 
     mySocket.on('cookie', data => {
@@ -45,9 +64,9 @@ const socketIO = (mySocket) => {
         console.log(data);
         let user = new User(data);
         user.save()
-            .then(Auction1 => {
+            .then(user => {
 
-                console.log(Auction1);
+                console.log(user);
             })
             .catch(e => {
                 console.log(e);
@@ -55,6 +74,106 @@ const socketIO = (mySocket) => {
     })
 
     mySocket.on('create-room', (userID) => {
+        let earlierMatchID;
+
+        User.findOne({ userID: userID }).
+            then(user => {
+                console.log('this is user i got from uer id' + userID);
+                console.log(user);
+                if (user) {
+
+
+
+                    let collectionName = 'buyersRoom-' + user.latestMatchID;
+                    earlierMatchID = user.latestMatchID;
+                    console.log(collectionName);
+
+
+
+                    if (user.latestMatchID > 10) {
+                        console.log('delete');
+                        mongoose.connection.db.dropCollection(collectionName, (error, result) => {
+                            console.log(result);
+                            if (error) {
+                                console.error('Error deleting collection:', error);
+                            } else {
+                                console.log('Collection deleted successfully:', result);
+                            }
+                        })
+                        const uniqueRoomID = generateUniqueRoomId();
+
+                        let room = new Multiplayer({ roomID: uniqueRoomID });
+
+                        console.log('xex')
+                        console.log(uniqueRoomID);
+
+                        room.save()
+                            .then(room => {
+                                console.log('room created')
+                                console.log(room);
+                                User.findOneAndUpdate({ userID: userID }, { latestMatchID: uniqueRoomID }, { runValidators: true, new: true })
+                                    .then(result => {
+
+                                        mySocket.emit('roomID', result.latestMatchID);
+                                    })
+
+
+                            })
+                            .catch(e => {
+                                console.log(e);
+                            })
+                    }
+                    else {
+                        const uniqueRoomID = generateUniqueRoomId();
+
+                        let room = new Multiplayer({ roomID: uniqueRoomID });
+
+                        console.log('xex')
+                        console.log(uniqueRoomID);
+
+                        room.save()
+                            .then(room => {
+                                console.log('room create first time')
+                                console.log(room);
+                                User.findOneAndUpdate({ userID: userID }, { latestMatchID: uniqueRoomID }, { runValidators: true, new: true })
+                                    .then(result => {
+
+                                        mySocket.emit('roomID', result.latestMatchID);
+                                    })
+
+
+                            })
+                            .catch(e => {
+                                console.log(e);
+                            })
+                    }
+
+
+                    Multiplayer.findOne({ roomID: earlierMatchID }).
+                        then(result => {
+                            console.log('auction room found:', result);
+                            if (result) {
+                                if (result.matchStatus == "Ongoing") {
+                                    let collectionName = 'cricketersRoom-' + user.latestMatchID;
+
+                                    mongoose.connection.db.dropCollection(collectionName, (error, result) => {
+                                        if (error) {
+                                            console.error('Error deleting collection:', error);
+                                        } else {
+                                            console.log('Collection deleted successfully:', result);
+                                        }
+                                    })
+                                }
+                            }
+
+                        })
+
+
+
+
+                }
+
+            })
 
         function generateUniqueRoomId() {
             const min = 100000;
@@ -78,54 +197,16 @@ const socketIO = (mySocket) => {
             return roomId;
         }
 
-        const uniqueRoomID = generateUniqueRoomId();
-
-        let room = new Multiplayer({ roomID: uniqueRoomID });
-
-        console.log('xex')
-        console.log(uniqueRoomID);
-
-        room.save()
-            .then(Auction1 => {
-                console.log('xenx')
-                console.log(Auction1);
-            })
-            .catch(e => {
-                console.log(e);
-            })
-
-        User.findOne({ userID: userID }).
-            then(user => {
-
-                let collectionName = 'buyersRoom-' + user.latestMatchID;
-                console.log(collectionName);
- 
-              if(user.latestMatchID>10)
-                mongoose.connection.db.dropCollection(collectionName, (error, result) => {
-                    if (error) {
-                        console.error('Error deleting collection:', error);
-                    } else {
-                        console.log('Collection deleted successfully:', result);
-                    }
-                })
-
-  
 
 
-                User.findOneAndUpdate({ userID: userID }, { latestMatchID: uniqueRoomID }, { runValidators: true, new: true })
-                    .then(result => {
 
-                        mySocket.emit('roomID', result.latestMatchID);
-                    })
-
-            })
 
 
     })
 
     mySocket.on('numOfPlayers', data => {
 
-        Multiplayer.findOneAndUpdate({ roomID: data.roomID }, { $set: { playersReached: 0, numberOfPlayers: data.number, hostID: data.userID } }, { runValidators: true, new: true })
+        Multiplayer.findOneAndUpdate({ roomID: data.roomID }, { $set: { playersReached: 0, numberOfPlayers: data.number, hostID: data.userID, matchStatus: 'not-Started' } }, { runValidators: true, new: true })
             .then(result => {
                 console.log(result);
             })
@@ -152,6 +233,28 @@ const socketIO = (mySocket) => {
             });
 
     })
+
+
+    async function fetchPlayerDetails(roomID, viewData) {
+        try {
+
+            let cricketersRoom = 'cricketersRoom-' + roomID;
+
+
+            const collection = mongoose.connection.db.collection(cricketersRoom);
+            const query = {
+                Team: Number(viewData.teamOrder)
+            };
+            const cursor = collection.find(query);
+            const cricketers = await cursor.toArray();
+
+            const cricketersDetails = cricketers.filter(cricketer => cricketer !== null);
+            console.log(cricketersDetails);
+            mySocket.emit('view-team-players', cricketersDetails);
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    }
 
 
 }

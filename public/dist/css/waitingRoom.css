@@ -45,19 +45,22 @@ body{
     padding: 0.5rem;
     padding-left: 3rem;
     padding-right: 3rem;
-    width: 50rem;
-    height: 70%;
+    width: 35rem;
+    height: 70vh;
     border-radius: 0.7rem;
     background-color: white;
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
     background: linear-gradient(123.7deg,black  0%, #7423ed 80%);
     background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
-    box-shadow: 0.16rem 0.16rem 0.5rem rgb(0, 0, 0);
+    box-shadow: 0.16rem 0.16rem 0.3rem rgb(0, 0, 0);
     gap: 1.2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 1rem;
    
 }
 
@@ -91,6 +94,7 @@ box-shadow: 0.1rem 0.1rem 0.5rem rgb(54, 53, 53);
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+   
 }
 
 .status-light{
@@ -99,6 +103,7 @@ box-shadow: 0.1rem 0.1rem 0.5rem rgb(54, 53, 53);
     height: 0.8rem;
     width: 0.8rem;
     border-radius: 50%;
+    border: 0.1rem solid  white;
     filter: drop-shadow(0px 0px 0.2rem #00ff55);
     /* filter: drop-shadow(0px 0px 0.2rem #f33232); */
 }
@@ -115,11 +120,197 @@ box-shadow: 0.1rem 0.1rem 0.5rem rgb(54, 53, 53);
     background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
     background: blue;
     background: white;
-    padding-left: 1.2rem;
+    padding-left: 1.9rem;
     padding-right: 1.2rem;
     box-shadow: 0.1rem 0.1rem 0.3rem rgb(0, 0, 0);
 }
 
 .player-logo{
     height: 3rem;
+}
+
+
+.select-avatar{
+    padding: 0.5rem;
+    height: 70vh;
+    width: 15rem;
+    overflow-y: hidden;
+    gap: 0.8rem;
+   
+  
+}
+
+.avatars{
+    width: 90%;
+    height: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.other-data{
+    height: 70vh;
+    width: 15rem;
+    background: none;
+    box-shadow: none;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: hidden;
+}
+
+.players-reached{
+    height: 10vh;
+    width: 15rem;
+    padding: 0.2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 0;
+  overflow-y: hidden;
+}
+.players-reached p{
+    color: white;
+}
+.reached-box{
+    background: white;
+  
+    border-radius: 0.5rem;
+    padding: 1rem;
+color: #000 !important;
+padding-left: 1rem !important;
+padding-right: 1rem !important;
+    
+}
+
+.start{
+    height: 10vh;
+    width: 15rem;
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    margin: 0;
+    overflow: hidden;
+}
+.start-button{
+    background: white;
+    background: linear-gradient(140deg,green, rgb(20, 255, 63) );
+    color: white !important;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(54, 53, 53);
+    border-radius: 0.5rem;
+    padding-left: 1rem !important;
+padding-right: 1rem !important;
+font-size: 0.9rem !important;
+transition: all 0.1s ease-in-out;
+}
+.start-button:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+.start-button:active {
+   
+    color: white;
+    box-shadow: 0.2rem 0.2rem 0.2rem rgb(54, 53, 53);
+    transform: translateY(0.1rem);
+}
+
+.main-container{
+
+    height: 100vh;
+    width: 95%;
+    padding: 5rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    overflow-y: hidden;
+    flex-wrap: wrap;
+
+}
+
+.avatar-logo{
+    max-width: 2.5rem;
+    max-height: 3rem;
+    left:  1rem;
+    position: absolute;
+}
+
+.avatar-div{
+    width: 90%;
+   padding-left: 0.5rem;
+   padding-right: 0.5rem;
+  position: relative;
+  min-height: 3rem;
+  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+background: white;
+border-radius: 0.2rem;
+box-shadow: 0.1rem 0.1rem 0.5rem rgb(54, 53, 53);
+
+}
+
+.selected-status{
+    right: 1rem;
+    position: absolute;
+    outline: none;
+    background: linear-gradient(140deg,green, rgb(20, 255, 63) );
+    /* background: linear-gradient(140deg,rgb(85, 2, 2), rgb(255, 28, 20) );  */
+  font-size: 0.9rem !important;
+    padding: 0.2rem;
+ color: white !important;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgb(54, 53, 53);
+    transition: all 0.1s linear;
+   
+}
+.selected-status:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+.selected-status:active {
+    color: white;
+    box-shadow: 0.16rem 0.16rem 0.26rem rgb(54, 53, 53);
+    transform: translateY(0.1rem);
+}
+
+.select-avatar p{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.roomID{
+    color: white !important;
+}
+
+::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+
+
+::-webkit-scrollbar-thumb {
+    background: #4936facb;
+    background: gold;
+    border-radius: 20px;
+}
+
+#vacancy{
+    display: none;
+    position: absolute;
+    top: 5%;
+    color: red;
+    background: white;
+    padding: 0.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+    border-radius: 0.15rem;
 }

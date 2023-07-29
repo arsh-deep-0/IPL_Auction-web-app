@@ -1,5 +1,5 @@
 //const Socket= require('./database4myAuction')
-const Socket = io('https://auction-arsh.onrender.com');
+const Socket = io('https://auction-arsh.onrender.com/');
 console.log(getCookie('userName'));
 
 // Function to generate a unique user ID based on IP address
@@ -105,6 +105,7 @@ if (userIDCookie) {
 }
 
 
+
 const multiplayer = document.getElementById('multiplayer');
 multiplayer.addEventListener('click', multiplayerPage);
 function multiplayerPage() {
@@ -116,3 +117,64 @@ function multiplayerPage() {
     })     
     
 } 
+
+Socket.emit('findUser',getCookie('userID'));
+
+Socket.on('findUser', result=>{
+    if(result ==null){
+        makeUser();
+    }
+});
+function makeUser(){
+    {
+        // User does not have a user ID, generate a new one based on the IP address
+        const getIPAddress = async () => {
+            try {
+                const response = await fetch("https://api.ipify.org?format=json");
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error("Error retrieving IP address:", error);
+                return null;
+            }
+        };
+    
+        // Prompt the user for their name
+        //const userName = prompt("Please enter your name:");
+    
+        document.getElementById('nameModal').style.display = "flex"; //showa the modal if no userID cookie is here
+        const submitName = document.getElementById('submit');
+        submitName.addEventListener('click', getName);
+    
+    
+        function getName() {
+            console.log('hi');
+            let userName = document.getElementById('name').value;
+            document.getElementById('nameModal').style.display = "none";
+    
+            // Set the user name as a cookie that expires in 30 days
+            setCookie("userName", userName, 30);
+            console.log(userName + 'hi');
+            console.log("Generated User name:", userName);
+    
+            getIPAddress().then(ipAddress => {
+                if (ipAddress) {
+                    const userID = generateUserID(ipAddress);
+                    console.log("Generated User ID:", userID);
+    
+    
+                    // Set the user ID as a cookie that expires in 30 days
+                    setCookie("userID", userID, 30);
+    
+                    Socket.emit('cookie', { userName: userName, userID: userID })
+    
+                } else {
+                    console.log("Unable to retrieve IP address. User ID and name not set.");
+                }
+            });
+        }
+    
+    
+    }
+    
+}

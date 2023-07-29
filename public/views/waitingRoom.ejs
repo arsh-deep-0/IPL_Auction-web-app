@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,78 @@
     <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div class="background-box-1"></div>
     <div class="background-box-2"></div>
 
-    <div class="container" id="container">
-        <p id="heading">Waiting Lobby</p>
-        <!-- <div class="player-div">
+    <p id="vacancy"></p>
+
+    <div class="main-container">
+        <div class="select-avatar container">
+            <p id="heading">Select Avatar</p>
+
+            <div class="avatars">
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/rcblogo.webp" alt="">
+                    <p id="rcblogo" class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/milogo.webp" alt="">
+                    <p id="milogo"  class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/csklogo.webp" alt="">
+                    <p id="csklogo"  class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/pbkslogo.webp" alt="">
+                    <p id="pbkslogo"  class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/srhlogo.webp" alt="">
+                    <p id="srhlogo"  class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/dclogo.webp" alt="">
+                    <p id="dclogo"  class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/kkrlogo.webp" alt="">
+                    <p id="kkrlogo" class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/rrlogo.webp" alt="">
+                    <p id="rrlogo"  class="selected-status">Select</p>
+                    
+                </div>
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/gtlogo.webp" alt="">
+                    <p id="gtlogo"  class="selected-status">Select</p>
+                    
+                </div>
+
+                <div class="avatar-div">
+                    <img class="avatar-logo" src="/resources/logos/lsglogo.webp" alt="">
+                    <p id="lsglogo" class="selected-status">Select</p>
+                    
+                </div>
+            </div>
+          
+            
+           
+        </div>
+
+        <div class="container" id="container">
+            <p id="heading">Waiting Lobby</p>
+            <!-- <div class="player-div">
            
             <div class="player-name">
                 <p id="serial-number">1.</p>
@@ -27,8 +93,24 @@
                 <p>online</p>
             </div>
         </div> -->
+        </div>
+
+        <div class="other-data container">
+            <div class="players-reached container">
+                <p>Players Reached</p>
+                <p class="reached-box"><span id="total-players-reached">0</span>/<span id="total-players">0</span></p>
+            </div>
+
+            <div class="start container">
+                <p class="roomID" id="roomID">Room ID : 000000</p>
+                <p class="start-button" id="start-button"></p>
+            </div>
+        </div>
     </div>
+
+
 
     <script type="text/javascript" src="views/js/waitingRoom.js"></script>
 </body>
-</html> 
+
+</html>

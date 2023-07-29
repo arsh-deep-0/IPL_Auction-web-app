@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Auction </title>
+
+    <link rel="stylesheet" href="dist/css/myAuction.css">
+    <link rel="stylesheet" href="dist/css/navbar.css">
+    <link rel="stylesheet" href="dist/css/bg-design-ele.css">
+    <link rel="stylesheet" href="dist/css/modal.css">
+    <link rel="stylesheet" href="dist/css/playerModal.css">
+
+
+
+</head>
+
+<body>
+    <div class="body" id="body">
+        <nav class="navbar">
+            <div class="main-logo"><a href="#">Auction Heroes</a></div>
+            <ul class="links">
+                <li id="list-ele-1">Home
+
+                </li>
+                <li id="list-ele-2">Domain
+
+                </li>
+                <li id="list-ele-3">Hosting
+
+                </li>
+                <li id="list-ele-4">Servers
+
+                </li>
+                <li id="list-ele-5">Contact
+
+                </li>
+            </ul>
+
+            <div class="toggle_btn" id="menu-btn">
+                <a href="#" class="login">Log in</a>
+                <img src="dist/images/menu-btn.svg" alt="">
+
+            </div>
+        </nav>
+
+        <nav class="navbar" id="navbar-2">
+
+            <ul class="links" id="links-2">
+                <li class="bottom-navbar-ele" id="openTeamsModal">Teams</li>
+                <li class="bottom-navbar-ele" id="play-Auction">Auction</li>
+                <li class="bottom-navbar-ele" id="list-ele-3">Players</li>
+
+            </ul>
+
+
+        </nav>
+
+        <div id="Teams-Modal" class="modal">
+            <section class="modal-content">
+                <div class="modal-teams" id="modal-teams">
+                </div>
+                <div class="modal-players" id="modal-players">
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">Batsmen Bought - <span id="batsmen-Number"></span></p>
+
+                        <div id="modal-batsman-div" class="modal-batsman-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">Bowlers Bought - <span id="bowlers-Number"></span></p>
+                        <div id="modal-bowler-div" class="modal-bowler-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">All-Rounders Bought - <span id="All-Rounders-Number"></span></p>
+                        <div id="modal-allrounder-div" class="modal-allrounder-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">WKs Bought - <span id="Wks-Number"></span></p>
+                        <div id="modal-WKs-div" class="modal-WKs-div"></div>
+                    </div>
+
+                </div>
+
+                <div class="modal-team-data" id="modal-team-data">
+                    <div class="mlogo">
+                        <div class="mlogo-inner">
+                            <img id="mlogo" src="" alt="">
+                        </div>
+                        <div>
+                            <p id="modal-team-name"></p>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="mdashboard">
+                        <div class="circle__box">
+
+                            <p><span id="wallet-left"></span>/80Cr <br><br><br><br> Wallet left</p>
+                            <div class="circle__wrapper circle__wrapper--right">
+
+                                <div class="circle__whole circle__right" id="odometer">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-other-data">
+                        <div>
+                            <p>Total Players - <span id="total-players"></span></p>
+                        </div>
+
+                        <div>
+                            <p>Overseas - <span id='overseas'></span></p>
+                        </div>
+
+                        <div>
+                            <p>Avg.Bat Pts - <span id='avg-bat-pts'></span></p>
+                        </div>
+
+                        <div>
+                            <p>Avg.Bowl Pts - <span id='avg-bowl-pts'></span></p>
+                        </div>
+                    </div>
+
+
+            </section>
+        </div>
+
+        <div id="Players-Modal" class="modal">
+
+            <section class="modal-content">
+                         <div class="modal-selector">
+                            <p id="query-1">All</p>
+                            <p p id="query-3">Sold</p>
+                            <p p id="query-0">Yet to Come</p>
+                            <p p id="query-2">Unsold</p>
+                         </div>     
+                         
+                         <div class="query-modal-players" id="modal-players">
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">Batsmen - <span id="query-batsmen-Number"></span></p>
+        
+                                <div id="query-modal-batsman-div" class="modal-batsman-div"></div>
+                            </div>
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">Bowlers - <span id="query-bowlers-Number"></span></p>
+                                <div id="query-modal-bowler-div" class="modal-bowler-div"></div>
+                            </div>
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">All-Rounders - <span id="query-All-Rounders-Number"></span></p>
+                                <div id="query-modal-allrounder-div" class="modal-allrounder-div"></div>
+                            </div>
+                            <div class="modal-player-outerdiv">
+                                <p class="heading">WKs - <span id="query-Wks-Number"></span></p>
+                                <div id="query-modal-WKs-div" class="modal-WKs-div"></div>
+                            </div>
+        
+                        </div>
+            </section>
+        </div>
+
+
+
+
+
+        <div class="bg">
+            <div class="background-design-ele-1" id="bg-1"></div>
+            <div class="background-design-ele-2" id="bg-2"></div>
+        </div>
+        <section class="container" id="container">
+
+
+            <div class="Heading" id="Wallet-Heading">Team Wallets
+                <img src="/resources/icons/3d-wallet.png" alt="">
+            </div>
+            <div class="Heading" id="Bids-Heading">Bids Section
+                <img src="/resources/icons/hammer.png" alt="">
+            </div>
+            <div class="Heading" id="Stats-Heading">Player Stats
+                <img src="/resources/icons/bats.png" alt="">
+            </div>
+
+
+
+            <div class="wallet-outer">
+                <div class="wallet" id="wallet"></div>
+                <div class="rules" id="rules-heading">
+                   <div class="rulebook">
+                    <p>Rules</p>
+                   </div>
+                </div>
+                <div class="rules" id="rules">
+                    <div class="rulebook-rules">
+                     <p>Minimum requirements  <hr> &nbsp; 11 Players ,  &nbsp;  1 WK  ,  &nbsp; 5 (Bowlers + All-Rounders)</p>
+                     <p><br>Maximum overseas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Players<hr> 4  Players  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 31</p>
+                   
+                    </div>
+                 </div>
+            </div>
+            
+
+
+
+
+
+            <div class="bids">
+
+
+                <div id="search">
+
+                    <input id="searchOrder" name="order" size="3" type="text" value="">
+                    <button class="button" id="change">Search</button>
+
+                </div>
+
+                <section class="bids-1">
+                    <div class="bids-3" id="bids-3">
+                        <p class="Bid">Current Bid:</p>
+                        <p id="rupee"> &#8377<span class="Bid" id="Amount">0</span>Lakhs</p>
+                    </div>
+                    <div class="upsold">
+                        <img id="PREV" src="/resources/icons/next.png" alt="">
+                        <button class="button" id="UP">Bid Up</button>
+                        <button class="button" id="Sold">Sell</button>
+                        <img class="logo" id="buyerTeam" src="" alt="0">
+                        <img ID="NEXT" src="/resources/icons/next.png" alt="">
+                    </div>
+                    <div>
+                        <p class="Bids" id="hidden"></p>
+
+                    </div>
+
+                </section>
+
+
+                <section class="undo">
+                    <button class="button" id="undo">Undo</button>
+                    <button class="button" id="reset">Reset</button>
+                </section>
+
+                <section class="currentBider bids-1" id="currentBider">
+                    <p  class="biderName" >Current Bidder : <span  id="currentBiderName"></span></p>
+                    <img class="currentBiderImg" id="currentBiderImg" src="" alt="">
+                  
+                </section>
+
+                <div id="countdown"></div>
+
+
+                <section class="teamSelector" id="teamSelector">
+                    <p class="edgy-font">Select Team</p>
+
+                    <form>
+                        <div class="buying-teams" id="buying-teams">
+
+                        </div>
+                    </form>
+                    <div class="add">
+                        <button class="button" id="confirm">ADD</button>
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="statsHolder">
+                <div class="statsHolderBackground" id="statsHolderBackground">
+                    <p id="playerno">Player:<span id="playerNum"></span></p>
+                    <p class="stats" id="name"></p>
+
+
+                    <img class="stas" id="currPlayerImg" src="" alt="">
+
+                    <div class="data" id="databox">
+                        <p>Bat Pts :<span id="batAvg"></span></p>
+
+                        <p>Bowl Pts:<span id="bowlPts"></span></p>
+
+                        <p>Wk Pts :<span id="wkPts"></span></p>
+
+
+
+                    </div>
+                </div>
+
+                <div class="otherstatsbg">
+                    <div class="team-role">
+
+
+                        <p id="role">-</p>
+                        <img class="eclipse" src="resources/icons/eclipse.webp" alt="">
+                        <img id="roleImg" src="" alt="">
+                    </div>
+
+                    <div class="nationality">
+                        <p id="nationality">-</p>
+                        <img class="eclipse" src="resources/icons/eclipse.webp" alt="">
+                        <img class="flag" id="flagImg" src="" alt="">
+                    </div>
+                    <div class="basePrice">
+                        <p>Base- <span id="basePrice">-</span> Cr</p>
+                        <img class="eclipse" src="resources/icons/eclipse.webp" alt="">
+                        <img class="coin" src="resources/icons/BasePrice.webp" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+    <script src="views/js/myAuction.js"></script>
+    <script src="views/js/database4multiplayerAuction.js"></script>
+    <script src="views/js/navbar.js"></script>
+    <script src="views/js/teamModal.js"></script>
+    <script src="views/js/playersModal.js"></script>
+
+</body>
+
+</html> 

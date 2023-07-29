@@ -6,10 +6,18 @@ socket.emit('player-connected-in-auctionRoom', params.get('roomID'));
 //on page reload , going back to database details
 
 socket.on("user connected", (AuctionData) => {
+    console.log(AuctionData);
     console.log('connection established');
     changePlayer(AuctionData.order, 'local');
     console.log(AuctionData);
     document.getElementById("Amount").innerHTML = AuctionData.bidValue;
+    if (AuctionData.currentBidderName != undefined) {
+        document.getElementById("currentBiderName").innerHTML = AuctionData.currentBidderName;
+    }
+    else {
+        document.getElementById("currentBiderName").innerHTML = "none";
+    }
+    document.getElementById("currentBiderImg").src = "/resources/logos/" + AuctionData.currentBidderLogo + ".webp";
 });
 
 
@@ -32,8 +40,9 @@ function decideOrder() {
     changePlayer(order, 'global');
 
     let bidDetails = {
-        bidValue:0,
-        roomID:params.get('roomID')
+        bidValue: 0,
+        roomID: params.get('roomID'),
+        userID: getCookie('userID'),
     }
     socket.emit('increase-Bid', bidDetails);
 }
@@ -44,10 +53,11 @@ function increaseOrder() {
     console.log(order);
     changePlayer(order + "", 'global');
     let bidDetails = {
-        bidValue:0,
-        roomID:params.get('roomID')
+        bidValue: 0,
+        roomID: params.get('roomID'),
+        userID: getCookie('userID')
     }
-    socket.emit('increase-Bid', bidDetails);
+   // socket.emit('increase-Bid', bidDetails);
 }
 function decreaseOrder() {
     let order = Number(currentPlayerOrder.innerHTML);
@@ -55,10 +65,10 @@ function decreaseOrder() {
     console.log(order);
     changePlayer(order + "", 'global');
     let bidDetails = {
-        bidValue:0,
-        roomID:params.get('roomID')
+        bidValue: 0,
+        roomID: params.get('roomID')
     }
-    socket.emit('increase-Bid', bidDetails);
+   // socket.emit('increase-Bid', bidDetails);
 }
 
 function changePlayer(playerOrder, scope) {
@@ -66,7 +76,7 @@ function changePlayer(playerOrder, scope) {
     //     playerOrder++;
     // }
 
-    let changingDetails = { playerOrder: playerOrder, scope: scope ,roomID:params.get('roomID')}
+    let changingDetails = { playerOrder: playerOrder, scope: scope, roomID: params.get('roomID') }
     socket.emit('change-Player', changingDetails);
     console.log("emiited", changingDetails);
 
@@ -76,7 +86,7 @@ function changePlayer(playerOrder, scope) {
 socket.on('change-Player', (myElement) => {
     console.log(myElement);
     if (myElement == null) {
-        alert('Player-'+input.value+' doesn\'t exist')
+        alert('Player-' + input.value + ' doesn\'t exist')
     } else {
         document.getElementById("name").innerHTML = myElement.name;
         currentPlayerOrder.innerHTML = myElement.order;
@@ -105,15 +115,21 @@ socket.on('change-Player', (myElement) => {
         document.getElementById("bids-3").style.display = "block";
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
-        document.getElementById("teamSelector").style.display = "none";
+        document.getElementById("teamSelector").style.display = "none"; 
+
+        document.getElementById('currentBider').style.display = 'none';     
 
 
         //checking if player is sold or not 
 
         if (myElement.sellingStatus >= 1) {
-            let sellingDetails = { sellingStatus: myElement.sellingStatus, sellingAmount: myElement.SellingPrice ,roomID:params.get('roomID')};
+            document.getElementById("currentBider").style.display = "none";
+            let sellingDetails = { sellingStatus: myElement.sellingStatus, sellingAmount: myElement.SellingPrice, roomID: params.get('roomID') };
             soldPlayerHandler(sellingDetails);
+           
         }
+           
+        
     }
 })
 
@@ -150,9 +166,11 @@ function increaseBid() {
     currentBidValue = currentBid.innerHTML;
     console.log(currentBidValue);
     let bidDetails = {
-        bidValue:currentBidValue ,
-        roomID:params.get('roomID')
+        bidValue: currentBidValue,
+        roomID: params.get('roomID'),
+        userID: getCookie('userID')
     }
+    console.log(getCookie('userID'));
     socket.emit('increase-Bid', bidDetails)
 }
 
@@ -161,6 +179,8 @@ function increaseBid() {
 
 socket.on('increase-Bid', value => {
     console.log(value);
+    if(value>0)
+    document.getElementById("currentBider").style.display="flex";    
     document.getElementById("bids-3").style.display = "block";
     document.getElementById("UP").style.display = "block";
     document.getElementById("Sold").style.display = "block";
@@ -174,9 +194,11 @@ socket.on('increase-Bid', value => {
 
 //Selling a player 
 const soldButton = document.getElementById("Sold");
-soldButton.addEventListener('click', () => {
+//soldButton.addEventListener('click',sellPlayer);
+
+const sellPlayer=() => {
     let sellingStatus = 1;
-    if (currentBid.innerHTML == 0) {
+    if (currentBid.innerHTML == 0) { 
         sellingStatus = 2;
     }
     let sellingDetails = {
@@ -186,7 +208,7 @@ soldButton.addEventListener('click', () => {
         roomID: params.get('roomID')
     }
     socket.emit('player-Sold', sellingDetails);
-});
+}
 
 const sellingPrice = document.getElementById('hidden');
 
@@ -194,19 +216,19 @@ const sellingPrice = document.getElementById('hidden');
 //handler of player-sold , which updates to UI
 socket.on('player-Sold', sellingDetails => {
     console.log('yeah', sellingDetails);
-    // if(sellingDetails.roomID ==params.get('roomID'))
-    soldPlayerHandler(sellingDetails);
+     if(sellingDetails.roomID ==params.get('roomID'))
+      soldPlayerHandler(sellingDetails);  
 
 })
 
 function soldPlayerHandler(sellingDetails) {
     console.log("got", sellingDetails);
     if (sellingDetails.sellingStatus == 0) {
-        sellingPrice.style.display = "none";
+        sellingPrice.style.display = "none"; 
         document.getElementById("bids-3").style.display = "block";
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
-        document.getElementById("teamSelector").style.display = "none";
+       // document.getElementById("teamSelector").style.display = "none";
     }
     else {
         sellingPrice.style.display = "block";
@@ -220,12 +242,12 @@ function soldPlayerHandler(sellingDetails) {
     }
     else if (sellingDetails.sellingStatus == 1) {
         sellingPrice.innerHTML = "Sold at : " + "\u20B9" + sellingDetails.sellingAmount + " lakhs";
-        document.getElementById("teamSelector").style.display = "block";
+        //document.getElementById("teamSelector").style.display = "block";
 
     }
     else if (sellingDetails.sellingStatus == 3) {
         sellingPrice.innerHTML = "Sold at : " + "\u20B9" + sellingDetails.sellingAmount + " lakhs";
-        document.getElementById("teamSelector").style.display = "none";
+       // document.getElementById("teamSelector").style.display = "none";
 
     }
 }
@@ -236,12 +258,12 @@ function soldPlayerHandler(sellingDetails) {
 const reset = document.getElementById('reset');
 reset.addEventListener('click', () => {
 
-    if ( document.getElementById('buyerTeam').style.display == "block") {//it means player sold and added in a team 
+    if (document.getElementById('buyerTeam').style.display == "block") {//it means player sold and added in a team 
         let removingDetails = {
             playerOrder: currentPlayerOrder.innerHTML,
             sellingPrice: Number(currentBid.innerHTML),
             sellingStatus: 3,
-            roomID:params.get('roomID')
+            roomID: params.get('roomID')
         }
         socket.emit('remove-Player', removingDetails)
         console.log('sent');
@@ -254,8 +276,9 @@ reset.addEventListener('click', () => {
     }
     socket.emit('player-Sold', resetingDetails);
     let bidDetails = {
-        bidValue:0,
-        roomID:params.get('roomID')
+        bidValue: 0,
+        roomID: params.get('roomID'),
+        userID: getCookie('userID')
     }
     socket.emit('increase-Bid', bidDetails);
 })
@@ -352,20 +375,15 @@ function addTeamInSelector(buyingTeams, Buyer) {
 //adding player to team
 const confirm = document.getElementById("confirm");
 confirm.addEventListener("click", find);
-function find() {
-    let order;
-    let allOrders = document.forms[0];
-    for (let i = 0; i < allOrders.length; i++) {
-        if (allOrders[i].checked) {
-            order = allOrders[i].value + "";
-        }
-    }
+
+function find(order) {
+  
     console.log(order);
     let addingDetails = {
         playerOrder: currentPlayerOrder.innerHTML,
         buyingTeamOrder: order,
         sellingPrice: currentBid.innerHTML,
-        roomID:params.get('roomID')
+        roomID: params.get('roomID')
     }
     socket.emit('add-Player', addingDetails)
 
@@ -389,6 +407,20 @@ socket.on('remove-Player', Buyer => {
     document.getElementById('buyerTeam').style.display = "none";
 })
 
+socket.on('currentBidder', currentBidder => {
+    document.getElementById('currentBiderName').innerHTML = currentBidder.name;
+    document.getElementById('currentBiderImg').src = "/resources/logos/" + currentBidder.logo + ".webp";
+    document.getElementById('UP').disabled=false;
+    document.getElementById('UP').backgroundColor='grey'; 
+    startCountdown(currentBidder.userID,currentBidder.order);
+   
+
+    if(currentBidder.userID == getCookie('userID')){
+        document.getElementById('UP').disabled=true;
+       
+    }
+})
+
 
 
 
@@ -409,6 +441,69 @@ function fullscreen() {
     } else if (element.msRequestFullscreen) {
         element.msRequestFullscreen();
     }
+}
+
+function getCookie(name) {
+    const cookieName = name + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) === ' ') {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(cookieName) === 0) {
+            return cookie.substring(cookieName.length, cookie.length);
+        }
+    }
+
+    return "";
+}
+
+
+let countdownInterval;
+
+function startCountdown(userID,Bidderorder) {
+    console.log("Countdown started!");
+
+    // Set the countdown duration in seconds
+    const countdownDuration = 16;
+
+    // Get the current timestamp
+    const startTime = new Date().getTime();
+
+    // Calculate the target timestamp when the countdown should end
+    const targetTime = startTime + countdownDuration * 1000;
+
+    // Clear any existing interval
+    clearInterval(countdownInterval);
+
+    // Update the countdown every second
+    countdownInterval = setInterval(() => {
+        // Get the current timestamp
+        const currentTime = new Date().getTime();
+
+        // Calculate the remaining time in seconds
+        const remainingTime = Math.max(0, Math.round((targetTime - currentTime) / 1000));
+
+        if (remainingTime === 0) {
+            // Countdown completed
+            console.log("Hi!");
+            if(userID==getCookie("userID"));{
+            sellPlayer();
+             find(Bidderorder);
+             document.getElementById("currentBider").style.display="none"; 
+            }
+           
+
+            // Clear the interval to stop the countdown
+            clearInterval(countdownInterval);
+        }
+
+        // Update the countdown display
+        document.getElementById("countdown").textContent = remainingTime;
+    }, 1000);
 }
 
 

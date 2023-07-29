@@ -1,7 +1,11 @@
 {
     let orignalQuery = document.getElementById('query-1');
     orignalQuery.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
-    socket.emit('all-players',1);
+    let myquery={
+        query:1,
+        roomID:params.get('roomID')
+    }
+    socket.emit('all-players',myquery);
 }
 
 
@@ -18,7 +22,12 @@ for (let i = 0; i < 4; i++) {
         }
 
         query.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
-        socket.emit('all-players',i);
+      
+        let myquery={
+            query:i,
+            roomID:params.get('roomID')
+        }
+        socket.emit('all-players',myquery);
     })
 }
 
@@ -52,6 +61,7 @@ socket.on('all-players',players=>{
     allrounderNumber.innerHTML=allrounderCount;   
  
     players.forEach(player => {
+        
 
         let playerDiv = document.createElement('div');
         playerDiv.classList.add('modal-player-div');

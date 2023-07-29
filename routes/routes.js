@@ -39,14 +39,14 @@ router.get('/enterroomNumber',(req,res)=>{
   res.render('enterroomNumber');
 })
 
-router.post('/myAuction', async (req, res) => {  
+router.post('/Auction', async (req, res) => {  
   const newAuction = new IplAuction(req.body);
   await newAuction.save();
-  res.render('myAuction', { newAuction });
+  res.render('Auction', { newAuction });
 });
 
-router.get('/myAuction', (req, res) => {
-  res.render('myAuction');
+router.get('/Auction', (req, res) => {
+  res.render('multiplayer');
 });
 
 router.get('/players', async (req, res) => {

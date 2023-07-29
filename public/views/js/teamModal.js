@@ -2,32 +2,40 @@
 
 
 socket.on('buyer-Details', result => {
+
     const modalTeams = document.getElementById('modal-teams');
     modalTeams.innerHTML = '<p>Teams</p>';
     result.forEach(Buyer => {
 
-        let logoDiv = document.createElement('div');
-        logoDiv.classList.add('modal-logo-div');
-        logoDiv.id = 'modal-logo-div-' + Buyer.order;
-        modalTeams.appendChild(logoDiv);
-
-        let logoImg = document.createElement('img');
-        logoImg.classList.add('modal-logo');
-        logoImg.id = 'modal-logo-' + Buyer.order;  //giving it a class name
-        logoImg.src = "/resources/logos/" + Buyer.logo + ".webp";
-        logoDiv.appendChild(logoImg)
+        if(Buyer==null){}
+        else{
+            let logoDiv = document.createElement('div');
+            logoDiv.classList.add('modal-logo-div');
+            logoDiv.id = 'modal-logo-div-' + Buyer.order;
+            modalTeams.appendChild(logoDiv);
+    
+            let logoImg = document.createElement('img');
+            logoImg.classList.add('modal-logo');
+            logoImg.id = 'modal-logo-' + Buyer.order;  //giving it a class name
+            logoImg.src = "/resources/logos/" + Buyer.logo + ".webp";
+            logoDiv.appendChild(logoImg)
+        }      
 
     })
     let modalLogo1 = document.getElementById('modal-logo-div-' + (1));
     modalLogo1.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
 
-    socket.emit('view-team-players', 1);
-    socket.emit('view-team-analytics', 1);
+    let viewData ={
+        teamOrder:1,
+        roomID:params.get('roomID')
+    }
+    socket.emit('view-team-players', viewData);
+    socket.emit('view-team-analytics', viewData);
 
     const modalLogos = document.getElementsByClassName('modal-logo');
     //document.getElementById('modal-logo-div-0').back
 
-    for (let i = 0; i < modalLogos.length; i++) {
+    for (let i = 0; i < modalLogos.length; i++) { 
         const modalLogo = document.getElementById('modal-logo-div-' + (i + 1));
 
         modalLogo.addEventListener("click", function () {
@@ -41,8 +49,13 @@ socket.on('buyer-Details', result => {
 
             this.style.background = "linear-gradient(143.7deg,#462523 -60%, #cb9b51 2%,#f6e27a 45%,#f6f2c0 50%,#f6e27a 55%,#cb9b51 98%,#462523 160%)";
             console.log(i)
-            socket.emit('view-team-players', i + 1);
-            socket.emit('view-team-analytics', i + 1);
+
+            let viewData ={
+                teamOrder:i+1,
+                roomID:params.get('roomID')
+            }
+            socket.emit('view-team-players', viewData);
+            socket.emit('view-team-analytics', viewData);
 
         });
     }

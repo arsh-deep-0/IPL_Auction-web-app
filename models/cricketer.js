@@ -21,6 +21,9 @@ const playerSchema = new mongoose.Schema({
         type:Number,
         min:0
     },
+    currentBidder:{
+        type:String
+    },
     SellingPrice:{
         type:Number
     },

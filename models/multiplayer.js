@@ -15,6 +15,9 @@ const multiplayerSchema = new mongoose.Schema({
     },
     playersReached:{
         type:Number
+    },
+    matchStatus:{
+       type:String
     }
 })
 

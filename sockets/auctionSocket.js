@@ -3,67 +3,81 @@ const Buyer = require('../models/buyer');
 const IplAuction = require('../models/auction');
 const User = require('../models/user');
 const Multiplayer = require('../models/multiplayer');
-const { default: mongoose } = require('mongoose');
-const multiplayer = require('../models/multiplayer');
-
-const connectedUsers = {};
-
-const connectedRooms = {};
+const { default: mongoose, mongo } = require('mongoose');
 
 const socketIO = (http) => {
     const io = require('socket.io')(http, {
-        cors: { origin: "https://auction-arsh.onrender.com" }
+        cors: { origin: "https://auction-arsh.onrender.com/" } 
     });
 
+    require('./userOnlineStatus')(io); //passing socket io events from another file 
 
     io.on('connection', (mySocket) => {
         console.log(` ${mySocket.id} connected`);
 
-        require('./teamsDataSocket')(mySocket);//passing socket io events from another file 
-        //require('./userOnlineStatus')(mySocket);//passing socket io events from another file 
+        require('./teamsDataSocket')(mySocket);
+        mySocket.on('player-connected-in-auctionRoom', (roomID) => {
+           
+            console.log('hi');
+            mySocket.join(roomID);
+            IplAuction.findOne({ order: Number(roomID) })    //finds the current order of player which is running from MongoDB and the current Bid Value 
+                .then((element) => {
+                    console.log('bye');
+                    console.log(element);
 
-
-        IplAuction.find({ order: 1 })    //finds the current order of player which is running from MongoDB and the current Bid Value 
-            .then((result) => {
-               
-                result.forEach(element => {
                     let currentPlayerOrder = element.currentPlayerOrder;
                     if (currentPlayerOrder == 0) {
                         currentPlayerOrder++;
                     }
                     let currentBidValue = element.currentBidValue;
 
-                    let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue };
+                    let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue ,currentBidderName:element.currentBidderName ,currentBidderLogo:element.currentBidderLogo,currentBiderUserID:element.currentBiderUserID};  
+                    console.log("auction details",auctiondetails);
 
-                  
                     mySocket.emit("user connected", auctiondetails);
 
-                    Buyer.find({ order: { $lte: 8 } }) //Finding the details of all buyers  
-                        .then(result => {
-
-                            mySocket.emit('buyer-Details', result);
+                    let buyersRoom = 'buyersRoom-' + roomID;
+                    let buyerDetails = [];
+                    fetchBuyerDetails(roomID)
+                        .then(() => {
+                            console.log('Buyer details fetched successfully.');
                         })
-                });
+                        .catch(error => {
+                            console.error('An error occurred:', error);
+                        });
 
-            })
 
-        //Basic working of Socket io
-        mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  //remember io is global and mySocket is its local instance ,so when u want to emit on all devices use io
-            io.emit('message', `${mySocket.id.substr(0, 2)} said ${message} bro `);  /*the message emitted by client side 
+                })
+
+
+
+
+            //Basic working of Socket io
+            mySocket.on('message', (message) => {/*the message emitted by client side socket instance is handled here  */  //remember io is global and mySocket is its local instance ,so when u want to emit on all devices use io
+                io.emit('message', `${mySocket.id.substr(0, 2)} said ${message} bro `);  /*the message emitted by client side 
                                                                               socket instance is now emitted to all servers 
                                                                               with little modification */
-        });
+            });
 
 
-        mySocket.on('change-Player', (changingDetails) => { //whenever next , prev or search button is clicked or new user is connected
+
+        }
+        );
+
+
+
+        mySocket.on('change-Player', (changingDetails) => { //whenever next , prev or search button is clicked or new user is connected 
             let order = changingDetails.playerOrder;
 
-            IplAuction.findOneAndUpdate({ order: 1 }, { currentPlayerOrder: order }, { runValidators: true, new: true })
+            let cricketersRoom = 'cricketersRoom-' + changingDetails.roomID;
+
+            IplAuction.findOneAndUpdate({ order: Number(changingDetails.roomID) }, { currentPlayerOrder: Number(order) }, { runValidators: true, returnDocument: 'after' })
                 .then((result => {
-                    Cricketer.find({ order: order })
+                    mongoose.connection.collection(cricketersRoom).findOne({ order: Number(order) })
                         .then(result => {
+                            console.log(result, 'change-player')
                             if (changingDetails.scope == 'global') {
-                                io.emit('change-Player', result)
+                                io.to(changingDetails.roomID).emit('change-Player', result)
                             }
                             else {
                                 mySocket.emit('change-Player', result)
@@ -73,41 +87,81 @@ const socketIO = (http) => {
                 }))
         })
 
-        mySocket.on('increase-Bid', bidValue => {
-            IplAuction.findOneAndUpdate({ order: 1 }, { currentBidValue: bidValue }, { runValidators: true, new: true })
+      
+
+        mySocket.on('increase-Bid', bidDetails => {
+            IplAuction.findOneAndUpdate({ order: Number(bidDetails.roomID) }, { currentBidValue: Number(bidDetails.bidValue) }, { runValidators: true, returnDocument: 'after' })
                 .then((result => {
-                    io.emit('increase-Bid', bidValue);
+                    io.to(bidDetails.roomID).emit('increase-Bid', bidDetails.bidValue);
+                    if(bidDetails.bidValue>0){
+                    let buyersRoom='buyersRoom-'+bidDetails.roomID;
+                    console.log("room",buyersRoom," ",bidDetails.userID);
+                    console.log(bidDetails)
+
+                    mongoose.connection.db.collection(buyersRoom).findOne({userID:bidDetails.userID}).
+                    then(result=>{
+                        console.log(result);
+                        if(result){
+                        let currentBidder={
+                            name:result.name,
+                            logo:result.logo,
+                            userID:bidDetails.userID,
+                            order:result.order
+                        }
+                        IplAuction.findOneAndUpdate({order:bidDetails.roomID},{currentBidderName:currentBidder.name,currentBidderLogo:currentBidder.logo}).
+                        then(result =>{
+                            io.to(bidDetails.roomID).emit('currentBidder',currentBidder);
+                        })
+                       
+                    }
+                       
+                    })
+                    }
                 }))
+               
         })
 
         mySocket.on('player-Sold', sellingDetails => {
-            //firstly we have to add teams in team selector
-            Buyer.find({ order: { $lte: 8 } }) //Finding the details of all buyers  
-                .then(result => {
-                    io.emit('buyer-Details', result);
+            console.log('sellingDeails',sellingDetails);
+            let buyersRoom = 'buyersRoom-' + sellingDetails.roomID; 
+            let buyerDetails = [];
+            fetchBuyerDetails(sellingDetails.roomID)
+                .then(() => {
+                    console.log('Buyer details fetched successfully.');
                 })
+                .catch(error => {
+                    console.error('An error occurred:', error);
+                });
 
-            console.log(sellingDetails, "sold")
+
+            console.log(sellingDetails, "sold") 
             let filter = sellingDetails.playerOrder;
             let update = sellingDetails.sellingAmount;
             let sellingStatus = sellingDetails.sellingStatus;
-            Cricketer.findOneAndUpdate({ order: filter }, { SellingPrice: update, sellingStatus: sellingStatus }, { runValidators: true, new: true })
+
+            let cricketersRoom = 'cricketersRoom-' + sellingDetails.roomID;
+            console.log(cricketersRoom);
+            console.log(filter);
+            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(filter) }, { $set: { SellingPrice: Number(update), sellingStatus: Number(sellingStatus) } }, { runValidators: true, returnDocument: 'after' })
                 .then(result => {
-                    io.emit('player-Sold', sellingDetails);
+                    console.log(result, 'playerSold');
+                    io.to(sellingDetails.roomID).emit('player-Sold', sellingDetails);
                 })
         })
 
         mySocket.on('add-Player', addingDetails => {
 
-            Cricketer.findOneAndUpdate({ order: addingDetails.playerOrder }, { Team: addingDetails.buyingTeamOrder, sellingStatus: 3 }, { runValidators: true, new: true })
+            let cricketersRoom = 'cricketersRoom-' + addingDetails.roomID;
+            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(addingDetails.playerOrder) }, { $set: { Team: Number(addingDetails.buyingTeamOrder), sellingStatus: 3 } }, { runValidators: true, returnDocument: 'after' })
                 .then(result => {
-                    let role = result.Role + 'sBought';
+                    console.log(result);
+                    let role = result.value.Role + 'sBought';
                     console.log(role);
                     console.log(addingDetails, 'added')
-                    let sellingAmount = (-1 * result.SellingPrice / 100).toFixed(1);
+                    let sellingAmount = (-1 * result.value.SellingPrice / 100).toFixed(1);
 
                     let number = 0;
-                    if (result.Nationality != 'India') {
+                    if (result.value.Nationality != 'India') {
                         number = 1
                     }
 
@@ -116,264 +170,84 @@ const socketIO = (http) => {
                     //  console.log(result);
                     // })
 
+                    let buyersRoom = 'buyersRoom-' + addingDetails.roomID;
 
-                    Buyer.findOneAndUpdate({ order: addingDetails.buyingTeamOrder },
-                        { $inc: { playersBought: 1, overseasBought: number, [role]: 1, currentWallet: sellingAmount } },
-                        { runValidators: true, new: true })
+
+                    mongoose.connection.collection(buyersRoom).findOneAndUpdate({ order: Number(addingDetails.buyingTeamOrder) },
+                        { $inc: { playersBought: 1, overseasBought: Number(number), [role]: 1, currentWallet: Number(sellingAmount) } },
+                        { runValidators: true, returnDocument: 'after' })
                         .then(Buyer => {
                             console.log(Buyer);
-                            Cricketer.findOneAndUpdate({ order: addingDetails.playerOrder }, { teamlogo: Buyer.logo }).
+                            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(addingDetails.playerOrder) }, { $set: { teamlogo: Buyer.value.logo } }).
                                 then(player => {
                                     console.log(player);
                                 })
-                            io.emit('add-Player', Buyer)
+                            io.to(addingDetails.roomID).emit('add-Player', Buyer.value)
                         })
                 })
 
 
-        })
+        }) 
+
         mySocket.on('remove-Player', removingDetails => {
-            Cricketer.findOneAndUpdate({ order: removingDetails.playerOrder }, { Team: '0', sellingStatus: 0 }, { runValidators: true }) // new :true is attentionaly not kept true
+            let cricketersRoom = 'cricketersRoom-' + removingDetails.roomID;
+            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(removingDetails.playerOrder) }, { $set: { Team: '1000', sellingStatus: 0 } }, { runValidators: true }) // new :true is attentionaly not kept true  
                 .then(result => {
-                    let role = result.Role + 'sBought';
+                    let role = result.value.Role + 'sBought';
                     console.log(role);
                     console.log(removingDetails, 'removed');
-                    let sellingAmount = (1 * result.SellingPrice / 100).toFixed(1);
+                    let sellingAmount = (1 * result.value.SellingPrice / 100).toFixed(1);
 
 
                     let number = 0;
-                    if (result.Nationality != 'India') {
+                    if (result.value.Nationality != 'India') {
                         number = -1;
                     }
-                    Buyer.findOneAndUpdate({ order: result.Team },
-                        { $inc: { playersBought: -1, overseasBought: number, [role]: -1, currentWallet: sellingAmount } },
-                        { runValidators: true, new: true })
+
+                    console.log(result.value.Team)
+
+                    let buyersRoom = 'buyersRoom-' + removingDetails.roomID;
+                    mongoose.connection.collection(buyersRoom).findOneAndUpdate({ order: Number(result.value.Team) },
+                        { $inc: { playersBought: -1, overseasBought: number, [role]: -1, currentWallet: Number(sellingAmount) } },
+                        { runValidators: true, returnDocument: 'after' })
                         .then(Buyer => {
-                            Cricketer.findOneAndUpdate({ order: removingDetails.playerOrder }, { teamlogo: '0' }).
+                            console.log(Buyer, 'money added  back');
+                            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(removingDetails.playerOrder) }, { $set: { teamlogo: '100' , sellingStatus: 0} }).
                                 then(player => {
                                     console.log(player);
                                 })
-                            io.emit('remove-Player', Buyer)
+                            io.to(removingDetails.roomID).emit('remove-Player', Buyer.value)
                         })
                 })
 
         })
 
 
-        mySocket.on('reached-waiting-room', userDetails => {
-            connectedUsers[mySocket.id] = userDetails.userID;
-            let room = userDetails.roomID;
-            connectedRooms[mySocket.id] = userDetails.roomID;
-            mySocket.join(room);
-
-            let buyersRoom = 'buyersRoom-' + userDetails.roomID;
-            const db = mongoose.connection;
-
-            db.collection(buyersRoom).findOne({ userID: userDetails.userID }).
-                then(user => {
-
-                    if (user) {
-                        addPlayersLocally();
-                    } else {
-                        addPlayers();
-                    }
-                })
+        async function fetchBuyerDetails(roomID) {
+            try {
+                const multiplayer = await Multiplayer.findOne({ roomID });
+                const { playersReached } = multiplayer;
+                let buyersRoom = 'buyersRoom-' + roomID;
+                let buyerDetails = [];
 
 
-
-            function addPlayers() {
-                Multiplayer.findOneAndUpdate({ roomID: userDetails.roomID }, { $inc: { playersReached: 1 } }, { runValidators: true, new: true }).
-                    then(result => {
-
-                        console.log(result);
-                        let buyersRoom = 'buyersRoom-' + userDetails.roomID;
-                        const db = mongoose.connection;
-                        db.collection(buyersRoom).findOneAndUpdate({ order: result.playersReached }, { $set: { name: userDetails.userName, userID: userDetails.userID, onlineStatus: 'online' } }, { runValidators: true, new: true })
-                            .then(buyersRoomObject => {
-
-                                console.log(buyersRoomObject);
-
-                                for (let i = 1; i <= result.playersReached; i++) {
-                                    db.collection(buyersRoom).findOne({ order: i }).
-                                        then(user => {
-                                            if (result.hostID == user.userID) {
-                                                let userdetails = {
-                                                    role: 'Host',
-                                                    userName: user.name,
-                                                    userID: user.userID,
-                                                    roomID: userDetails.roomID,
-                                                    userLogo: user.logo,
-                                                    onlineStatus: user.onlineStatus
-                                                }
-                                                console.log(`what`);
-                                                console.log(userdetails);
-                                                io.emit('new-user-in-waiting-room', userdetails)
-                                            } else {
-                                                let userdetails = {
-                                                    role: 'Player',
-                                                    userName: user.name,
-                                                    userID: user.userID,
-                                                    roomID: userDetails.roomID,
-                                                    userLogo: user.logo,
-                                                    onlineStatus: user.onlineStatus
-                                                }
-                                                console.log(`wow`);
-                                                console.log(userdetails);
-                                                io.emit('new-user-in-waiting-room', userdetails)
-                                            }
-                                        })
-                                }
-
-                            })
-
-                    })
+                for (let i = 1; i < playersReached + 1; i++) {
+                    const buyer = await mongoose.connection.collection(buyersRoom).findOne({ order: i });
+                    console.log(buyer);
+                    buyerDetails.push(buyer);
+                }
+                mySocket.emit('buyer-Details', buyerDetails);
+            } catch (error) {
+                console.error('An error occurred:', error);
             }
-            function addPlayersLocally() {
-                Multiplayer.findOneAndUpdate({ roomID: userDetails.roomID }, { }, { runValidators: true, new: true }).
-                    then(result => {
-                        
-                        console.log('hi');
-                        console.log(result);
-                    
-                        let buyersRoom = 'buyersRoom-' + userDetails.roomID;
-                        const db = mongoose.connection;
-                       
-                        db.collection(buyersRoom).findOneAndUpdate({userID:userDetails.userID},{ $set:{onlineStatus: 'online'}}, { runValidators: true, new: true }).
-                        then(currentUser=>{
-                            for (let i = 1; i <= result.playersReached; i++) {
-                                db.collection(buyersRoom).findOne({ order: i }).
-                                    then(user => {
-                                        if (result.hostID == user.userID) {
-                                            let userdetails = {
-                                                role: 'Host',
-                                                userName: user.name,
-                                                userID: user.userID,
-                                                roomID: userDetails.roomID,
-                                                userLogo: user.logo,
-                                                onlineStatus: user.onlineStatus
-    
-                                            }
-                                            console.log(`what locally`);
-                                            console.log(userdetails);
-                                            io.emit('new-user-in-waiting-room', userdetails)
-                                        } else {
-                                            let userdetails = {
-                                                role: 'Player',
-                                                userName: user.name,
-                                                userID: user.userID,
-                                                roomID: userDetails.roomID,
-                                                userLogo: user.logo,
-                                                onlineStatus: user.onlineStatus
-                                            }
-                                            console.log(`wow locally`);
-                                            console.log(userdetails);
-                                            io.emit('new-user-in-waiting-room', userdetails);
-                                        }
-                                    })
-                            }
-                        })
-                      
-                    })
-            }
-        });
-
-        mySocket.on('check-room', roomID => {
-            console.log(roomID);
-            Multiplayer.findOne({ roomID: roomID }).
-                then(result => {
-                    console.log(result);
-                    if (result != null) {
-                        mySocket.emit('room-found');
-                        console.log('found');
-                    } else {
-                        mySocket.emit('room-not-found');
-                        console.log('not');
-                    }
-                })
-        })
-
-
-        mySocket.on('disconnect', () => {
-            console.log(`Client ${mySocket.id} disconnected`);
-            const userID = connectedUsers[mySocket.id];
-            console.log(userID); 
-
-          
-            // Remove the user from the connectedUsers object
-            //delete connectedUsers[mySocket.id];
-
-            let room = connectedRooms[mySocket.id];
-            console.log(room);
-            if (room) {
-                let buyersRoom = 'buyersRoom-' + room;
-                const db = mongoose.connection;
-                db.collection(buyersRoom).findOneAndUpdate({ userID: userID }, {$set:{ onlineStatus: 'off-line' }}, { runValidators: true, new: true }).
-                    then(user => {
-                        console.log(user);
-                        if(user){
-                            
-                            if (user.order == 1) {
-                                let userdetails = {
-                                    role: 'Host',
-                                    userName: user.name,
-                                    userID: userID,
-                                    roomID: room,
-                                    userLogo: user.logo,
-                                    onlineStatus: 'offline'
-    
-                                }
-                                console.log(`what locally`);
-                                console.log(userdetails);
-                                mySocket.broadcast.emit('user-left', userdetails)
-                            } else {
-                                let userdetails = {
-                                    role: 'Player',
-                                    userName: user.name,
-                                    userID: userID,
-                                    roomID: room,
-                                    userLogo: user.logo,
-                                    onlineStatus: 'Offline'
-                                }
-                                console.log(`wow locally`);
-                                console.log(userdetails);
-                                mySocket.broadcast.emit('user-left', userdetails);
-                            }
-                        }
-                      
-                    })
-
-            }
-
-
-
-
-
-            // Emit the 'userLeft' event to all clients in room
-
         }
-
-        );
-
-        mySocket.on('back-online', (userDetails) => {
-            connectedUsers[mySocket.id] = userDetails.userID;
-            let room = userDetails.roomID;
-            connectedRooms[mySocket.id] = userDetails.roomID;
-            mySocket.join(room);
-
-            io.emit('back-online', userDetails.userID);
-
-        })
-
-       
-
-     
- 
-        
-
 
     }
     )
+
+
 }
+
 
 
 module.exports = socketIO;

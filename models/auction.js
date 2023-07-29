@@ -33,6 +33,15 @@ const auctionSchema = new mongoose.Schema({
    currentBidValue:{
     type:Number
    },
+   currentBidderName:{
+    type:String
+   },
+   currentBiderUserID:{
+    type:String
+   },
+   currentBidderLogo:{
+    type:String
+   },
    currentBuyer:{
     type:Number
    }

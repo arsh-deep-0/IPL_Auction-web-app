@@ -1,4 +1,4 @@
-const Socket = io('https://auction-arsh.onrender.com');
+const Socket = io('https://auction-arsh.onrender.com/');
 
 let input = document.getElementById("numOfPlayers");
 let maxValue = 10; // Set your desired maximum value
