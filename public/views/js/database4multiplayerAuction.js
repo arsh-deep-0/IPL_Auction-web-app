@@ -1,4 +1,5 @@
-const socket = io('https://auction-arsh.onrender.com'); 
+//const socket = io('http://localhost:3001');
+const socket = io('https://auction-arsh.onrender.com/');
 
 const params = new URLSearchParams(window.location.search);
 socket.emit('player-connected-in-auctionRoom', params.get('roomID'));
@@ -100,7 +101,7 @@ socket.on('change-Player', (myElement) => {
         document.getElementById("nationality").innerHTML = myElement.Nationality;
         document.getElementById("role").innerHTML = myElement.Role;
 
-        document.getElementById('UP').disabled=false;
+         document.getElementById('UP').disabled=false;
 
         //putting team logo in sold section \
         
@@ -510,11 +511,40 @@ function startCountdown(userID,Bidderorder) {
 
             // Clear the interval to stop the countdown
             clearInterval(countdownInterval);
+
+            // Call showModal() to trigger the modal display
+            showModal();
         }
 
         // Update the countdown display
         document.getElementById("countdown").textContent = remainingTime;
     }, 1000);
 }
+
+
+function showModal() {
+    const modal = document.getElementById('modal-2');
+    const countdownElement = document.getElementById('countdown-2'); 
+  
+    let countdown = 3;
+    countdownElement.textContent = countdown; 
+  
+    modal.style.display = 'block';
+    let order = Number(currentPlayerOrder.innerHTML)+1;
+    console.log('hi',currentPlayerOrder.innerHTML);  
+  
+    const countdownInterval = setInterval(() => {
+      countdown--;
+      countdownElement.textContent = countdown;
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        modal.style.display = 'none';
+        changePlayer(order, 'global');
+      }
+    }, 1000);
+  }
+  
+  
+  
 
 
