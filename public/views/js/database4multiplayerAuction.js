@@ -1,4 +1,4 @@
-const socket = io('https://auction-arsh.onrender.com');
+const socket = io('https://auction-arsh.onrender.com'); 
 
 const params = new URLSearchParams(window.location.search);
 socket.emit('player-connected-in-auctionRoom', params.get('roomID'));
