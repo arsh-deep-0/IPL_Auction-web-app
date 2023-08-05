@@ -212,12 +212,7 @@
             <div class="bids">
 
 
-                <div id="search">
-
-                    <input id="searchOrder" name="order" size="3" type="text" value="">
-                    <button class="button" id="change">Search</button>
-
-                </div>
+               
 
                 <section class="bids-1">
                     <div class="bids-3" id="bids-3">
@@ -227,7 +222,7 @@
                     <div class="upsold">
                         <img id="PREV" src="/resources/icons/next.png" alt="">
                         <button class="button" id="UP">Bid Up</button>
-                        <button class="button" id="Sold">Sell</button>
+                        <!-- <button class="button" id="Sold">Sell</button> -->
                         <img class="logo" id="buyerTeam" src="" alt="0">
                         <img ID="NEXT" src="/resources/icons/next.png" alt="">
                     </div>
@@ -238,11 +233,15 @@
 
                 </section>
 
-
-                <section class="undo">
-                    <button class="button" id="undo">Undo</button>
-                    <button class="button" id="reset">Reset</button>
+                <section id="countdown-timer">
+                    <p>Countdown</p>
+                    <div class="inner-counter">
+                     
+                        <div id="countdown"></div>
+                    </div>
+                   
                 </section>
+              
 
                 <section class="currentBider bids-1" id="currentBider">
                     <p  class="biderName" >Current Bidder : <span  id="currentBiderName"></span></p>
@@ -250,7 +249,8 @@
                   
                 </section>
 
-                <div id="countdown"></div>
+               
+               
 
 
                 <section class="teamSelector" id="teamSelector">
