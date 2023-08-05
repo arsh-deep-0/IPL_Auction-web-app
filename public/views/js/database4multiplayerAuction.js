@@ -31,7 +31,7 @@ const prev = document.getElementById('PREV');
 const input = document.getElementById("searchOrder");
 const currentPlayerOrder = document.getElementById("playerNum")
 
-search.addEventListener("click", decideOrder);
+//search.addEventListener("click", decideOrder);
 next.addEventListener("click", increaseOrder);
 prev.addEventListener("click", decreaseOrder);
 
@@ -100,7 +100,10 @@ socket.on('change-Player', (myElement) => {
         document.getElementById("nationality").innerHTML = myElement.Nationality;
         document.getElementById("role").innerHTML = myElement.Role;
 
+        document.getElementById('UP').disabled=false;
+
         //putting team logo in sold section \
+        
 
         if (myElement.teamlogo == '0' || myElement.teamlogo == undefined) {
             document.getElementById('buyerTeam').style.display = 'none';
@@ -114,7 +117,7 @@ socket.on('change-Player', (myElement) => {
         document.getElementById("hidden").style.display = "none";
         document.getElementById("bids-3").style.display = "block";
         document.getElementById("UP").style.display = "block";
-        document.getElementById("Sold").style.display = "block";
+       // document.getElementById("Sold").style.display = "block";
         document.getElementById("teamSelector").style.display = "none"; 
 
         document.getElementById('currentBider').style.display = 'none';     
@@ -189,7 +192,7 @@ socket.on('increase-Bid', value => {
     document.getElementById("currentBider").style.display="flex";    
     document.getElementById("bids-3").style.display = "block";
     document.getElementById("UP").style.display = "block";
-    document.getElementById("Sold").style.display = "block";
+   // document.getElementById("Sold").style.display = "block";
     document.getElementById("teamSelector").style.display = "none";
     document.getElementById('hidden').style.display = "none";
     currentBid.innerHTML = value;
@@ -233,14 +236,14 @@ function soldPlayerHandler(sellingDetails) {
         sellingPrice.style.display = "none"; 
         document.getElementById("bids-3").style.display = "block";
         document.getElementById("UP").style.display = "block";
-        document.getElementById("Sold").style.display = "block";
+       // document.getElementById("Sold").style.display = "block";
        // document.getElementById("teamSelector").style.display = "none";
     }
     else {
         sellingPrice.style.display = "block";
         document.getElementById("bids-3").style.display = "none";
         document.getElementById("UP").style.display = "none";
-        document.getElementById("Sold").style.display = "none";
+       // document.getElementById("Sold").style.display = "none";
     }
     if (sellingDetails.sellingStatus == 2) {
         sellingPrice.innerHTML = "Unsold";
@@ -262,7 +265,7 @@ function soldPlayerHandler(sellingDetails) {
 //reseting a sold player 
 
 const reset = document.getElementById('reset');
-reset.addEventListener('click', () => {
+/*reset.addEventListener('click', () => {
 
     if (document.getElementById('buyerTeam').style.display == "block") {//it means player sold and added in a team 
         let removingDetails = {
@@ -287,7 +290,7 @@ reset.addEventListener('click', () => {
         userID: getCookie('userID')
     }
     socket.emit('increase-Bid', bidDetails);
-})
+})*/
 
 
 
@@ -300,7 +303,7 @@ socket.on('buyer-Details', details => {
     parentDiv.innerHTML = ''; //ensuring that there is not prior teams already in parent div
     let buyingTeams = document.getElementById('buying-teams');
     buyingTeams.innerHTML = '';
-    console.log('buyer is here', details);
+    console.log('buyer is here', details); 
 
 
 
@@ -495,8 +498,10 @@ function startCountdown(userID,Bidderorder) {
 
         if (remainingTime === 0) {
             // Countdown completed
-            console.log("Hi!");
-            if(userID==getCookie("userID"));{
+            console.log("Hi!"); 
+          
+            if(userID===getCookie("userID")){
+                console.log(userID," ",getCookie('userID'));
             sellPlayer();
              find(Bidderorder);
              document.getElementById("currentBider").style.display="none"; 
