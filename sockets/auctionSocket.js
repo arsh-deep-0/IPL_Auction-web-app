@@ -7,6 +7,7 @@ const { default: mongoose, mongo } = require('mongoose');
 
 const socketIO = (http) => {
     const io = require('socket.io')(http, {
+       // cors: { origin: "https://auction-arsh.onrender.com/" } 
         cors: { origin: "https://auction-arsh.onrender.com/" } 
     });
 
@@ -125,13 +126,13 @@ const socketIO = (http) => {
             console.log('sellingDeails',sellingDetails);
             let buyersRoom = 'buyersRoom-' + sellingDetails.roomID; 
             let buyerDetails = [];
-            fetchBuyerDetails(sellingDetails.roomID)
-                .then(() => {
-                    console.log('Buyer details fetched successfully.');
-                })
-                .catch(error => {
-                    console.error('An error occurred:', error);
-                });
+            // fetchBuyerDetails(sellingDetails.roomID)
+            //     .then(() => {
+            //         console.log('Buyer details fetched successfully.');
+            //     })
+            //     .catch(error => {
+            //         console.error('An error occurred:', error);
+            //     });
 
 
             console.log(sellingDetails, "sold") 
@@ -139,7 +140,7 @@ const socketIO = (http) => {
             let update = sellingDetails.sellingAmount;
             let sellingStatus = sellingDetails.sellingStatus;
 
-            let cricketersRoom = 'cricketersRoom-' + sellingDetails.roomID;
+            let cricketersRoom = 'cricketersRoom-' + sellingDetails.roomID;  
             console.log(cricketersRoom);
             console.log(filter);
             mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(filter) }, { $set: { SellingPrice: Number(update), sellingStatus: Number(sellingStatus) } }, { runValidators: true, returnDocument: 'after' })
@@ -236,7 +237,8 @@ const socketIO = (http) => {
                     console.log(buyer);
                     buyerDetails.push(buyer);
                 }
-                mySocket.emit('buyer-Details', buyerDetails);
+                console.log('Buyer details are',buyerDetails);
+                mySocket.emit('buyer-Details', buyerDetails); 
             } catch (error) {
                 console.error('An error occurred:', error);
             }
