@@ -284,7 +284,7 @@ const socketIO = (io) => {
                     const db = mongoose.connection;
                     duplicateCollection(db, duplicateCollectionName);
             
-                    Cricketer.find({order: {$lte:8*result.playersReached} })
+                    Cricketer.find({order: {$lte:7*result.playersReached} })
                         .then((documents) => { 
                             const duplicateDocuments = documents.map((document) => ({ ...document.toObject() }));
                             db.collection(duplicateCollectionName).insertMany(duplicateDocuments)
