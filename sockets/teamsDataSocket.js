@@ -14,7 +14,7 @@ const socketIO = (mySocket) => {
         console.log(viewData.teamOrder);
 
         fetchPlayerDetails(viewData.roomID, viewData);
-    })
+    }) 
 
     mySocket.on('view-team-analytics', viewData => {
         let buyersRoom = 'buyersRoom-' + viewData.roomID;

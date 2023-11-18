@@ -130,6 +130,7 @@ box-shadow: 0.1rem 0.1rem 0.5rem rgb(54, 53, 53);
 }
 
 
+
 .select-avatar{
     padding: 0.5rem;
     height: 70vh;
@@ -313,4 +314,40 @@ box-shadow: 0.1rem 0.1rem 0.5rem rgb(54, 53, 53);
     padding-right: 1rem;
     
     border-radius: 0.15rem;
+}
+@media screen and (max-width: 767px) {
+    .background-box-1{
+        display:none;
+    }.background-box-2{
+        display:none;
+    }
+    .main-container{
+        padding: 0;
+    }
+    .player-div{
+        padding-inline:1rem ;
+    }
+
+    .container{
+        width: 95%;
+        padding-inline: 1rem;
+    }
+
+    .main-container{
+        height: 150vh;  
+        overflow: scroll;      
+    }
+    body{
+        height:150vh ;
+        width: 100%;
+        display: flex;
+        align-items: center;
+       
+        flex-direction: column;
+        overflow: scroll;
+    }
+    .other-data{
+        justify-content: center;
+        height: 12rem;
+    }
 }

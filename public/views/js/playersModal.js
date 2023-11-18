@@ -58,7 +58,7 @@ socket.on('all-players',players=>{
     bowlerNumber.innerHTML=bowlerCount;
     batsmenNumber.innerHTML=batsmanCount;
     wknumber.innerHTML=wkCount;
-    allrounderNumber.innerHTML=allrounderCount;   
+    allrounderNumber.innerHTML=allrounderCount;     
  
     players.forEach(player => {
         

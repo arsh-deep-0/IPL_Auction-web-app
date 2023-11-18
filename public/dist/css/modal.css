@@ -16,9 +16,12 @@
     
     z-index: 1;
     animation-name: appear-from-left-modal ;
-    animation-duration:  0.3s;
+    animation-duration:  0.1s;
     animation-timing-function:  ease-out;
     animation-iteration-count:  1;
+}
+#Players-Modal{
+  animation-duration:  0.05s;
 }
 @keyframes appear-from-left-modal{
     0%{left:-100%}

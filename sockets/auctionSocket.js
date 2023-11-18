@@ -7,8 +7,8 @@ const { default: mongoose, mongo } = require('mongoose');
 
 const socketIO = (http) => {
     const io = require('socket.io')(http, {
-       // cors: { origin: "https://auction-arsh.onrender.com/" } 
-        cors: { origin: "https://auction-arsh.onrender.com/" } 
+        // cors: { origin: "https://auction-arsh.onrender.com/" } 
+        cors: { origin: "http://localhost:3001" }
     });
 
     require('./userOnlineStatus')(io); //passing socket io events from another file 
@@ -18,7 +18,7 @@ const socketIO = (http) => {
 
         require('./teamsDataSocket')(mySocket);
         mySocket.on('player-connected-in-auctionRoom', (roomID) => {
-           
+
             console.log('hi');
             mySocket.join(roomID);
             IplAuction.findOne({ order: Number(roomID) })    //finds the current order of player which is running from MongoDB and the current Bid Value 
@@ -32,8 +32,8 @@ const socketIO = (http) => {
                     }
                     let currentBidValue = element.currentBidValue;
 
-                    let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue ,currentBidderName:element.currentBidderName ,currentBidderLogo:element.currentBidderLogo,currentBiderUserID:element.currentBiderUserID};  
-                    console.log("auction details",auctiondetails);
+                    let auctiondetails = { order: currentPlayerOrder, bidValue: currentBidValue, currentBidderName: element.currentBidderName, currentBidderLogo: element.currentBidderLogo, currentBiderUserID: element.currentBiderUserID };
+                    console.log("auction details", auctiondetails);
 
                     mySocket.emit("user connected", auctiondetails);
 
@@ -76,55 +76,59 @@ const socketIO = (http) => {
                 .then((result => {
                     mongoose.connection.collection(cricketersRoom).findOne({ order: Number(order) })
                         .then(result => {
-                            console.log(result, 'change-player')
-                            if (changingDetails.scope == 'global') {
-                                io.to(changingDetails.roomID).emit('change-Player', result)
-                            }
-                            else {
-                                mySocket.emit('change-Player', result)
+                            if (result == null) {
+                                mySocket.emit('auction-over');
+                            } else {
+                                console.log(result, 'change-player')
+                                if (changingDetails.scope == 'global') {
+                                    io.to(changingDetails.roomID).emit('change-Player', result)
+                                }
+                                else {
+                                    mySocket.emit('change-Player', result)
+                                }
                             }
                         }
                         );
                 }))
         })
 
-      
+
 
         mySocket.on('increase-Bid', bidDetails => {
             IplAuction.findOneAndUpdate({ order: Number(bidDetails.roomID) }, { currentBidValue: Number(bidDetails.bidValue) }, { runValidators: true, returnDocument: 'after' })
                 .then((result => {
                     io.to(bidDetails.roomID).emit('increase-Bid', bidDetails.bidValue);
-                    if(bidDetails.bidValue>0){
-                    let buyersRoom='buyersRoom-'+bidDetails.roomID;
-                    console.log("room",buyersRoom," ",bidDetails.userID);
-                    console.log(bidDetails)
+                    if (bidDetails.bidValue > 0) {
+                        let buyersRoom = 'buyersRoom-' + bidDetails.roomID;
+                        console.log("room", buyersRoom, " ", bidDetails.userID);
+                        console.log(bidDetails)
 
-                    mongoose.connection.db.collection(buyersRoom).findOne({userID:bidDetails.userID}).
-                    then(result=>{
-                        console.log(result);
-                        if(result){
-                        let currentBidder={
-                            name:result.name,
-                            logo:result.logo,
-                            userID:bidDetails.userID,
-                            order:result.order
-                        }
-                        IplAuction.findOneAndUpdate({order:bidDetails.roomID},{currentBidderName:currentBidder.name,currentBidderLogo:currentBidder.logo}).
-                        then(result =>{
-                            io.to(bidDetails.roomID).emit('currentBidder',currentBidder);
-                        })
-                       
-                    }
-                       
-                    })
+                        mongoose.connection.db.collection(buyersRoom).findOne({ userID: bidDetails.userID }).
+                            then(result => {
+                                console.log(result);
+                                if (result) {
+                                    let currentBidder = {
+                                        name: result.name,
+                                        logo: result.logo,
+                                        userID: bidDetails.userID,
+                                        order: result.order
+                                    }
+                                    IplAuction.findOneAndUpdate({ order: bidDetails.roomID }, { currentBidderName: currentBidder.name, currentBidderLogo: currentBidder.logo }).
+                                        then(result => {
+                                            io.to(bidDetails.roomID).emit('currentBidder', currentBidder);
+                                        })
+
+                                }
+
+                            })
                     }
                 }))
-               
+
         })
 
         mySocket.on('player-Sold', sellingDetails => {
-            console.log('sellingDeails',sellingDetails);
-            let buyersRoom = 'buyersRoom-' + sellingDetails.roomID; 
+            console.log('sellingDeails', sellingDetails);
+            let buyersRoom = 'buyersRoom-' + sellingDetails.roomID;
             let buyerDetails = [];
             // fetchBuyerDetails(sellingDetails.roomID)
             //     .then(() => {
@@ -135,12 +139,12 @@ const socketIO = (http) => {
             //     });
 
 
-            console.log(sellingDetails, "sold") 
+            console.log(sellingDetails, "sold")
             let filter = sellingDetails.playerOrder;
             let update = sellingDetails.sellingAmount;
             let sellingStatus = sellingDetails.sellingStatus;
 
-            let cricketersRoom = 'cricketersRoom-' + sellingDetails.roomID;  
+            let cricketersRoom = 'cricketersRoom-' + sellingDetails.roomID;
             console.log(cricketersRoom);
             console.log(filter);
             mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(filter) }, { $set: { SellingPrice: Number(update), sellingStatus: Number(sellingStatus) } }, { runValidators: true, returnDocument: 'after' })
@@ -188,7 +192,7 @@ const socketIO = (http) => {
                 })
 
 
-        }) 
+        })
 
         mySocket.on('remove-Player', removingDetails => {
             let cricketersRoom = 'cricketersRoom-' + removingDetails.roomID;
@@ -213,7 +217,7 @@ const socketIO = (http) => {
                         { runValidators: true, returnDocument: 'after' })
                         .then(Buyer => {
                             console.log(Buyer, 'money added  back');
-                            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(removingDetails.playerOrder) }, { $set: { teamlogo: '100' , sellingStatus: 0} }).
+                            mongoose.connection.collection(cricketersRoom).findOneAndUpdate({ order: Number(removingDetails.playerOrder) }, { $set: { teamlogo: '100', sellingStatus: 0 } }).
                                 then(player => {
                                     console.log(player);
                                 })
@@ -237,8 +241,8 @@ const socketIO = (http) => {
                     console.log(buyer);
                     buyerDetails.push(buyer);
                 }
-                console.log('Buyer details are',buyerDetails);
-                mySocket.emit('buyer-Details', buyerDetails); 
+                console.log('Buyer details are', buyerDetails);
+                mySocket.emit('buyer-Details', buyerDetails);
             } catch (error) {
                 console.error('An error occurred:', error);
             }

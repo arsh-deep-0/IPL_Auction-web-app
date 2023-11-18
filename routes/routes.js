@@ -49,6 +49,10 @@ router.get('/Auction', (req, res) => {
   res.render('multiplayer');
 });
 
+router.get('/Scoreboard', (req, res) => {
+  res.render('Scoreboard');
+});
+
 router.get('/players', async (req, res) => {
   const players = await Cricketer.find({});
   res.render('players', { players });

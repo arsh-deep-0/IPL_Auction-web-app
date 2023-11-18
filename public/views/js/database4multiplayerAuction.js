@@ -1,5 +1,5 @@
-//const socket = io('http://localhost:3001');
-const socket = io('https://auction-arsh.onrender.com/');
+const socket = io('http://localhost:3001');
+//const socket = io('https://auction-arsh.onrender.com/');
 
 const params = new URLSearchParams(window.location.search);
 socket.emit('player-connected-in-auctionRoom', params.get('roomID'));
@@ -80,7 +80,6 @@ function changePlayer(playerOrder, scope) {
     let changingDetails = { playerOrder: playerOrder, scope: scope, roomID: params.get('roomID') }
     socket.emit('change-Player', changingDetails);
     console.log("emiited", changingDetails);
-
 }
 
 
@@ -422,7 +421,8 @@ socket.on('currentBidder', currentBidder => {
     document.getElementById('currentBiderImg').src = "/resources/logos/" + currentBidder.logo + ".webp";
     document.getElementById('UP').disabled=false;
     document.getElementById('UP').backgroundColor='grey'; 
-    startCountdown(currentBidder.userID,currentBidder.order);
+    let cpo = document.getElementById('playerNum').innerText;
+    startCountdown(currentBidder.userID,currentBidder.order,cpo);
    
 
     if(currentBidder.userID == getCookie('userID')){
@@ -474,7 +474,7 @@ function getCookie(name) {
 
 let countdownInterval;
 
-function startCountdown(userID,Bidderorder) {
+function startCountdown(userID,Bidderorder , playerOrder) {
     console.log("Countdown started!");
 
     // Set the countdown duration in seconds
@@ -500,13 +500,21 @@ function startCountdown(userID,Bidderorder) {
         if (remainingTime === 0) {
             // Countdown completed
             console.log("Hi!"); 
-          
-            if(userID===getCookie("userID")){
-                console.log(userID," ",getCookie('userID'));
-            sellPlayer();
-             find(Bidderorder);
-             document.getElementById("currentBider").style.display="none"; 
+            
+            let cpo = document.getElementById("playerNum").innerText;
+            console.log('cpo:',cpo);
+            console.log('playerorder:',playerOrder);
+            if(cpo==playerOrder){
+                console.log("same player!");
+                if(userID===getCookie("userID")){
+                    console.log(userID," ",getCookie('userID'));
+                sellPlayer();
+                 find(Bidderorder);
+                 document.getElementById("currentBider").style.display="none"; 
+                }
             }
+          
+            
            
 
             // Clear the interval to stop the countdown
@@ -517,8 +525,13 @@ function startCountdown(userID,Bidderorder) {
         }
 
         // Update the countdown display
+        if(remainingTime<6){
+            document.getElementById("countdown").style.color='red'; 
+        }else{
+            document.getElementById("countdown").style.color='green';
+        }
         document.getElementById("countdown").textContent = remainingTime;
-    }, 1000);
+    }, 1000); 
 }
 
 
@@ -545,6 +558,4 @@ function showModal() {
   }
   
   
-  
-
 

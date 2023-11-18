@@ -1,5 +1,6 @@
 //const Socket= require('./database4myAuction')
-const Socket = io('https://auction-arsh.onrender.com/');
+//const Socket = io('https://auction-arsh.onrender.com/');
+const Socket = io('http://localhost:3001');
 console.log(getCookie('userName')); 
 
 let input = document.getElementById("numOfPlayers");

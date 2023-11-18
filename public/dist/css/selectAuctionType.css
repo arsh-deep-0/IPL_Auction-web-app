@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 body{
     position: relative;
     display: flex;
@@ -10,8 +11,10 @@ body{
     align-items: center;
     flex-wrap: wrap;
     height: 100vh;
-  /*  background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 70%);*/
-  overflow: hidden;
+    /*  background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 70%);*/
+    overflow: hidden;
+    background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #310a7e 70%);
+
 }
 
 #greet{
@@ -60,17 +63,18 @@ p{
 .selectionDivChild{
     width: 35%;
     height: 35%;
-    background: linear-gradient(143.7deg,rgb(0, 0, 0)  -40%, #7423ed 100%);
+    /* background: linear-gradient(143.7deg,rgb(0, 0, 0)  -40%, #7423ed 100%); */
+    background: rgb(255, 255, 255);
     box-shadow: 0.16rem 0.16rem 0.5rem rgb(14, 14, 14);
     border-radius: 0.5rem;
-    color: #fff;
-
+    color: #000000;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-   justify-content: space-evenly;
-   align-items: center;
-   transition: all 0.2s ease-in;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: all 0.2s ease-in;
+    text-align: center;
 }
 
 .selectionDivChild:hover{
@@ -103,6 +107,26 @@ p{
    align-items: center;
    gap: 2rem;
 }
+@media screen and (max-width: 767px) {
+    .modal-content {
+        width: 80%;
+    }
+
+    .selectionDiv{
+        width: 90%;
+        height: 50%;
+    }
+    .selectionDivChild{
+        width: 40%;
+        height: 40%;
+    }
+    .background-box-1{
+        visibility: hidden;
+    }.background-box-2{
+        visibility: hidden;
+    }
+}
+
 
 .modal-content p{
     font-size: 1.5rem;

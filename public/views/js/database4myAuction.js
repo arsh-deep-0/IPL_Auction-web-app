@@ -105,7 +105,7 @@ socket.on('change-Player', (myElement) => {
         document.getElementById("bids-3").style.display = "block";
         document.getElementById("UP").style.display = "block";
         document.getElementById("Sold").style.display = "block";
-        document.getElementById("teamSelector").style.display = "none";
+        document.getElementById("teamSelector").style.display = "none";  
 
 
         //checking if player is sold or not 

@@ -258,7 +258,7 @@ margin-left: 3%;
     margin-top: 5vh;
     min-height: 6rem; 
    
-    max-height: 25rem;
+    max-height: 19rem;
 
 }
 
@@ -289,6 +289,8 @@ margin-left: 3%;
     border-radius: 0.5rem;
 }
 
+
+
 .rulebook{
     width: 100%;
     height: 2rem;
@@ -304,7 +306,7 @@ margin-left: 3%;
 
 .rulebook-rules{
     width: 100%;
-    height: 8rem;
+    /* height: 8rem; */
     background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     border-radius: 0.3rem;
@@ -314,6 +316,7 @@ margin-left: 3%;
     justify-content: center;  
     color: white;
     flex-wrap: nowrap;
+    padding: 0.5rem;
 }
 
 
@@ -429,8 +432,8 @@ background: linear-gradient(
 
 
 .bids-1 {
-
-
+    border: 0.3rem solid  #ebe9e9 /*-20% /*,  #6200ff 40%,   #7423ed 100%);*/;
+    color: #fff;
     width: 75%;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
      box-shadow: 0.0rem 0.2rem 0.55rem 0.02rem #9743fe7e;
@@ -455,7 +458,8 @@ background: linear-gradient(
         #cb9b51 98%,
         #462523 160%
         );;
-     
+     background: linear-gradient( 143.7deg, #f97794 -10%,  #6200ff 60%,   #7423ed 100%);;
+     padding-bottom: 0;
 
 }
 
@@ -694,16 +698,28 @@ button:active {
 }
 
 #UP {
+    border: 0.15rem solid #fff;
     margin: 0;
     margin-bottom: 1rem;
     min-width: 3.7rem;
-    
+    color: #000;
+    padding: 0.3rem;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     box-shadow: 0.03rem 0.03rem 0.25rem 0.06rem rgb(178, 177, 177);
     box-shadow: 0.0rem 0.2rem 0.65rem 0.02rem #994ff54f;
     background: linear-gradient(180deg, #0fb122 0, #1a5f08 100%);
     background: linear-gradient(-90deg, #25054a 0, #7423ed 100%);
     background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
+    background: linear-gradient(
+        143.7deg,
+        #462523 -60%,
+               #cb9b51 2%, 
+        #f6e27a 45%,
+        #f6f2c0 50%,
+        #f6e27a 55%,
+        #cb9b51 98%,
+        #462523 160%
+        );;
 }
 
 #Sold {
@@ -733,6 +749,18 @@ button:active {
     box-shadow: 0.0rem 0.2rem 0.65rem 0.02rem #994ff54f;
     padding: 0.2rem;
     display: none;
+    background: linear-gradient(
+        143.7deg,
+        #462523 -60%,
+               #cb9b51 2%, 
+        #f6e27a 45%,
+        #f6f2c0 50%,
+        #f6e27a 55%,
+        #cb9b51 98%,
+        #462523 160%
+        );;
+        color: black;
+        font-weight: 600;
 }
 
 label .logo {
@@ -767,6 +795,7 @@ label .logo {
         #cb9b51 98%,
         #462523 160%
         );;
+        background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
     border-radius: 0.5rem;
     height: 10vh;
     width: 16vh;
@@ -774,30 +803,56 @@ label .logo {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #fff;
+    border: 0.25rem solid white;
+    box-shadow: 0.0rem 0.2rem 0.55rem 0.02rem #9743fe7e;
 }
 .inner-counter{
-    background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
+  
+    background: linear-gradient(
+        143.7deg,
+        #462523 -60%,
+               #cb9b51 2%, 
+        #f6e27a 45%,
+        #f6f2c0 50%,
+        #f6e27a 55%,
+        #cb9b51 98%,
+        #462523 160%
+        );;
     border-radius: 50%;
     height: 6.5vh;
     width: 6.5vh;
-    color: white;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 0.2rem solid white;
 }
 #countdown{
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+   
 
 }
 .biderName{
     background: linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%);
+    
+    background: linear-gradient(
+        143.7deg,
+        #462523 -60%,
+               #cb9b51 2%, 
+        #f6e27a 45%,
+        #f6f2c0 50%,
+        #f6e27a 55%,
+        #cb9b51 98%,
+        #462523 160%
+        );;
     box-shadow: 0rem 0.5rem 2rem 0 rgb(0, 0, 0, 0.37);
     border-radius: 0.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #000;
     padding: 0.3rem;
 }
 
@@ -856,7 +911,7 @@ label .logo {
 }
 
 #Bids-Heading {
-    margin-right: 9%;
+    margin-right: 4%;
 }
 
 #Stats-Heading {
@@ -1226,7 +1281,7 @@ label .logo {
         width: 19.5rem;
         min-height: 6rem; 
    
-        max-height: 25rem;
+        max-height: 19rem;
         /* height: 38.5vh; */
     }
    
@@ -1243,8 +1298,9 @@ label .logo {
         height: 12vh;
         padding: 0;
         padding-top: 1rem;
-        padding-bottom: 1rem;
+        
         width: 16rem;
+        border: 0.3rem  solid ;
     }
     .upsold{
         height: 7.5rem;
@@ -1298,6 +1354,27 @@ label .logo {
         overflow-y: visible;
         padding-left: 0;
         width: 100%;
+    }
+
+   
+    .rules-outer{
+        width: 19.5rem;
+      position: absolute;
+        bottom: 10.5%;
+    }
+
+    #countdown{
+        font-size: 2.8rem;
+        font-weight: 400;
+    
+    }
+
+    #countdown-timer{
+        border: 0.4rem rgb(239, 239, 239) solid;
+        box-shadow: 0.0rem 0.2rem 0.55rem 0.02rem #9743fe7e;
+    }
+    #rules-heading{
+        display: none;
     }
 }
 

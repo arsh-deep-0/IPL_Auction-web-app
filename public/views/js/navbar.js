@@ -21,7 +21,7 @@ for (let i = 0; i < bottomNavbarLinks.length; i++) {
                     document.getElementById(modal).style.animationName="disappear-to-left-modal";
                     setTimeout(()=>{
                         document.getElementById(modal).style.display = "none";
-                    },250) 
+                    },50) 
                     
                 }
                 
@@ -31,13 +31,17 @@ for (let i = 0; i < bottomNavbarLinks.length; i++) {
             bottomNavbarLinks[j].style.color = "#000"
         }
 
-        // Set background color of the clicked child to blue
+        // Set background color of the clicked child to blue 
         let modal = (this.innerHTML) + '-Modal';
         if (modal == 'Auction-Modal') { }
         else {
-            document.getElementById(modal).style.animationName="appear-from-left-modal";
+            console.log("open it ", modal);
+            setTimeout(()=>{
+                document.getElementById(modal).style.animationName="appear-from-left-modal";
             
                 document.getElementById(modal).style.display = "block";
+            },60) 
+            
          
         }
         this.style.background = "linear-gradient( 143.7deg, #f97794 -20%,  #6200ff 40%,   #7423ed 100%)";

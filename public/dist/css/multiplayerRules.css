@@ -30,6 +30,17 @@
     color: blue;
 }
 
+@media screen and (max-width: 767px) {
+    .background-box-1{
+        display:none;
+    }.background-box-2{
+        display:none;
+    }
+    .modal-content{
+        width: 90%;
+    }
+}
+
 
 #next{
     padding: 0.3rem;

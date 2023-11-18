@@ -160,18 +160,18 @@ socket.on('view-team-analytics', team => {
     console.log(teamlogo.src);
 
     let wallet = document.getElementById('wallet-left');
-   
-
+    let totalWallet=document.getElementById('total-wallet');
+    totalWallet.innerText=team.intialWallet; 
 
     const counterElement = document.querySelector('.counter');
     const targetNumber = team.currentWallet.toFixed(2); // Replace with your desired target number
 
-    const decimalPlaces = 2; // Number of decimal places to display
+    const decimalPlaces = 1; // Number of decimal places to display
     const duration = 2000; // Duration of the animation in milliseconds
     const intervalTime = 80; // Interval time for each frame
 
     const frameCount = Math.ceil(duration / intervalTime);
-    const incrementValue = (targetNumber / frameCount).toFixed(decimalPlaces);
+    const incrementValue = (targetNumber / frameCount).toFixed(3);
 
     let currentValue = 0;
     let frame = 0;
@@ -180,7 +180,7 @@ socket.on('view-team-analytics', team => {
         currentValue += parseFloat(incrementValue);
 
         if (frame < frameCount) {
-            wallet.textContent = currentValue.toFixed(decimalPlaces);
+            wallet.textContent = currentValue.toFixed(decimalPlaces); 
             frame++;
         } else {
             clearInterval(countAnimation);
@@ -193,10 +193,10 @@ socket.on('view-team-analytics', team => {
    document.getElementById('Wks-Number').innerHTML=team.WKsBought;
    document.getElementById('modal-team-name').innerHTML=team.name;
    document.getElementById('total-players').innerHTML=team.playersBought;
-   document.getElementById('overseas').innerHTML=team.overseasBought;
+   document.getElementById('overseas').innerHTML=team.overseasBought; 
 
 
-    let walletLeft = (team.currentWallet * 180 / 80) - 135;
+    let walletLeft = (team.currentWallet * 180 / Number(team.intialWallet)) - 135;
     let odometer = document.getElementById('odometer');
     odometer.animate([
         // key frames

@@ -99,7 +99,8 @@
                     <div class="mdashboard">
                         <div class="circle__box">
 
-                            <p><span id="wallet-left"></span>/80Cr <br><br><br><br> Wallet left</p>
+                            <p><span id="wallet-left"></span>/<span id="total-wallet"></span>Cr <br><br><br><br> Wallet
+                                left</p>
                             <div class="circle__wrapper circle__wrapper--right">
 
                                 <div class="circle__whole circle__right" id="odometer">
@@ -135,33 +136,33 @@
         <div id="Players-Modal" class="modal">
 
             <section class="modal-content">
-                         <div class="modal-selector">
-                            <p id="query-1">All</p>
-                            <p p id="query-3">Sold</p>
-                            <p p id="query-0">Yet to Come</p>
-                            <p p id="query-2">Unsold</p>
-                         </div>     
-                         
-                         <div class="query-modal-players" id="modal-players">
-                            <div class="modal-player-outerdiv">
-                                <p class="heading">Batsmen - <span id="query-batsmen-Number"></span></p>
-        
-                                <div id="query-modal-batsman-div" class="modal-batsman-div"></div>
-                            </div>
-                            <div class="modal-player-outerdiv">
-                                <p class="heading">Bowlers - <span id="query-bowlers-Number"></span></p>
-                                <div id="query-modal-bowler-div" class="modal-bowler-div"></div>
-                            </div>
-                            <div class="modal-player-outerdiv">
-                                <p class="heading">All-Rounders - <span id="query-All-Rounders-Number"></span></p>
-                                <div id="query-modal-allrounder-div" class="modal-allrounder-div"></div>
-                            </div>
-                            <div class="modal-player-outerdiv">
-                                <p class="heading">WKs - <span id="query-Wks-Number"></span></p>
-                                <div id="query-modal-WKs-div" class="modal-WKs-div"></div>
-                            </div>
-        
-                        </div>
+                <div class="modal-selector">
+                    <p id="query-1">All</p>
+                    <p p id="query-3">Sold</p>
+                    <p p id="query-0">Yet to Come</p>
+                    <p p id="query-2">Unsold</p>
+                </div>
+
+                <div class="query-modal-players" id="modal-players">
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">Batsmen - <span id="query-batsmen-Number"></span></p>
+
+                        <div id="query-modal-batsman-div" class="modal-batsman-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">Bowlers - <span id="query-bowlers-Number"></span></p>
+                        <div id="query-modal-bowler-div" class="modal-bowler-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">All-Rounders - <span id="query-All-Rounders-Number"></span></p>
+                        <div id="query-modal-allrounder-div" class="modal-allrounder-div"></div>
+                    </div>
+                    <div class="modal-player-outerdiv">
+                        <p class="heading">WKs - <span id="query-Wks-Number"></span></p>
+                        <div id="query-modal-WKs-div" class="modal-WKs-div"></div>
+                    </div>
+
+                </div>
             </section>
         </div>
 
@@ -190,20 +191,31 @@
 
             <div class="wallet-outer">
                 <div class="wallet" id="wallet"></div>
-                <div class="rules" id="rules-heading">
-                   <div class="rulebook">
-                    <p>Rules</p>
-                   </div>
-                </div>
-                <div class="rules" id="rules">
-                    <div class="rulebook-rules">
-                     <p>Minimum requirements  <hr> &nbsp; 8 Players ,  &nbsp;  1 WK  ,  &nbsp; 4 (Bowlers + All-Rounders)</p>
-                     <p><br>Maximum overseas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Players<hr> 3  Players  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 31</p>
-                   
+
+                <div class="rules-outer">
+                    <div class="rules" id="rules-heading">
+                        <div class="rulebook">
+                            <p>Rules</p>
+                        </div> 
                     </div>
-                 </div>
+                    <div class="rules" id="rules">
+                        <div class="rulebook-rules">
+                            <p>Team (6 Players)
+                                <hr> &nbsp; 
+                                 (2 Bat. + &nbsp; 1 WK + &nbsp; 2 Bowl. + 1 All-Rounder)
+                            </p>
+                            <p><br>Maximum overseas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Players
+                                <hr> 2 Players
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                31
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            
+
 
 
 
@@ -212,7 +224,7 @@
             <div class="bids">
 
 
-               
+
 
                 <section class="bids-1">
                     <div class="bids-3" id="bids-3">
@@ -236,21 +248,21 @@
                 <section id="countdown-timer">
                     <p>Countdown</p>
                     <div class="inner-counter">
-                     
+
                         <div id="countdown"></div>
                     </div>
-                   
+
                 </section>
-              
+
 
                 <section class="currentBider bids-1" id="currentBider">
-                    <p  class="biderName" >Current Bidder : <span  id="currentBiderName"></span></p>
+                    <p class="biderName">Current Bidder : <span id="currentBiderName"></span></p>
                     <img class="currentBiderImg" id="currentBiderImg" src="" alt="">
-                  
+
                 </section>
 
-               
-               
+
+
 
 
                 <section class="teamSelector" id="teamSelector">
@@ -315,14 +327,14 @@
 
         <div id="modal-2" class="modal-2">
             <div class="modal-content-2">
-              <p id="modal-message">Next player coming in <span id="countdown-2">3</span> secs</p>
+                <p id="modal-message">Next player coming in <span id="countdown-2">3</span> secs</p>
             </div>
-          </div>
+        </div>
 
     </div>
 
-  
-      
+
+
 
 
     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
@@ -334,4 +346,4 @@
 
 </body>
 
-</html> 
+</html>
