@@ -121,9 +121,9 @@ p{
         height: 40%;
     }
     .background-box-1{
-        visibility: hidden;
+        display: none;
     }.background-box-2{
-        visibility: hidden;
+        display: none;
     }
 }
 

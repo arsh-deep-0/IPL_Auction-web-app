@@ -20,7 +20,7 @@ let count=0;
 
 
         if( document.getElementById("ss").innerHTML = "woww"&&count>0){
-           // const socket2 = io('http://localhost:3001');
+           // const socket2 = io('https://auction-arsh.onrender.com');
 
         document.getElementById("submit").onclick = () => {
 
@@ -44,7 +44,7 @@ let count=0;
 
 
 /*        
-const socket = io('http://localhost:3001');  //we are able to get an instance of io because of this line in ejs
+const socket = io('https://auction-arsh.onrender.com');  //we are able to get an instance of io because of this line in ejs
                                             //<script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
 
 document.getElementById("submit").onclick=()=>{

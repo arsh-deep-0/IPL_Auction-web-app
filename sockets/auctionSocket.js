@@ -8,7 +8,7 @@ const { default: mongoose, mongo } = require('mongoose');
 const socketIO = (http) => {
     const io = require('socket.io')(http, {
         // cors: { origin: "https://auction-arsh.onrender.com/" } 
-        cors: { origin: "http://localhost:3001" }
+        cors: { origin: "https://auction-arsh.onrender.com" }
     });
 
     require('./userOnlineStatus')(io); //passing socket io events from another file 

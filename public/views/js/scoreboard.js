@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3001');
+const socket = io('https://auction-arsh.onrender.com');
 
 const cards = document.querySelectorAll('.card');
 const cardHolders = document.querySelectorAll('.card-holder');
